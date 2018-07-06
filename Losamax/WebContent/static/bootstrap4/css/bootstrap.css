@@ -2367,6 +2367,12 @@ fieldset:disabled a.btn {
   border-color: #007bff;
 }
 
+.btn-primary2 {
+  color: #fff;
+  background-color: #555555;
+  border-color: #007bff;
+}
+
 .btn-primary:hover {
   color: #fff;
   background-color: #0069d9;
@@ -8790,6 +8796,7 @@ button.bg-dark:focus {
 
 .font-weight-normal {
   font-weight: 400 !important;
+  font-color: #333333;
 }
 
 .font-weight-bold {
