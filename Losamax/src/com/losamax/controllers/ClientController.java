@@ -42,7 +42,7 @@ public class ClientController {
 		if (!result.hasErrors()) {
 		    //encodePassword(client);
 		    clientRepo.save(client);
-		    return "accueil";
+		    return "confirmationCreation";
 		}
 		List<Sport> sports = sportRepo.findAll();
 		model.addAttribute("sports", sports);
