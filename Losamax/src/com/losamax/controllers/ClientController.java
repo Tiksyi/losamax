@@ -58,5 +58,10 @@ public class ClientController {
 	    public String contact() {
 	    	return "contact";
 	    }
+	    
+	    @GetMapping("/parier")
+	    public String parier() {
+	    	return "parier";
+	    }
 	 
 }
