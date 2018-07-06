@@ -1,9 +1,7 @@
 package com.losamax.controllers;
 
 import java.util.List;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.losamax.dao.IClientJpaRepository;
 import com.losamax.dao.ISportJpaRepository;
 import com.losamax.entities.Client;
@@ -40,15 +37,15 @@ public class ClientController {
 	 
 	    @PostMapping("/creer")
 	    public String creer(
-		   @Valid @ModelAttribute(value = "client") Client client, BindingResult result, Model model) {
-		if (!result.hasErrors()) {
+		   @ModelAttribute(value = "client") Client client, Model model) {
+		//if (!result.hasErrors()) {
 		    //encodePassword(client);
 		    clientRepo.save(client);
 		    return "confirmationCreation";
-		}
-		List<Sport> sports = sportRepo.findAll();
-		model.addAttribute("sports", sports);
-		return "creerClient";
+		//}
+//		List<Sport> sports = sportRepo.findAll();
+//		model.addAttribute("sports", sports);
+//		return "creerClient";
 	    }
 	    
 	    @GetMapping("/goToModifier/{id}")
@@ -66,19 +63,26 @@ public class ClientController {
 		if (!result.hasErrors()) {
 		    //encodePassword(client);
 		    clientRepo.save(client);
+		    return "confirmationModification";
 		}
 		List<Sport> sports = sportRepo.findAll();
 		model.addAttribute("sports", sports);
-		return "confirmationModification";
+		return "modifierClient";
 	    }
-	    
-	    
-	    
+
+	    @GetMapping("/goToLogin")
+	    public String login() {
+	    	return "login";
+	    }
+
 //	    private static void encodePassword(Client client) {
-//	    	String rawPassword = client.getCredentials().getPassword();
-//	    	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//	    	String encodedPassword = encoder.encode(rawPassword);
-//	    	client.getCredentials().setPassword(encodedPassword);
-//	        }
+//    	String rawPassword = client.getCredentials().getPassword();
+//    	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//    	String encodedPassword = encoder.encode(rawPassword);
+//    	client.getCredentials().setPassword(encodedPassword);
+//        }
+	    
+	    
+	    
 	 
 }

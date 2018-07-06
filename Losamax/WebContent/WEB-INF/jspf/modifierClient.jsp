@@ -13,6 +13,7 @@
 		<spring:message code="modifier.client.header" />
 			<form method="POST" action="${pageContext.request.contextPath}/clientcontroller/modifier" modelAttribute="client">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		<form:hidden path="client.id"/>
 		<form:label path="client.nom"><spring:message code="client.nom" /><span class="required">*</span></form:label>
 		<form:input path="client.nom" />&nbsp;<form:errors path="client.nom" cssClass="errors" />
 		<br>
@@ -44,13 +45,13 @@
 		</form:select>
 		<br>
 		<form:label path="client.credentials.username"><spring:message code="client.username" /><span class="required">*</span></form:label>
-		<form:password path="client.credentials.username" />&nbsp;<form:errors path="client.credentials.username" cssClass="errors" />
+		<form:input path="client.credentials.username" />&nbsp;<form:errors path="client.credentials.username" cssClass="errors" />
 		<br>
 		<form:label path="client.credentials.password"><spring:message code="client.password" /><span class="required">*</span></form:label>
 		<form:password path="client.credentials.password" />&nbsp;<form:errors path="client.credentials.password" cssClass="errors" />
 		<br>
 		<input type="hidden" name="client.credentials.role" value="ROLE_USER" />
-		<input type="submit" value="<spring:message code="client.creer.submit" />" />
+		<input type="submit" value="<spring:message code="client.submit" />" />
 	</form>
 	<h3><a href="<c:url value="/paricontroller/goToMenu" />"><spring:message code="menu.retour" /></a></h3>
 	

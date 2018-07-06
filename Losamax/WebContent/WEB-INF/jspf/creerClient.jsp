@@ -41,19 +41,18 @@
 		<form:input path="client.solde" />&nbsp;<form:errors path="client.solde" cssClass="errors" />
 		<br>
 		<form:label path="client.listeSports"><spring:message code="client.listeSports" /></form:label>
-		<form:select path="client.listeSports" multiple="true">
-			<form:option value="" label="" />
-			<form:options items="${sports}" itemValue="id" itemLabel="nom" />
+		<form:select path="client.listeSports" items="${sports}" multiple="true">
+<%-- 			<form:options items="${sports}" itemValue="id" itemLabel="nom" /> --%>
 		</form:select>
 		<br>
 		<form:label path="client.credentials.username"><spring:message code="client.username" /><span class="required">*</span></form:label>
-		<form:password path="client.credentials.username" />&nbsp;<form:errors path="client.credentials.username" cssClass="errors" />
+		<form:input path="client.credentials.username" />&nbsp;<form:errors path="client.credentials.username" cssClass="errors" />
 		<br>
 		<form:label path="client.credentials.password"><spring:message code="client.password" /><span class="required">*</span></form:label>
 		<form:password path="client.credentials.password" />&nbsp;<form:errors path="client.credentials.password" cssClass="errors" />
 		<br>
 		<input type="hidden" name="client.credentials.role" value="ROLE_USER" />
-		<input type="submit" value="<spring:message code="client.creer.submit" />" />
+		<input type="submit" value="<spring:message code="client.submit" />" />
 	</form>
 	<h3><a href="<c:url value="/paricontroller/goToMenu" />"><spring:message code="menu.retour" /></a></h3>
 	

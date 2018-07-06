@@ -11,13 +11,14 @@
 <title><spring:message code="accueil.title" /></title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="<c:url value="/static/css/styles.css" />">
-<link rel="stylesheet"
+ <link rel="stylesheet" href="<c:url value="/static/css/styles.css" />">
+<%-- <link rel="stylesheet"
 	href="<c:url value="/static/bootstrap3/css/bootstrap.css" />">
-<%-- <link rel="stylesheet" href="<c:url value="/static/bootstrap4/css/bootstrap.css" />"> --%>
 <script src="<c:url value="/static/bootstrap3/js/bootstrap.js" />"></script>
-<%-- <script src="<c:url value="/static/bootstrap4/js/bootstrap.js" />"></script> --%>
-<script src="<c:url value="/static/jquery/js/jquery.js" />"></script>
+<script src="<c:url value="/static/jquery/js/jquery.js" />"></script> --%>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -43,9 +44,9 @@
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#"><spring:message code="accueil.langue" /></a></li>
-					<li><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp<spring:message
+					<li><a href="<c:url value="/clientcontroller/goToCreer" />"><span class="glyphicon glyphicon-user"></span>&nbsp<spring:message
 								code="accueil.inscription" /></a></li>
-					<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>&nbsp
+					<li><a href="<c:url value="/clientcontroller/goToLogin" />"><span class="glyphicon glyphicon-log-in"></span>&nbsp
 							<spring:message code="accueil.connexion" /></a></li>
 				</ul>
 			</div>
@@ -79,37 +80,40 @@
 					minim veniam, quis nostrud exercitation ullamco laboris nisi ut
 					aliquip ex ea commodo consequat.</p>
 				<hr>
+				
 				<div class="container">
 					<h2>Football</h2>
 					<div class="panel-group">
-						<div class="panel panel-default">
+						<div class="panel panel-info class">
 							<div class="panel-heading">Panel with panel-default class</div>
 							<div class="panel-body">Panel Content</div>
 						</div>
 					</div>
 				</div>
-				
+
 				<div class="container">
+					<!-- <div class="rubrique"> -->
 					<h2>BasketBall</h2>
 					<div class="panel-group">
-						<div class="panel panel-default">
+						<div class="panel panel-info class">
 							<div class="panel-heading">Panel with panel-default class</div>
 							<div class="panel-body">Panel Content</div>
 						</div>
 					</div>
+					<!-- </div> -->
 				</div>
-				
+
 				<div class="container">
 					<h2>Cyclisme</h2>
 					<div class="panel-group">
-						<div class="panel panel-default">
+						<div class="panel panel-info class">
 							<div class="panel-heading">Panel with panel-default class</div>
 							<div class="panel-body">Panel Content</div>
 						</div>
 					</div>
 				</div>
-				
-				
+
+
 			</div>
 			<div class="col-sm-2 sidenav">
 				<div class="well">
