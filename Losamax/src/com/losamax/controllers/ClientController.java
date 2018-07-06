@@ -111,8 +111,8 @@ public class ClientController {
 	    
 	    @PostMapping("/miser")
 	    public String modifier(
-		    @Valid @ModelAttribute(value = "client") Client client, BindingResult result, Model model) {
-		    clientRepo.save(client);
+		    @Valid @ModelAttribute(value = "evenement") Client client, Model model) {
+		    pariRepo.save(pari);
 		    return "confirmationModification";
 
 	    }
