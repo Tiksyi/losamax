@@ -1,10 +1,16 @@
 package com.losamax.entities;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,11 +22,13 @@ public class Evenement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-    @OneToMany
-	private List<Participant> participants;
+    @OneToMany(fetch = FetchType.EAGER,  cascade = CascadeType.PERSIST )
+	private List<Participant> participants = new ArrayList<Participant>();
 	private Date dateDebut;
 	private Date dateFin;
-	private HashMap cotes;
+	@OneToMany(cascade = CascadeType.ALL )
+	private List<Cote> cotes = new ArrayList<Cote>();
+	
 	private String resultatFinal;
 
 	public Evenement() {
@@ -58,11 +66,13 @@ public class Evenement {
 		this.dateFin = dateFin;
 	}
 
-	public HashMap getCotes() {
+	
+
+	public List<Cote> getCotes() {
 		return cotes;
 	}
 
-	public void setCotes(HashMap cotes) {
+	public void setCotes(List<Cote> cotes) {
 		this.cotes = cotes;
 	}
 
