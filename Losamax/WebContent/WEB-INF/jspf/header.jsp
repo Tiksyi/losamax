@@ -52,7 +52,7 @@
 					</c:forEach>
 
 					<li><a href="#"><spring:message code="accueil.apropos" /></a></li>
-					<li><a href="./contact.jsp"><span class="glyphicon glyphicon-envelope"></span>&nbsp<spring:message
+					<li><a href="<c:url value="/clientcontroller/contact"/>"><span class="glyphicon glyphicon-envelope"></span>&nbsp<spring:message
 								code="accueil.contact" /></a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
@@ -62,7 +62,7 @@
 						<ul class="dropdown-menu">
 							<li><a href="?lang=fr">FR</a></li>
 							<li><a href="?lang=en">EN</a></li>
-							<li><a href="#">RU</a></li>
+							<li><a href="?lang=ru">RU</a></li>
 						</ul></li>
 					<li><a href="<c:url value="/clientcontroller/goToCreer" />"><span
 							class="glyphicon glyphicon-user"></span>&nbsp<spring:message
