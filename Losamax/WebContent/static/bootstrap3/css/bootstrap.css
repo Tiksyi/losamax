@@ -4591,6 +4591,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
 .navbar-inverse {
   background-color: #222;
   border-color: #080808;
+  position: absolute;
 }
 .navbar-inverse .navbar-brand {
   color: #9d9d9d;
@@ -4980,6 +4981,7 @@ a.badge:focus {
   padding-left: 15px;
   border-radius: 6px;
 }
+
 .jumbotron .container {
   max-width: 100%;
 }

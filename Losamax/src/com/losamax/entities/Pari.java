@@ -1,5 +1,6 @@
 package com.losamax.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,7 +15,7 @@ public class Pari {
 	private Long id;
 	@OneToOne
 	private Client client;
-	@OneToOne
+	@OneToOne (cascade = CascadeType.PERSIST)
 	private Evenement evenement;
 	private double mise;
 	private String choix;

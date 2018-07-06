@@ -81,8 +81,12 @@ public class ClientController {
 //    	String encodedPassword = encoder.encode(rawPassword);
 //    	client.getCredentials().setPassword(encodedPassword);
 //        }
+
 	    
-	    
-	    
+	    @GetMapping("/contact")
+	    public String contact() {
+	    	return "contact";
+	    }
+
 	 
 }

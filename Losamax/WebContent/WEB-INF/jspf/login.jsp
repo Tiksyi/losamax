@@ -17,7 +17,7 @@
 <title>Connexion</title>
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet"
-	href="<c:url value="/static/bootstrap4/css/minLogin.css" />" />
+	href="<c:url value="/static/bootstrap4/css/bootstrap.css" />" />
 <%-- <link href="<c:url value="/static/css/styles.css" />" rel="stylesheet"> --%>
 
 <!-- Custom styles for this template -->
@@ -33,7 +33,7 @@
 
 		<div class="text-center mb-4">
 
-			<h1 class="h3 mb-3 font-weight-normal">Bienvenue</h1>
+			<h1 class="h3 mb-3 font-weight-normal"><spring:message code="login.message"/></h1>
 
 		</div>
 
@@ -48,18 +48,18 @@
 				class="form-control" placeholder="Password" required>
 			<!-- <label for="inputPassword">Password</label> -->
 		</div>
-
-
+		<br>
+		<!-- 
 		<div class="checkbox mb-3">
 			<label> <input type="checkbox" value="remember-me">
 				Remember me
 			</label>
-		</div>
-		<button class="btn btn-lg btn-primary2 btn-block" type="submit">Sign
-			in</button>
-		<p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>
-		<!-- <input type="submit" value="Connexion!" /> -->
-
+		</div> -->
+		<button class="btn btn-lg btn-primary2 btn-block" type="submit"><spring:message code="login.connexion"/></button>
+		<p class="mt-5 mb-3 text-muted text-center">
+			<spring:message code="accueil.footer" />
+		</p>
+		
 		<div class="text-center mb-4">
 			<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
