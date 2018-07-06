@@ -65,7 +65,7 @@
 				</div>
 			</div>
 		</div>
-
+</div>
 		<footer class="container-fluid text-center">
 			<p>
 				<spring:message code="accueil.footer" />
