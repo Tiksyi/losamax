@@ -52,7 +52,7 @@
 					</c:forEach>
 
 					<li><a href="#"><spring:message code="accueil.apropos" /></a></li>
-					<li><a href="#"><span class="glyphicon glyphicon-envelope"></span>&nbsp<spring:message
+					<li><a href="./contact.jsp"><span class="glyphicon glyphicon-envelope"></span>&nbsp<spring:message
 								code="accueil.contact" /></a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">

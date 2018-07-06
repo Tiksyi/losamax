@@ -53,5 +53,10 @@ public class ClientController {
 	    public String login() {
 	    	return "login";
 	    }
+	    
+	    @GetMapping("/contact")
+	    public String contact() {
+	    	return "contact";
+	    }
 	 
 }
