@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.losamax.dao.IClientJpaRepository;
+import com.losamax.dao.IEvenementJpaRepository;
+import com.losamax.dao.IPariJpaRepository;
 import com.losamax.dao.ISportJpaRepository;
 import com.losamax.entities.Client;
+import com.losamax.entities.Evenement;
 import com.losamax.entities.Sport;
 
 @Controller
@@ -26,6 +29,12 @@ public class ClientController {
 	
 	@Autowired
 	private IClientJpaRepository clientRepo;
+	
+	@Autowired
+	private IPariJpaRepository pariRepo;
+	
+	@Autowired
+	private IEvenementJpaRepository evenementRepo;
 
 	 @GetMapping("/goToCreer")
 	    public String goToCreer(Model model) {
@@ -87,6 +96,25 @@ public class ClientController {
 	    public String contact() {
 	    	return "contact";
 	    }
+	    
+	    @GetMapping("/parier")
+	    public String parier() {
+	    	return "parier";
+	    }
+	    
+	    @GetMapping("/goToParier/{idEvenement}")
+	    public String goToParier(@PathVariable("idEvenement") Long idEvenement, Model model) {
+		Evenement evenement = evenementRepo.getOne(idEvenement);
+		model.addAttribute("evenement", evenement);
+		return "parier";
+	    }
+	    
+	    @PostMapping("/miser")
+	    public String modifier(
+		    @Valid @ModelAttribute(value = "client") Client client, BindingResult result, Model model) {
+		    clientRepo.save(client);
+		    return "confirmationModification";
 
+	    }
 	 
 }

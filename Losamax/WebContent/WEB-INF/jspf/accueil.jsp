@@ -77,7 +77,7 @@
 												<button type="button" class="btn btn-default">2</button>
 											</div>
 											<div class="col-lg-4" text-align=right>
-												<a href="#" type="button" class="btn btn-primary" >Parier</a>
+												<a href="<c:url value="/clientcontroller/parier"/>" type="button" class="btn btn-primary" >Parier</a>
 											</div>
 										</div>
 									</div>

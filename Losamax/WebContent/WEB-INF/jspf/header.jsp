@@ -41,7 +41,7 @@
 					<li class="active"><a href="#"><span
 							class="glyphicon glyphicon-home"></span>&nbsp<spring:message
 								code="accueil.accueil" /></a></li>
-					<li><a href="#"><spring:message code="accueil.parier" /></a></li>
+					<li><a href="<c:url value="/clientcontroller/parier"/>"><spring:message code="accueil.parier" /></a></li>
 
 					<c:forEach var="s" items="${listeSports}">
 						<li></li>
