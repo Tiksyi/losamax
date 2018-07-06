@@ -48,5 +48,10 @@ public class ClientController {
 		model.addAttribute("sports", sports);
 		return "creerClient";
 	    }
+	    
+	    @GetMapping("/goToLogin")
+	    public String login() {
+	    	return "login";
+	    }
 	 
 }
