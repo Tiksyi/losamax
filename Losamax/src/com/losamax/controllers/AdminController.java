@@ -40,7 +40,7 @@ public class AdminController {
 	@Autowired
 	private IPariJpaRepository pariRepo;
 
-	@GetMapping("/goToWelcomeAdmin")
+	@GetMapping("/goToAdmin")
 	public String goToCreer(Model model) {
 		List<Evenement> evenements = evenementRepo.findAll();
 		for (Evenement e : evenements) {
@@ -76,6 +76,21 @@ public class AdminController {
 		model.addAttribute("sports", sports);
 		coteRepo.save(cote);
 		return "creerparticipant";
+	}
+	@GetMapping("/goToCreerEvenement")
+	public String goToCreerEvenement(Model model) {
+		List<Participant> participants = participantRepo.findAll();
+		List<Sport> sports = sportRepo.findAll();
+		List<Cote> cotes = coteRepo.findAll();
+		model.addAttribute("sports", sports);
+		model.addAttribute("cotes", cotes);
+		model.addAttribute("participants", participants);
+		model.addAttribute("evenement", new Evenement());
+		model.addAttribute("datedebut", new Date());
+		model.addAttribute("datefin", new Date());
+		
+		
+		return "creerEvenement";
 	}
 
 }

@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -25,7 +26,7 @@ public class Client {
 	private String adresse;
 	private String telFix;
 	private String telMobile;
-	@OneToMany
+	@OneToMany(cascade=CascadeType.PERSIST)
 	private List<Sport> listeSports;
 	private double miseMax;
 	private double solde;
