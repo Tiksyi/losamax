@@ -14,10 +14,13 @@
 <title><spring:message code="admin.bienvenue" /></title>
 </head>
 <body>
-	<spring:message code="admin.bienvenue" />
-	<br>
-	<spring:message code="admin.liste.evenement" />
 	<div class="container">
+		<h3>
+			<spring:message code="admin.bienvenue" />
+			<br>
+			<spring:message code="admin.liste.evenement" />
+		</h3>
+		<br> <br>
 		<table class="table table-striped table-dark">
 			<tr>
 				<th><spring:message code="evenement.nom" /></th>
@@ -37,9 +40,16 @@
 
 			<a href="<c:url value="/admincontroller/goToCreerParticipant" />"
 				type="button" class="btn btn-primary"><spring:message
-					code="participant.creer" /></a> <br><br> <a
-				href="<c:url value="/paricontroller/goToMenu" />" type="button"
-				class="btn btn-primary"><spring:message code="menu.retour" /></a>
+					code="participant.creer" /></a> <br>
+							<br><a href="<c:url value="/admincontroller/goToCreerParticipant" />"
+				type="button" class="btn btn-primary"><spring:message
+					code="cote.creer" /></a> <br>
+					<br><a href="<c:url value="/admincontroller/goToCreerEvenement" />"
+				type="button" class="btn btn-primary"><spring:message
+					code="evenement.creer" /></a> <br>
+			<br> <a href="<c:url value="/paricontroller/goToMenu" />"
+				type="button" class="btn btn-primary"><spring:message
+					code="menu.retour" /></a>
 
 		</h3>
 

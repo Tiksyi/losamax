@@ -21,7 +21,22 @@ public class Participant {
 	
 	public Participant() {
 	}
-
+	@Override
+	public boolean equals (Object obj) {
+		if (this==obj) {
+			return true;
+		}
+		if (!(obj instanceof Participant)) {
+			return false;
+		}
+		Participant other= (Participant) obj;
+		return nom.equals(other.nom);
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(nom);
+	}
 	public Long getId() {
 		return id;
 	}

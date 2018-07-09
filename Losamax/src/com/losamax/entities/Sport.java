@@ -1,11 +1,15 @@
 package com.losamax.entities;
 
+
 import java.util.Objects;
+
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Sport {
@@ -17,7 +21,7 @@ public class Sport {
 	
 	public Sport() {
 	}
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -35,7 +39,7 @@ public class Sport {
 	}
 
 	public String toString() {
-		return "Sport [id=" + id + ", nom=" + nom + "]";
+		return nom;
 	}
 	
 	@Override

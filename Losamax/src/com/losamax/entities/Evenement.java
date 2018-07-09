@@ -14,6 +14,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -23,12 +24,12 @@ public class Evenement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
     private String nom;
-    @OneToMany(fetch = FetchType.EAGER,  cascade = CascadeType.PERSIST )
-	private List<Participant> participants = new ArrayList<Participant>();
+    @ManyToMany
+	private List<Participant> participants = new ArrayList<>();
 	private Date dateDebut;
 	private Date dateFin;
-	@OneToMany(cascade = CascadeType.ALL )
-	private List<Cote> cotes = new ArrayList<Cote>();
+	@ManyToMany
+	private List<Cote> cotes = new ArrayList<>();
 	
 	private String resultatFinal;
 

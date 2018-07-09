@@ -1,5 +1,7 @@
 package com.losamax.entities;
 
+import java.util.Objects;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +20,23 @@ public class Cote {
 	public Cote() {
 	
 	}
+	@Override
+	public boolean equals (Object obj) {
+		if (this==obj) {
+			return true;
+		}
+		if (!(obj instanceof Cote)) {
+			return false;
+		}
+		Cote other= (Cote) obj;
+		return libelle.equals(other.libelle);
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(libelle);
+	}
+	
 	public Long getId() {
 		return id;
 	}
