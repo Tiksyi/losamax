@@ -13,16 +13,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="<c:url value="/static/css/styles.css" />">
-<%-- <link rel="stylesheet"
+<link rel="stylesheet"
 	href="<c:url value="/static/bootstrap3/css/bootstrap.css" />">
 <script src="<c:url value="/static/bootstrap3/js/bootstrap.js" />"></script>
-<script src="<c:url value="/static/jquery/js/jquery.js" />"></script> --%>
-<link rel="stylesheet"
+<script src="<c:url value="/static/jquery/js/jquery.js" />"></script>
+<!-- <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 </head>
 <body class="body">
 
@@ -60,7 +60,7 @@
 				<c:forEach var="s" items="${listeSports}">
 					<div class="well">
 						<h2 style="text-transform: capitalize">
-							<a href=""><c:out value="${fn:toLowerCase(s.nom)}" /></a>
+							<c:out value="${fn:toLowerCase(s.nom)}" />
 						</h2>
 						<div class="panel-group">
 							<div class="panel panel-info class">

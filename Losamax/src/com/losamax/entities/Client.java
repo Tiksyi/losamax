@@ -1,5 +1,6 @@
 package com.losamax.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -26,8 +27,10 @@ public class Client {
 	private String adresse;
 	private String telFix;
 	private String telMobile;
-	@OneToMany(cascade=CascadeType.PERSIST)
-	private List<Sport> listeSports;
+
+	@OneToMany
+	private List<Sport> listeSports = new ArrayList<>();
+
 	private double miseMax;
 	private double solde;
 
