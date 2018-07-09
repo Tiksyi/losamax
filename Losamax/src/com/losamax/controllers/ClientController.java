@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.losamax.dao.IClientJpaRepository;
 import com.losamax.dao.IEvenementJpaRepository;
 import com.losamax.dao.IPariJpaRepository;
@@ -123,7 +125,8 @@ public String modifier(@Valid @ModelAttribute(value = "client") Client client, B
 	}
 
 	@PostMapping("/creerPari")
-	public String creerPari(@ModelAttribute(value = "pari") Pari pari, Model model) {
+	public String creerPari(@ModelAttribute(value = "pari") Pari pari, @RequestParam(value = "choix", required = true) String choix, Model model) {
+		pari.setChoix(choix);
 		pariRepo.save(pari);
 		return "confirmationPari";
 	}
