@@ -1,5 +1,7 @@
 package com.losamax.entities;
 
+import java.util.Objects;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -48,5 +50,21 @@ public class Participant {
 		return "Participant [id=" + id + ", nom=" + nom + ", sport=" + sport + "]";
 	}
 	
+	@Override
+	public boolean equals (Object obj) {
+		if (this==obj) {
+			return true;
+		}
+		if (!(obj instanceof Sport)) {
+			return false;
+		}
+		Participant other= (Participant) obj;
+		return nom.equals(other.nom);
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(nom);
+	}
 	
 }

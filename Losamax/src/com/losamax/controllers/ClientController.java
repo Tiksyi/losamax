@@ -35,10 +35,10 @@ public class ClientController {
 
 	@Autowired
 	private IClientJpaRepository clientRepo;
-	
-	@Autowired 
+
+	@Autowired
 	private IEvenementJpaRepository evenementRepo;
-	
+
 	@Autowired
 	private IPariJpaRepository pariRepo;
 
@@ -69,15 +69,15 @@ public class ClientController {
 
 	@GetMapping(value = { "/contact", "/contact?lang={code}" })
 	public String contact(@PathVariable(value = "code", required = false) String code, Model model) {
-		if(code == "fr") {
-			model.addAttribute("nom","Entrez votre nom");
-			model.addAttribute("email","Entrez votre email");
-			model.addAttribute("message","Saisissez votre message ici ...");
+		if (code == "fr") {
+			model.addAttribute("nom", "Entrez votre nom");
+			model.addAttribute("email", "Entrez votre email");
+			model.addAttribute("message", "Saisissez votre message ici ...");
 		}
-		if(code == "en") {
-			model.addAttribute("nom","Enter your name");
-			model.addAttribute("email","Enter your email");
-			model.addAttribute("message","Please enter your message here...");
+		if (code == "en") {
+			model.addAttribute("nom", "Enter your name");
+			model.addAttribute("email", "Enter your email");
+			model.addAttribute("message", "Please enter your message here...");
 		}
 		return "contact";
 	}
@@ -86,24 +86,22 @@ public class ClientController {
 	public String parier() {
 		return "parier";
 	}
-	
-    @GetMapping("/goToModifier/{id}")
-    public String goToModifier(@PathVariable("id") Long id, Model model) {
-	Client client = clientRepo.getOne(id);
-	model.addAttribute("client", client);
-	List<Sport> sports = sportRepo.findAll();
-	model.addAttribute("sports", sports);
-	return "modifierClient";
-    }
 
-    @PostMapping("/modifier")
-    public String modifier(
-	    @Valid @ModelAttribute(value = "client") Client client,
-	    BindingResult result, Model model) {
+	@GetMapping("/goToModifier/{id}")
+	public String goToModifier(@PathVariable("id") Long id, Model model) {
+		Client client = clientRepo.getOne(id);
+		model.addAttribute("client", client);
+		List<Sport> sports = sportRepo.findAll();
+		model.addAttribute("sports", sports);
+		return "modifierClient";
+	}
+
+@PostMapping("/modifier")
+public String modifier(@Valid @ModelAttribute(value = "client") Client client, BindingResult result, Model model) {
 	if (!result.hasErrors()) {
-	    //encodePassword(client);
-	    clientRepo.save(client);
-	    return "confirmationModification";
+		// encodePassword(client);
+		clientRepo.save(client);
+		return "confirmationModification";
 	}
 	List<Sport> sports = sportRepo.findAll();
 	model.addAttribute("sports", sports);
@@ -118,18 +116,17 @@ public class ClientController {
 		model.addAttribute("cotes", cotes);
 		List<Participant> participants = evenement.getParticipants();
 		model.addAttribute("participants", participants);
-		model.addAttribute("pari", new Pari());
+		Pari pari=new Pari();
+		pari.setEvenement(evenement);
+		model.addAttribute("pari", pari);
 		return "creerPari";
 	}
-//
-//	@PostMapping("/creerPari")
-//	public String creerPari(@ModelAttribute(value = "participant") Participant participant,
-//			@ModelAttribute(value = "cote") Cote cote, Model model) {
-//		List<Sport> sports = sportRepo.findAll();
-//		model.addAttribute("sports", sports);
-//		participantRepo.save(participant);
-//		return "creerpari";
-//	}
+
+	@PostMapping("/creerPari")
+	public String creerPari(@ModelAttribute(value = "pari") Pari pari, Model model) {
+		pariRepo.save(pari);
+		return "confirmationPari";
+	}
     
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
@@ -145,12 +142,24 @@ public class ClientController {
     			return id != null ? sportRepo.getOne(id) : null;
     		}
     	});
+    	binder.registerCustomEditor(List.class, "participants", new CustomCollectionEditor(List.class){
+    		@Override
+    		protected Object convertElement(Object element) {
+    			Long id=null;
+    			if (element instanceof String) {
+    				id=Long.valueOf((String) element);
+    			} else if (element instanceof Long) {
+    				id = (Long) element;
+    			}
+    			return id != null ? evenementRepo.getOne(id) : null;
+    		}
+    	});
     }
 
-    private static void encodePassword(Client client) {
-	String rawPassword = client.getCredentials().getPassword();
-	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-	String encodedPassword = encoder.encode(rawPassword);
-	client.getCredentials().setPassword(encodedPassword);
-}
+	private static void encodePassword(Client client) {
+		String rawPassword = client.getCredentials().getPassword();
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		String encodedPassword = encoder.encode(rawPassword);
+		client.getCredentials().setPassword(encodedPassword);
+	}
 }
