@@ -27,7 +27,7 @@
 <body class="body">
 
 
-	<c:import url="./header.jsp"/>
+	<c:import url="./header.jsp" />
 
 	<div class="container-fluid text-center">
 		<div class="row content">
@@ -56,20 +56,27 @@
 					minim veniam, quis nostrud exercitation ullamco laboris nisi ut
 					aliquip ex ea commodo consequat.</p>
 				<hr>
+				<div class="well">
+					<c:forEach var="e" items="${listeEvents}">
 
-				<c:forEach var="s" items="${listeSports}">
-					<div class="well">
-						<h2 style="text-transform: capitalize">
-							<c:out value="${fn:toLowerCase(s.nom)}" />
-						</h2>
+						<%-- <h2 style="text-transform: capitalize">
+							<c:out value="${fn:toLowerCase(e.nom)}" />
+						</h2> --%>
 						<div class="panel-group">
 							<div class="panel panel-info class">
-								<div class="panel-heading">Rencontre à la une</div>
+								<div class="panel-heading">
+									<label class="capital"> <c:out value="${fn:toLowerCase(e.nom)}" /></label>
+								</div>
 								<div class="panel-body">
 									<div class="container">
 										<div class="row">
 											<div class="col-lg-4">
-												<label text-align=left>France - Uruguay</label>
+												<label text-align=left class="capital"> <c:forEach
+														var="p" items="${e.participants}" varStatus="loop">
+														<c:out value="${fn:toLowerCase(p.nom)}" />
+														<c:if test="${loop.index==0}">&nbsp;-&nbsp;</c:if>
+													</c:forEach>
+												</label>
 											</div>
 											<div class="col-lg-4" align=center>
 												<button type="button" class="btn btn-default">1</button>
@@ -77,16 +84,17 @@
 												<button type="button" class="btn btn-default">2</button>
 											</div>
 											<div class="col-lg-4" text-align=right>
-												<a href="<c:url value="/clientcontroller/parier"/>" type="button" class="btn btn-primary" >Parier</a>
+												<a href="<c:url value="/clientcontroller/goToCreerPari/${e.id}"/>"
+													type="button" class="btn btn-primary">Parier</a>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-				</c:forEach>
 
+					</c:forEach>
+				</div>
 			</div>
 			<div class="col-sm-2 sidenav-left">
 				<div class="well">

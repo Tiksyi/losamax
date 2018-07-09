@@ -26,29 +26,31 @@ import com.losamax.entities.Sport;
 @RequestMapping("/paricontroller")
 @Transactional
 public class PariController {
-	
+
 	@Autowired
 	ISportJpaRepository sportRepo;
-	
+
 	@Autowired
 	IEvenementJpaRepository eventRepo;
-	
+
 	@Autowired
 	IParticipantJpaRepository partiRepo;
-	
+
 	@GetMapping("/goToMenu")
 	public String gotomenu(Model model) {
 		List<Sport> lsport = sportRepo.findAll();
+		List<Evenement> levent = eventRepo.findByEvenementUnique();
+		model.addAttribute("listeEvents", levent);
 		model.addAttribute("listeSports", lsport);
 		return "accueil";
 	}
-	
+
 	@GetMapping("/{nom}")
 	public String gotorubrique(@PathVariable(value = "nom") String nom, Model model) {
 		List<Sport> lsport = sportRepo.findAll();
-//		List<Participant> lpart = partiRepo.findAll();
+		// List<Participant> lpart = partiRepo.findAll();
 		Sport s = sportRepo.findByNom(nom);
-//		model.addAttribute("listePartis", lpart);
+		// model.addAttribute("listePartis", lpart);
 		model.addAttribute("listeSports", lsport);
 		model.addAttribute("nom", s.getNom());
 		model.addAttribute("id", s.getId());
