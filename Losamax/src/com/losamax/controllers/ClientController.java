@@ -3,11 +3,14 @@ package com.losamax.controllers;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomCollectionEditor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -122,6 +125,22 @@ public class ClientController {
 //		participantRepo.save(participant);
 //		return "creerpari";
 //	}
+    
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+    	binder.registerCustomEditor(List.class, "listeSports", new CustomCollectionEditor(List.class){
+    		@Override
+    		protected Object convertElement(Object element) {
+    			Long id=null;
+    			if (element instanceof String) {
+    				id=Long.valueOf((String) element);
+    			} else if (element instanceof Long) {
+    				id = (Long) element;
+    			}
+    			return id != null ? sportRepo.getOne(id) : null;
+    		}
+    	});
+    }
 
     private static void encodePassword(Client client) {
 	String rawPassword = client.getCredentials().getPassword();
