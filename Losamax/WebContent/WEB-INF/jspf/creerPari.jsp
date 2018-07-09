@@ -33,10 +33,11 @@
 <%-- 				<form:label path="pari.evenement.participants" id="participants"><spring:message code="pari.participants" /> --%>
 <%-- 				</form:label> --%>
 <%-- 				<form:select path="pari.choix" items="${participants}" multiple="false" itemValue="id" itemLabel="participants" class="form-control"/> --%>
-			    <spring:message code="pari.participants" />
+			    <spring:message code="pari.choix" />
 			    <form:select path="pari.choix">
-        <form:options items="${participants}" itemValue="id" itemLabel="nom" />
+        <form:options items="${cotes}" itemValue="id" itemLabel="libelle" />
    			 </form:select>
+   			 <spring:message code="pari.cote" />
 			
 			</div>
 			
