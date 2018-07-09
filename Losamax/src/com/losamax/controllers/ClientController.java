@@ -21,6 +21,7 @@ import com.losamax.dao.IPariJpaRepository;
 import com.losamax.dao.ISportJpaRepository;
 import com.losamax.entities.Client;
 import com.losamax.entities.Evenement;
+import com.losamax.entities.Pari;
 import com.losamax.entities.Cote;
 import com.losamax.entities.Participant;
 import com.losamax.entities.Sport;
@@ -109,13 +110,17 @@ public class ClientController {
 	return "modifierClient";
 }
 	
-//	@GetMapping("/goToCreerPari")
-//	public String goToCreerPari(Model model) {
-//		model.addAttribute("participant", new Participant());
-//		model.addAttribute("sports", sports);
-//		model.addAttribute("cote", new Cote());
-//		return "creerpari";
-//	}
+	@GetMapping("/goToCreerPari/{id}")
+	public String goToCreerPari(@PathVariable("id") Long id, Model model) {
+		Evenement evenement = evenementRepo.getOne(id);
+		model.addAttribute("evenement", evenement);
+		List<Cote> cotes = evenement.getCotes();
+		model.addAttribute("cotes", cotes);
+		List<Participant> participants = evenement.getParticipants();
+		model.addAttribute("participants", participants);
+		model.addAttribute("pari", new Pari());
+		return "creerPari";
+	}
 //
 //	@PostMapping("/creerPari")
 //	public String creerPari(@ModelAttribute(value = "participant") Participant participant,
