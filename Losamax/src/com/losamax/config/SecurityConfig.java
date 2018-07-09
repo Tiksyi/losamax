@@ -26,6 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		// Pour activer l'authentification sur les web services, enlever le
 		// matcher "/api/**"
+		if (loginService.getRole().equals("ROLE_USER")) 
 		http.authorizeRequests().antMatchers("/static/**", "/api/**").permitAll().anyRequest().authenticated().and()
 				.formLogin().loginPage("/securitycontroller/login").loginProcessingUrl("/login")
 				.defaultSuccessUrl("/utilisateurcontroller/goToMenu", true)

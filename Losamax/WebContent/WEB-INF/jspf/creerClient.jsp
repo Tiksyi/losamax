@@ -118,15 +118,15 @@
 				<form:errors path="client.solde" cssClass="errors" />
 			</div>
 
-			<div class="form-group">
+			<%-- <div class="form-group">
 				<form:label path="client.listeSports">
 					<spring:message code="client.listeSports" />
 				</form:label>
 				<form:select path="client.listeSports" multiple="true" class="form-control">
 					<form:option value="" label="" />
-					<form:options items="${sports}" /> <!-- itemValue="id" itemLabel="nom" -->
+					<form:options items="${sports}" itemValue="id" itemLabel="nom" /> 
 				</form:select>
-			</div>  
+			</div>   --%>
 
 			<div class="form-group">
 				<form:label path="client.credentials.username">
@@ -146,8 +146,9 @@
 				&nbsp;
 				<form:errors path="client.credentials.password" cssClass="errors" />
 			</div>
-			<input type="hidden" name="client.credentials.role"
-				value="ROLE_USER" />
+			<form:hidden path = "client.credentials.role" value = "ROLE_USER" />
+			<!-- <input type="hidden" path="client.credentials.role" name ="client.credentials.role"
+				value="ROLE_USER" /> -->
 				<input type="submit" class="btn btn-primary"
 				value="<spring:message code="client.creer.submit" />" />
 		</form>
