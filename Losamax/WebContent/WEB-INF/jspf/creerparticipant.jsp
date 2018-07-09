@@ -69,9 +69,9 @@
 		</form>
 		<br> <a href="<c:url value="/admincontroller/goToCreerEvenement" />"
 			type="button" class="btn btn-primary"><spring:message
-				code="evenement.creer" /></a>
+				code="evenement.creer" /></a><br>
 
-		<br> <a href="<c:url value="/paricontroller/goToMenu" />"
+		<br> <a href="<c:url value="/admincontroller/goToAdmin" />"
 			type="button" class="btn btn-primary"><spring:message
 				code="menu.retour" /></a>
 	</div>

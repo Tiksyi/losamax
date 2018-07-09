@@ -28,7 +28,7 @@ public class Client {
 	private String telFix;
 	private String telMobile;
 
-	@OneToMany
+	@ManyToMany
 	private List<Sport> listeSports = new ArrayList<>();
 
 	private double miseMax;

@@ -21,59 +21,57 @@
 <body>
 	<div class="container">
 		<h3 text-align=center>
-			<spring:message code="participant.creer" />
+			<spring:message code="evenement.creer" />
 		</h3>
-		<form method="POST" action="creerParticipant"
-			modelAttribute="participant">
+		<form method="POST" action="creerEvenement" modelAttribute="evenement">
 			<input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token}" /> <input type="hidden"
-				name="participant.id" />
-			<div class="form-group">
-				<form:label path="participant.nom">
-					<spring:message code="participant.nom" />
-				</form:label>
-				<form:input path="participant.nom" class="form-control" />
-			</div>
-			<div class="form-group">
-				<form:label path="participant.sport.id">
-					<spring:message code="participant.sport" />
-				</form:label>
-				<form:select path="participant.sport.id" class="form-control">
-					<form:option value="" label="" />
-					<form:options items="${sports}" itemValue="id" itemLabel="nom" />
-				</form:select>
-			</div>
-			<br> <input type="submit" class="btn btn-primary"
-				value="<spring:message code="participant.creer" />" />
-		</form>
-		<h3 text-align=center>
-			<spring:message code="cote.creer" />
-		</h3>
-		<form method="POST" action="creerCote" modelAttribute="cote">
-			<input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token}" /> <input type="hidden" name="cote.id" />
-			<div class="form-group">
-				<form:label path="cote.libelle">
-					<spring:message code="cote.libelle" />
-				</form:label> 
-				<form:input path="cote.libelle" class="form-control" />
-			</div>
-			<div class="form-group">
-				<form:label path="cote.valeur">
-					<spring:message code="cote.valeur" />
-				</form:label>
-				<form:input path="cote.valeur" class="form-control" />
-			</div>
-			<br> <input type="submit" class="btn btn-primary"
-				value="<spring:message code="cote.creer" />" />
-		</form>
-		<br> <a href="<c:url value="/admincontroller/goToCreerEvenement" />"
-			type="button" class="btn btn-primary"><spring:message
-				code="evenement.creer" /></a>
+				value="${_csrf.token}" /> 
 
-		<br> <a href="<c:url value="/paricontroller/goToMenu" />"
-			type="button" class="btn btn-primary"><spring:message
-				code="menu.retour" /></a>
+			<div class="form-group">
+				<form:label path="evenement.nom">
+					<spring:message code="evenement.nom" />
+				</form:label>
+				<form:input path="evenement.nom" class="form-control" />
+			</div>
+
+			<div class="form-group">
+				<form:label path="evenement.participants" id="participants">
+					<spring:message code="evenement.participants" />
+				</form:label>
+
+				<form:select path="evenement.participants" items="${participants}"
+					multiple="true" itemValue="id" itemLabel="nom" class="form-control" />
+			</div>
+			
+			<div class="form-group">
+				<form:label path="evenement.cotes" id="cotes">
+					<spring:message code="evenement.cotes" />
+				</form:label>
+
+				<form:select path="evenement.cotes" items="${cotes}"
+					multiple="true" itemValue="id" itemLabel="libelle" class="form-control" />
+			</div> 
+			
+			<div class="form-group">
+				<form:label path="evenement.dateDebut">
+					<spring:message code="evenement.date.debut.format" />
+				</form:label>
+				<form:input path="evenement.dateDebut" class="form-control" />
+			</div>
+			<div class="form-group">
+				<form:label path="evenement.dateFin">
+					<spring:message code="evenement.date.fin.format" />
+				</form:label>
+				<form:input path="evenement.dateFin" class="form-control" />
+			</div>
+			
+
+			<br> <input type="submit" class="btn btn-primary"
+				value="<spring:message code="evenement.creer" />" />
+		</form>
+		<br> <br> <a
+			href="<c:url value="/admincontroller/goToAdmin" />" type="button"
+			class="btn btn-primary"><spring:message code="menu.retour" /></a>
 	</div>
 </body>
 </html>
