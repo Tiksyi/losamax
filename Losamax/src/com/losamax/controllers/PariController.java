@@ -1,5 +1,6 @@
 package com.losamax.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -45,14 +46,14 @@ public class PariController {
 	@GetMapping("/{nom}")
 	public String gotorubrique(@PathVariable(value = "nom") String nom, Model model) {
 		List<Sport> lsport = sportRepo.findAll();
-		List<Evenement> levent = eventRepo.findAll();
-		List<Participant> lpart = partiRepo.findAll();
+//		List<Participant> lpart = partiRepo.findAll();
 		Sport s = sportRepo.findByNom(nom);
-		model.addAttribute("listePartis", lpart);
-		model.addAttribute("listeEvents", levent);
+//		model.addAttribute("listePartis", lpart);
 		model.addAttribute("listeSports", lsport);
 		model.addAttribute("nom", s.getNom());
 		model.addAttribute("id", s.getId());
+		List<Evenement> levent = eventRepo.findByParticipantsSportId(s.getId());
+		model.addAttribute("listeEvents", levent);
 		return "rubrique";
 	}
 
