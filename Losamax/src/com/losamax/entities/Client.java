@@ -27,10 +27,8 @@ public class Client {
 	private String adresse;
 	private String telFix;
 	private String telMobile;
-
 	@ManyToMany
 	private List<Sport> listeSports = new ArrayList<>();
-
 	private double miseMax;
 	private double solde;
 

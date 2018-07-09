@@ -55,36 +55,46 @@
 				<hr>
 
 				<h1 class="capital">Rubrique ${nom}</h1>
+				<div class="well">
+					<c:forEach var="e" items="${listeEvents}">
 
-				<c:forEach var="e" items="${listesEvent}">
-					<div class="well">
 						<h2 style="text-transform: capitalize">
-							test
+							<c:out value="${e.nom}"></c:out>
 						</h2>
-						<div class="panel-group">
-							<div class="panel panel-info class">
-								<div class="panel-heading">Rencontre à la une</div>
-								<div class="panel-body">
-									<div class="container">
-										<div class="row">
-											<div class="col-lg-4">
-												<label text-align=left>France - Uruguay</label>
-											</div>
-											<div class="col-lg-4" align=center>
-												<button type="button" class="btn btn-default">1</button>
-												<button type="button" class="btn btn-default">N</button>
-												<button type="button" class="btn btn-default">2</button>
-											</div>
-											<div class="col-lg-4" text-align=right>
-												<a href="<c:url value="/clientcontroller/parier"/>" type="button" class="btn btn-primary" >Parier</a>
+						<form action="" method="get">
+							<div class="panel-group">
+								<div class="panel panel-info class">
+									<div class="panel-heading">Rencontre à la une</div>
+									<div class="panel-body">
+										<div class="container">
+
+											<div class="row">
+												<div class="col-lg-4">
+													<label text-align=left class="capital"> <c:forEach
+															var="p" items="${e.participants}" varStatus="loop">
+															<c:out value="${fn:toLowerCase(p.nom)}" />
+															<c:if test="${loop.index==0}">&nbsp;-&nbsp;</c:if>
+														</c:forEach>
+													</label>
+												</div>
+												<div class="col-lg-4" align=center>
+													<button type="button" class="btn btn-default">1</button>
+													<button type="button" class="btn btn-default">N</button>
+													<button type="button" class="btn btn-default">2</button>
+												</div>
+												<div class="col-lg-4" text-align=right>
+													<button type="submit" class="btn btn-primary"
+														formmethod="get"
+														formaction="<c:url value="/clientcontroller/goToCreerPari/${e.id}"/>">Parier</button>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-				</c:forEach>
+						</form>
+					</c:forEach>
+				</div>
 			</div>
 
 			<div class="col-sm-2 sidenav-left">
