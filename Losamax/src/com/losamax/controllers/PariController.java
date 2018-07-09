@@ -14,7 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.losamax.dao.IEvenementJpaRepository;
+import com.losamax.dao.IParticipantJpaRepository;
 import com.losamax.dao.ISportJpaRepository;
+import com.losamax.entities.Evenement;
+import com.losamax.entities.Participant;
 import com.losamax.entities.Sport;
 
 @Controller
@@ -24,6 +28,12 @@ public class PariController {
 	
 	@Autowired
 	ISportJpaRepository sportRepo;
+	
+	@Autowired
+	IEvenementJpaRepository eventRepo;
+	
+	@Autowired
+	IParticipantJpaRepository partiRepo;
 	
 	@GetMapping("/goToMenu")
 	public String gotomenu(Model model) {
@@ -35,9 +45,13 @@ public class PariController {
 	@GetMapping("/{nom}")
 	public String gotorubrique(@PathVariable(value = "nom") String nom, Model model) {
 		List<Sport> lsport = sportRepo.findAll();
+		List<Evenement> levent = eventRepo.findAll();
+		List<Participant> lpart = partiRepo.findAll();
 		Sport s = sportRepo.findByNom(nom);
+		model.addAttribute("listePartis", lpart);
+		model.addAttribute("listeEvents", levent);
 		model.addAttribute("listeSports", lsport);
-		model.addAttribute("nom", nom);
+		model.addAttribute("nom", s.getNom());
 		model.addAttribute("id", s.getId());
 		return "rubrique";
 	}

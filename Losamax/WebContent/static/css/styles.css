@@ -68,4 +68,8 @@ footer {
 .body {
 	background-color: #F5F5F5;
 }
+
+.capital {
+	text-transform: capitalize;
+}
 /* Fin du CCS perso */
