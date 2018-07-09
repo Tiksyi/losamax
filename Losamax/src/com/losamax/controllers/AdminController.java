@@ -1,12 +1,16 @@
 package com.losamax.controllers;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomCollectionEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,13 +44,9 @@ public class AdminController {
 	@Autowired
 	private IPariJpaRepository pariRepo;
 
-	@GetMapping("/goToWelcomeAdmin")
+	@GetMapping("/goToAdmin")
 	public String goToCreer(Model model) {
 		List<Evenement> evenements = evenementRepo.findAll();
-		for (Evenement e : evenements) {
-			e.setDateDebut(new Date());
-			e.setDateFin(new Date());
-		}
 		model.addAttribute("evenements", evenements);
 		return "bonjouradmin";
 	}
@@ -77,5 +77,63 @@ public class AdminController {
 		coteRepo.save(cote);
 		return "creerparticipant";
 	}
+	@GetMapping("/goToCreerEvenement")
+	public String goToCreerEvenement(Model model) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 
+		List<Participant> participants = participantRepo.findAll();
+		List<Sport> sports = sportRepo.findAll();
+		List<Cote> cotes = coteRepo.findAll();
+		model.addAttribute("sports", sports);
+		model.addAttribute("cotes", cotes);
+		model.addAttribute("participants", participants);
+		model.addAttribute("evenement", new Evenement());
+		model.addAttribute("datedebut", dateFormat.format(new Date()));
+		model.addAttribute("datefin", dateFormat.format(new Date()));
+		return "creerEvenement";
+		
+		
+			
+	}
+	
+	@PostMapping("/creerEvenement")
+	public String creerEvenement(@ModelAttribute(value = "evenement") Evenement evenement,
+		 Model model) {
+		List<Participant> participants = participantRepo.findAll();
+		List<Sport> sports = sportRepo.findAll();
+		List<Cote> cotes = coteRepo.findAll();
+		model.addAttribute("sports", sports);
+		model.addAttribute("cotes", cotes);
+		model.addAttribute("participants", participants);
+		evenementRepo.save(evenement);
+		return "creerEvenement";
+	}
+	
+	@InitBinder
+    protected void initBinder(WebDataBinder binder) {
+    	binder.registerCustomEditor(List.class, "participants", new CustomCollectionEditor(List.class){
+    		@Override
+    		protected Object convertElement(Object element) {
+    			Long id=null;
+    			if (element instanceof String) {
+    				id=Long.valueOf((String) element);
+    			} else if (element instanceof Long) {
+    				id = (Long) element;
+    			}
+    			return id != null ? participantRepo.getOne(id) : null;
+    		}
+    	});
+       	binder.registerCustomEditor(List.class, "cotes", new CustomCollectionEditor(List.class){
+    		@Override
+    		protected Object convertElement(Object element) {
+    			Long id=null;
+    			if (element instanceof String) {
+    				id=Long.valueOf((String) element);
+    			} else if (element instanceof Long) {
+    				id = (Long) element;
+    			}
+    			return id != null ? coteRepo.getOne(id) : null;
+    		}
+    	});
+    }
 }

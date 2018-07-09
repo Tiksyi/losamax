@@ -12,6 +12,8 @@ public class LoginService implements UserDetailsService {
 
     @Autowired
     private ICredentialsJpaRepository credentialsRepo;
+    
+    private String role;
 
     @Override
     public UserDetails loadUserByUsername(String username)
@@ -21,6 +23,11 @@ public class LoginService implements UserDetailsService {
 	    throw new UsernameNotFoundException(
 		    "No user found with username: " + username);
 	}
+	this.role=credentials.getRole().name();
 	return new UtilisateurPrincipal(credentials);
+    }
+    
+    public String getRole() {
+    	  	return this.role;
     }
 }

@@ -21,113 +21,38 @@
 		<h3 text-align=center>
 			<spring:message code="pari.header" />
 		</h3>
+		
 		<form method="POST" action="${pageContext.request.contextPath}/clientcontroller/creerPari" modelAttribute="pari">
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
- 			<form:hidden path="pari.evenement"/>
-			<div class="form-group">
+		 			<div class="form-group">
 				<form:label path="pari.mise"><spring:message code="pari.mise" /><span class="required">*</span></form:label>
-				<form:input path="pari.mise" class="form-control" />&nbsp;
-				<form:errors path="pari.mise" cssClass="errors" />
+ 				<form:input path="pari.mise" class="form-control" />&nbsp;
+ 				<form:errors path="pari.mise" cssClass="errors" />
 			</div>
-			<div class="form-group">
-<%-- 				<form:label path="pari.evenement.participants" id="participants"><spring:message code="pari.participants" /> --%>
-<%-- 				</form:label> --%>
-<%-- 				<form:select path="pari.choix" items="${participants}" multiple="false" itemValue="id" itemLabel="participants" class="form-control"/> --%>
-			    <spring:message code="pari.choix" />
-			    <form:select path="pari.choix">
-        <form:options items="${cotes}" itemValue="id" itemLabel="libelle" />
-   			 </form:select>
-   			 <spring:message code="pari.cote" />
-			
-			</div>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-<!-- 			<div class="form-group"> -->
-<%-- 				<form:label path="client.adresse"> --%>
-<%-- 					<spring:message code="client.adresse" /> --%>
-<!-- 					<span class="required">*</span> -->
-<%-- 				</form:label> --%>
-<%-- 				<form:input path="client.adresse" class="form-control" /> --%>
-<!-- 				&nbsp; -->
-<%-- 				<form:errors path="client.adresse" cssClass="errors" /> --%>
-
-<!-- 			</div> -->
-<!-- 			<div class="form-group"> -->
-<%-- 				<form:label path="client.telFix"> --%>
-<%-- 					<spring:message code="client.telFix" /> --%>
-<!-- 					<span class="required">*</span> -->
-<%-- 				</form:label> --%>
-<%-- 				<form:input path="client.telFix" class="form-control" /> --%>
-<!-- 				&nbsp; -->
-<%-- 				<form:errors path="client.telFix" cssClass="errors" /> --%>
-
-<!-- 			</div> -->
-<!-- 			<div class="form-group"> -->
-<%-- 				<form:label path="client.telMobile"> --%>
-<%-- 					<spring:message code="client.telMobile" /> --%>
-<!-- 					<span class="required">*</span> -->
-<%-- 				</form:label> --%>
-<%-- 				<form:input path="client.telMobile" class="form-control" /> --%>
-<!-- 				&nbsp; -->
-<%-- 				<form:errors path="client.telMobile" cssClass="errors" /> --%>
-
-<!-- 			</div> -->
-<!-- 			<div class="form-group"> -->
-<%-- 				<form:label path="client.miseMax"> --%>
-<%-- 					<spring:message code="client.miseMax" /> --%>
-<!-- 					<span class="required">*</span> -->
-<%-- 				</form:label> --%>
-<%-- 				<form:input path="client.miseMax" class="form-control" /> --%>
-<!-- 				&nbsp; -->
-<%-- 				<form:errors path="client.miseMax" cssClass="errors" /> --%>
-
-<!-- 			</div> -->
-<!-- 			<div class="form-group"> -->
-<%-- 				<form:label path="client.solde"> --%>
-<%-- 					<spring:message code="client.depot.solde" /> --%>
-<!-- 					<span class="required">*</span> -->
-<%-- 				</form:label> --%>
-<%-- 				<form:input path="client.solde" class="form-control" /> --%>
-<!-- 				&nbsp; -->
-<%-- 				<form:errors path="client.solde" cssClass="errors" /> --%>
-<!-- 			</div> -->
-
-
-
-<!-- 			<div class="form-group"> -->
-<%-- 			<form:hidden path="client.credentials.id"/> --%>
-<%-- 				<form:label path="client.credentials.username"> --%>
-<%-- 					<spring:message code="client.username" /> --%>
-<!-- 					<span class="required">*</span> -->
-<%-- 				</form:label> --%>
-<%-- 				<form:input path="client.credentials.username" /> --%>
-<!-- 				&nbsp; -->
-<%-- 				<form:errors path="client.credentials.username" cssClass="errors" /> --%>
-<!-- 			</div> -->
-<!-- 			<div class="form-group"> -->
-<%-- 				<form:label path="client.credentials.password"> --%>
-<%-- 					<spring:message code="client.password" /> --%>
-<!-- 					<span class="required">*</span> -->
-<%-- 				</form:label> --%>
-<%-- 				<form:password path="client.credentials.password" /> --%>
-<!-- 				&nbsp; -->
-<%-- 				<form:errors path="client.credentials.password" cssClass="errors" /> --%>
-<!-- 			</div> -->
-<!-- 			<input type="hidden" name="client.credentials.role" -->
-<!-- 				value="ROLE_USER" /> -->
-<!-- 				<input type="submit" class="btn btn-primary" -->
-<%-- 				value="<spring:message code="client.creer.submit" />" /> --%>
-<%-- 		</form> --%>
-<%-- 		<a href="<c:url value="/paricontroller/goToMenu" />" type="button" --%>
-<%-- 			class="btn btn-primary"><spring:message code="menu.retour" /></a> --%>
-<!-- 	</div> -->
+							<div class="panel-group">
+								<div class="panel panel-info class">
+									<div class="panel-body">
+										<div class="container">
+											<div class="row">
+												<div class="col-lg-4">
+													<label text-align=left class="capital"> <c:forEach
+															var="p" items="${pari.evenement.participants}" varStatus="loop">
+															<c:out value="${fn:toLowerCase(p.nom)}" />
+															<c:if test="${loop.index==0}">&nbsp;-&nbsp;</c:if>
+														</c:forEach>
+													</label>
+												</div>
+												<div class="col-lg-4" align=left>
+												<ul>
+												<c:forEach var="c" items="${cotes}"><li><button type="button" class="btn btn-default"><c:out value="${c.libelle}" /></button>&nbsp;<c:out value="${c.valeur}" /></li></c:forEach></ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						<div class="col-lg-4" text-align=right>
+							<button type="submit" class="btn btn-primary"><spring:message code="client.creer.submit" /></button>
+						</div>
+						</form>
 </body>
 </html>

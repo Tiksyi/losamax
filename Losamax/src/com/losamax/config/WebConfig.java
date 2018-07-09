@@ -29,7 +29,7 @@ import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module.Feature;
 @Import(value = { AppConfig.class, SecurityConfigDev.class })
 @EnableWebMvc
 @ComponentScan(basePackages = { "com.losamax.controllers",
-	"com.losamax.restcontrollers" })
+	"com.losamax.restcontrollers","com.losamax.services" })
 public class WebConfig implements WebMvcConfigurer {
 
     @Override

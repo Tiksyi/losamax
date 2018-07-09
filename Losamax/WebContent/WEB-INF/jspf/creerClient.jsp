@@ -120,6 +120,7 @@
 				<form:label path="client.listeSports" id="listeSports">
 					<spring:message code="client.listeSports" />
 				</form:label>
+
 				<form:select path="client.listeSports" items="${sports}" multiple="true" itemValue="id" itemLabel="nom" class="form-control"/>
 			</div>
 
@@ -141,8 +142,9 @@
 				&nbsp;
 				<form:errors path="client.credentials.password" cssClass="errors" />
 			</div>
-			<input type="hidden" name="client.credentials.role"
-				value="ROLE_USER" />
+			<form:hidden path = "client.credentials.role" value = "ROLE_USER" />
+			<!-- <input type="hidden" path="client.credentials.role" name ="client.credentials.role"
+				value="ROLE_USER" /> -->
 				<input type="submit" class="btn btn-primary"
 				value="<spring:message code="client.creer.submit" />" />
 		</form>
