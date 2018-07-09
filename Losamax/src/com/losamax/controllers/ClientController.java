@@ -18,103 +18,115 @@ import com.losamax.dao.IPariJpaRepository;
 import com.losamax.dao.ISportJpaRepository;
 import com.losamax.entities.Client;
 import com.losamax.entities.Evenement;
+import com.losamax.entities.Cote;
+import com.losamax.entities.Participant;
 import com.losamax.entities.Sport;
 
 @Controller
 @RequestMapping("/clientcontroller")
 public class ClientController {
-	
+
 	@Autowired
 	private ISportJpaRepository sportRepo;
-	
+
 	@Autowired
 	private IClientJpaRepository clientRepo;
 	
-	@Autowired
-	private IPariJpaRepository pariRepo;
+	@Autowired 
+	private IEvenementJpaRepository evenementRepo;
 	
 	@Autowired
-	private IEvenementJpaRepository evenementRepo;
+	private IPariJpaRepository pariRepo;
 
-	 @GetMapping("/goToCreer")
-	    public String goToCreer(Model model) {
+	@GetMapping("/goToCreer")
+	public String goToCreer(Model model) {
 		List<Sport> sports = sportRepo.findAll();
 		model.addAttribute("client", new Client());
 		model.addAttribute("sports", sports);
 		return "creerClient";
-	    }
-	 
-	    @PostMapping("/creer")
-	    public String creer(
-		   @ModelAttribute(value = "client") Client client, Model model) {
-		//if (!result.hasErrors()) {
-		    //encodePassword(client);
-		    clientRepo.save(client);
-		    return "confirmationCreation";
-		//}
-//		List<Sport> sports = sportRepo.findAll();
-//		model.addAttribute("sports", sports);
-//		return "creerClient";
-	    }
-	    
-	    @GetMapping("/goToModifier/{id}")
-	    public String goToModifier(@PathVariable("id") Long id, Model model) {
-		Client client = clientRepo.getOne(id);
-		model.addAttribute("client", client);
-		List<Sport> sports = sportRepo.findAll();
-		model.addAttribute("sports", sports);
-		return "modifierClient";
-	    }
-	    
-	    @PostMapping("/modifier")
-	    public String modifier(
-		    @Valid @ModelAttribute(value = "client") Client client, BindingResult result, Model model) {
+	}
+
+	@PostMapping("/creer")
+	public String creer(@Valid @ModelAttribute(value = "client") Client client, BindingResult result, Model model) {
 		if (!result.hasErrors()) {
-		    //encodePassword(client);
-		    clientRepo.save(client);
-		    return "confirmationModification";
+			// encodePassword(client);
+			clientRepo.save(client);
+			return "confirmationCreation";
 		}
 		List<Sport> sports = sportRepo.findAll();
 		model.addAttribute("sports", sports);
-		return "modifierClient";
-	    }
+		return "creerClient";
+	}
 
-	    @GetMapping("/goToLogin")
-	    public String login() {
-	    	return "login";
-	    }
+	@GetMapping("/goToLogin")
+	public String login() {
+		return "login";
+	}
 
-//	    private static void encodePassword(Client client) {
-//    	String rawPassword = client.getCredentials().getPassword();
-//    	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//    	String encodedPassword = encoder.encode(rawPassword);
-//    	client.getCredentials().setPassword(encodedPassword);
-//        }
+	@GetMapping(value = { "/contact", "/contact?lang={code}" })
+	public String contact(@PathVariable(value = "code", required = false) String code, Model model) {
+		if(code == "fr") {
+			model.addAttribute("nom","Entrez votre nom");
+			model.addAttribute("email","Entrez votre email");
+			model.addAttribute("message","Saisissez votre message ici ...");
+		}
+		if(code == "en") {
+			model.addAttribute("nom","Enter your name");
+			model.addAttribute("email","Enter your email");
+			model.addAttribute("message","Please enter your message here...");
+		}
+		return "contact";
+	}
 
-	    
-	    @GetMapping("/contact")
-	    public String contact() {
-	    	return "contact";
-	    }
-	    
-	    @GetMapping("/parier")
-	    public String parier() {
-	    	return "parier";
-	    }
-	    
-	    @GetMapping("/goToParier/{idEvenement}")
-	    public String goToParier(@PathVariable("idEvenement") Long idEvenement, Model model) {
-		Evenement evenement = evenementRepo.getOne(idEvenement);
-		model.addAttribute("evenement", evenement);
+	@GetMapping("/parier")
+	public String parier() {
 		return "parier";
-	    }
-	    
-	    @PostMapping("/miser")
-	    public String modifier(
-		    @Valid @ModelAttribute(value = "evenement") Client client, Model model) {
-		    pariRepo.save(pari);
-		    return "confirmationModification";
+	}
+	
+    @GetMapping("/goToModifier/{id}")
+    public String goToModifier(@PathVariable("id") Long id, Model model) {
+	Client client = clientRepo.getOne(id);
+	model.addAttribute("client", client);
+	List<Sport> sports = sportRepo.findAll();
+	model.addAttribute("sports", sports);
+	return "modifierClient";
+    }
 
-	    }
-	 
+    @PostMapping("/modifier")
+    public String modifier(
+	    @Valid @ModelAttribute(value = "client") Client client,
+	    BindingResult result, Model model) {
+	if (!result.hasErrors()) {
+	    //encodePassword(client);
+	    clientRepo.save(client);
+	    return "confirmationModification";
+	}
+	List<Sport> sports = sportRepo.findAll();
+	model.addAttribute("sports", sports);
+	return "modifierClient";
+}
+	
+//	@GetMapping("/goToCreerPari")
+//	public String goToCreerPari(Model model) {
+//		model.addAttribute("participant", new Participant());
+//		model.addAttribute("sports", sports);
+//		model.addAttribute("cote", new Cote());
+//		return "creerpari";
+//	}
+//
+//	@PostMapping("/creerPari")
+//	public String creerPari(@ModelAttribute(value = "participant") Participant participant,
+//			@ModelAttribute(value = "cote") Cote cote, Model model) {
+//		List<Sport> sports = sportRepo.findAll();
+//		model.addAttribute("sports", sports);
+//		participantRepo.save(participant);
+//		return "creerpari";
+//	}
+
+    private static void encodePassword(Client client) {
+	String rawPassword = client.getCredentials().getPassword();
+	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+	String encodedPassword = encoder.encode(rawPassword);
+	client.getCredentials().setPassword(encodedPassword);
+}
 }

@@ -1,64 +1,51 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title><spring:message code="admin.bienvenue" /></title>
 </head>
 <body>
-		<spring:message code="client.header" />
-			<form method="POST" action="creerRencontre" modelAttribute="evenement">
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-		<form:label path="client.nom"><spring:message code="client.nom" /><span class="required">*</span></form:label>
-		<form:input path="client.nom" />&nbsp;<form:errors path="client.nom" cssClass="errors" />
-		<br>
-		<form:label path="client.prenom"><spring:message code="client.prenom" /><span class="required">*</span></form:label>
-		<form:input path="client.prenom" />&nbsp;<form:errors path="client.prenom" cssClass="errors" />
-		<br>
-		<form:label path="client.mail"><spring:message code="client.mail" /><span class="required">*</span></form:label>
-		<form:input path="client.mail" />&nbsp;<form:errors path="client.mail" cssClass="errors" />
-		<br>
-		<form:label path="client.age"><spring:message code="client.age" /><span class="required">*</span></form:label>
-		<form:input path="client.age" />&nbsp;<form:errors path="client.age" cssClass="errors" />
-		<br>
-		<form:label path="client.adresse"><spring:message code="client.adresse" /><span class="required">*</span></form:label>
-		<form:input path="client.adresse" />&nbsp;<form:errors path="client.adresse" cssClass="errors" />
-		<br>
-		<form:label path="client.telFix"><spring:message code="client.telFix" /><span class="required">*</span></form:label>
-		<form:input path="client.telFix" />&nbsp;<form:errors path="client.telFix" cssClass="errors" />
-		<br>
-		<form:label path="client.telMobile"><spring:message code="client.telMobile" /><span class="required">*</span></form:label>
-		<form:input path="client.telMobile" />&nbsp;<form:errors path="client.telMobile" cssClass="errors" />
-		<br>
-		<form:label path="client.miseMax"><spring:message code="client.miseMax" /><span class="required">*</span></form:label>
-		<form:input path="client.miseMax" />&nbsp;<form:errors path="client.miseMax" cssClass="errors" />
-		<br>
-		<form:label path="client.solde"><spring:message code="client.depot.solde" /><span class="required">*</span></form:label>
-		<form:input path="client.solde" />&nbsp;<form:errors path="client.solde" cssClass="errors" />
-		<br>
-		<form:label path="client.listeSports"><spring:message code="client.listeSports" /></form:label>
-		<form:select path="client.listeSports" multiple="true">
-			<form:option value="" label="" />
-			<form:options items="${sports}" itemValue="id" itemLabel="nom" />
-		</form:select>
-		<br>
-		<form:label path="client.credentials.username"><spring:message code="client.username" /><span class="required">*</span></form:label>
-		<form:password path="client.credentials.username" />&nbsp;<form:errors path="client.credentials.username" cssClass="errors" />
-		<br>
-		<form:label path="client.credentials.password"><spring:message code="client.password" /><span class="required">*</span></form:label>
-		<form:password path="client.credentials.password" />&nbsp;<form:errors path="client.credentials.password" cssClass="errors" />
-		<br>
-		<input type="hidden" name="client.credentials.role" value="ROLE_USER" />
-		<input type="submit" value="<spring:message code="client.creer.submit" />" />
-	</form>
-	<h3><a href="<c:url value="/paricontroller/goToMenu" />"><spring:message code="menu.retour" /></a></h3>
-	
+	<spring:message code="admin.bienvenue" />
+	<br>
+	<spring:message code="admin.liste.evenement" />
+	<div class="container">
+		<table class="table table-striped table-dark">
+			<tr>
+				<th><spring:message code="evenement.nom" /></th>
+				<th><spring:message code="evenement.date.debut" /></th>
+				<th><spring:message code="evenement.date.fin" /></th>
+			</tr>
+			<c:forEach items="${evenements}" var="evenement">
+				<tr>
+					<td><c:out value="${evenement.nom}" /></td>
+					<td><c:out value="${evenement.dateDebut}" /></td>
+					<td><c:out value="${evenement.dateFin}" /></td>
+				</tr>
+			</c:forEach>
+		</table>
+
+		<h3>
+
+			<a href="<c:url value="/admincontroller/goToCreerParticipant" />"
+				type="button" class="btn btn-primary"><spring:message
+					code="participant.creer" /></a> <br><br> <a
+				href="<c:url value="/paricontroller/goToMenu" />" type="button"
+				class="btn btn-primary"><spring:message code="menu.retour" /></a>
+
+		</h3>
+
+	</div>
 
 
 </body>
