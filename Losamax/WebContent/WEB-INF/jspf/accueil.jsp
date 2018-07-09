@@ -4,6 +4,7 @@
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
@@ -91,6 +92,9 @@
 										</div>
 									</div>
 								</div>
+								<div class="panel-footer">
+									<label><i>Crée le <fmt:formatDate type = "both" dateStyle="long" value = "${e.dateDebut}" /></i></label>
+         						</div>
 							</div>
 						</div>
 
