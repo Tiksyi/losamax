@@ -22,6 +22,7 @@ public class Evenement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+    private String nom;
     @OneToMany(fetch = FetchType.EAGER,  cascade = CascadeType.PERSIST )
 	private List<Participant> participants = new ArrayList<Participant>();
 	private Date dateDebut;
@@ -40,6 +41,15 @@ public class Evenement {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 
 	public List<Participant> getParticipants() {
