@@ -4,8 +4,8 @@
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<!--  -->
 <!DOCTYPE html>
 <html lang=fr>
 <head>
@@ -40,7 +40,7 @@
 				</form:label>
 
 				<form:select path="evenement.participants" items="${participants}"
-					multiple="true" itemValue="id" itemLabel="nom" class="form-control" />
+					multiple="true" itemValue="id" itemLabel="nom" class="form-control capital" />
 			</div>
 		<br>
 		<div class="form-group">
@@ -58,8 +58,7 @@
 		<br> <input type="submit" class="btn btn-primary"
 			value="<spring:message code="evenement.creer" />" />
 		</form>	
-		<br> <br> <a
-			href="<c:url value="/admincontroller/goToAdmin" />" type="button"
+		<br> <br> <a href="<c:url value="/admincontroller/goToAdmin" />" type="button"
 			class="btn btn-primary"><spring:message code="menu.retour" /></a>
 	</div>
 </body>

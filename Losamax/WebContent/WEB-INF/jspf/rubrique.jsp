@@ -4,14 +4,14 @@
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
-<html lang=fr>
+<html lang="fr">
 <head>
 <title><spring:message code="accueil.title" /></title>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 <link rel="stylesheet" href="<c:url value="/static/css/styles.css" />">
 <%-- <link rel="stylesheet"
 	href="<c:url value="/static/bootstrap3/css/bootstrap.css" />">
@@ -40,7 +40,7 @@
 				</p>
 			</div>
 			<div class="col-sm-8 text-left">
-				
+
 				<h1 class="capital">Rubrique ${nom}</h1>
 				<div class="well">
 					<c:forEach var="e" items="${listeEvents}">
@@ -51,31 +51,33 @@
 						<form action="" method="get">
 							<div class="panel-group">
 								<div class="panel panel-info class">
-									<div class="panel-heading">Rencontre Ã  la une</div>
+									<div class="panel-heading">Rencontre à la une</div>
 									<div class="panel-body">
 										<div class="container">
 
 											<div class="row">
-												<div class="col-lg-4">
-													<label text-align=left class="capital"> <c:forEach
-															var="p" items="${e.participants}" varStatus="loop">
-															<c:out value="${fn:toLowerCase(p.nom)}" />
-															<c:if test="${loop.index==0}">&nbsp;-&nbsp;</c:if>
-														</c:forEach>
-													</label>
+												<div class="col-lg-4 capital" align="left">
+													<c:forEach var="p" items="${e.participants}"
+														varStatus="loop">
+														<c:out value="${fn:toLowerCase(p.nom)}" />
+														<c:if test="${loop.index==0}">&nbsp;-&nbsp;</c:if>
+													</c:forEach>
 												</div>
-												<div class="col-lg-4" align=center>
+												<div class="col-lg-4" align="center">
 													<button type="button" class="btn btn-default">1</button>
 													<button type="button" class="btn btn-default">N</button>
 													<button type="button" class="btn btn-default">2</button>
 												</div>
-												<div class="col-lg-4" text-align=right>
+												<div class="col-lg-4" align="right">
 													<button type="submit" class="btn btn-primary"
 														formmethod="get"
-														formaction="<c:url value="/clientcontroller/goToCreerPari/${e.id}"/>">Parier</button>
+														formaction="<c:url value="/clientcontroller/goToCreerPari/${e.id}"/>"><spring:message code="pari.nom"/></button>
 												</div>
 											</div>
 										</div>
+									</div>
+									<div class="panel-footer">
+										<i>Expire le <fmt:formatDate type = "both" dateStyle="long" value = "${e.dateFin}" /></i>
 									</div>
 								</div>
 							</div>

@@ -1,4 +1,4 @@
-function calculCote(id){
+function calculCote(id, nom){
 		var mise = document.getElementById('mise').value;
 		/* var cote = document.getElementById(id).innerHTML; */
 		var cote = id;
@@ -9,5 +9,12 @@ function calculCote(id){
 		console.log(cote);
 		console.log(resultat);
 		var view = document.getElementById('view');
-		view.value = resultat + " €";
+		view.value = resultat;
+		
+		var choix = document.getElementById('choix');
+		choix.value = nom;
 	}
+
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+});
