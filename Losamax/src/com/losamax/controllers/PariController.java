@@ -24,6 +24,7 @@ import com.losamax.dao.ISportJpaRepository;
 import com.losamax.entities.Cote;
 import com.losamax.entities.Evenement;
 import com.losamax.entities.Participant;
+import com.losamax.entities.SendEmail;
 import com.losamax.entities.Sport;
 
 @Controller
@@ -45,6 +46,12 @@ public class PariController {
 
 	@GetMapping("/goToMenu")
 	public String gotomenu(Model model) {
+		SendEmail.send("losamax2018@gmail.com","losamax31", "losamax2018@gmail.com", "coucou", "Bravo Momo !!");
+		SendEmail.send("losamax2018@gmail.com","losamax31", "nmarrauld@ausy.fr", "coucou", "Bravo Momo !!");
+		SendEmail.send("losamax2018@gmail.com","losamax31", "adubos@ausy-group.com", "Bisou", "Bravo Momo !!");
+		SendEmail.send("losamax2018@gmail.com","losamax31", "fvassal@ausy-group.com", "Bisou", "Bravo Momo !!");
+		SendEmail.send("losamax2018@gmail.com","losamax31", "nverhaeghe@ausy.fr", "Bisou", "Bravo Momo !!");
+		
 //		// Creation sport
 //		Sport s1 = new Sport();
 //		s1.setNom("footbal");
