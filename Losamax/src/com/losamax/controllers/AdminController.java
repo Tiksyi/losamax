@@ -121,6 +121,17 @@ public class AdminController {
 		return "creerCote";
 	}
 	
+    @RequestMapping("/supprimerEvenement")
+    public String supprimerEvenement(Evenement evenement) {
+	return "supprimerEvenement";
+    }
+
+    @PostMapping("/supprimerNom")
+    public String supprimerNom(@ModelAttribute(value = "evenement") Evenement evenement, Model model, @RequestParam(value = "nom") String nom) {   
+    	evenement=evenementRepo.findByNom(nom);
+    	evenementRepo.delete(evenement);;
+    return "confirmationSuppression";   } 
+	
 	@InitBinder
     protected void initBinder(WebDataBinder binder) {
     	binder.registerCustomEditor(List.class, "participants", new CustomCollectionEditor(List.class){
