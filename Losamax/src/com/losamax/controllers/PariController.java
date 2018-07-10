@@ -94,7 +94,7 @@ public class PariController {
 //		
 //		// Creation sport
 //		Sport s1 = new Sport();
-//		s1.setNom("footbal");
+//		s1.setNom("football");
 //		Sport s2 = new Sport();
 //		Sport s3 = new Sport();
 //		s3.setNom("basketball");

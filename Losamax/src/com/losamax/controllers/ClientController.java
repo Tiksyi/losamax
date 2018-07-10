@@ -133,6 +133,11 @@ public class ClientController {
 		pariRepo.save(pari);
 		return "confirmationPari";
 	}
+	
+	@GetMapping("/compte/{id}")
+	public String compte(@PathVariable(value = "id") Long id, Model model) {
+		return "compte";
+	}
 
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {

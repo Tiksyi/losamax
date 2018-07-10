@@ -16,7 +16,7 @@ public class UtilisateurPrincipal implements UserDetails {
     private Credentials credentials;
 
     public UtilisateurPrincipal(Credentials credentials) {
-	this.credentials = credentials;
+    	this.credentials = credentials;
     }
 
     @Override

@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.loginProcessingUrl("/login").defaultSuccessUrl("/paricontroller/goToMenu", true)
 				.failureUrl("/securitycontroller/login?error=true").permitAll().and().logout()
 				.invalidateHttpSession(true).logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.logoutSuccessUrl("/securitycontroller/login?logout=true").permitAll();
+				.logoutSuccessUrl("/paricontroller/goToMenu?logout=true").permitAll();
 		
 //		http.authorizeRequests()
 //        .antMatchers("/", "/*.html").permitAll()
