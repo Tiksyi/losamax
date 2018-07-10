@@ -93,7 +93,7 @@
 									</div>
 								</div>
 								<div class="panel-footer">
-									<label><i>Crée le <fmt:formatDate type = "both" dateStyle="long" value = "${e.dateDebut}" /></i></label>
+									<label><i>Expire le <fmt:formatDate type = "both" dateStyle="long" value = "${e.dateFin}" /></i></label>
          						</div>
 							</div>
 						</div>

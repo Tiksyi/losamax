@@ -15,20 +15,7 @@
 	href="<c:url value="/static/bootstrap3/css/bootstrap.css" />">
 <script src="<c:url value="/static/bootstrap3/js/bootstrap.js" />"></script>
 <script src="<c:url value="/static/jquery/js/jquery.js" />"></script>
-<script type="text/javascript">
-	function calculCote(id){
-		var mise = document.getElementById('mise').value;
-		var cote = document.getElementById(id).innerHTML;
-		var resultat;
-		
-		resultat = mise * cote;
-		console.log(mise);
-		console.log(cote);
-		console.log(resultat);
-		var view = document.getElementById('view');
-		view.value = resultat + " €";
-	}
-</script>
+<script src="<c:url value="/static/js/js.js" />"></script>
 </head>
 <body>
 	<div class="container">
@@ -65,10 +52,9 @@
 								<div class="col-lg-4" align=left>
 									<ul class="list-inline">
 										<c:forEach var="c" items="${cotes}">
-											<li><button type="button" class="btn btn-default"
-													onclick="calculCote(${c.libelle})">
-													<c:out value="${c.libelle}" />
-												</button>&nbsp;<label id="${c.libelle}"><c:out value="${c.valeur}" /></label></li>
+											<li><button type="button" class="btn btn-default" onclick="calculCote(${c.valeur})">
+											<c:out value="${c.libelle}" /></button>&nbsp;<label><c:out value="${c.valeur}" /></label>
+											</li>
 										</c:forEach>
 									</ul>
 								</div>
