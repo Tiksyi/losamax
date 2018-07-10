@@ -1,6 +1,7 @@
 package com.losamax.controllers;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,14 +13,17 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.losamax.dao.ICoteJpaRepository;
 import com.losamax.dao.IEvenementJpaRepository;
 import com.losamax.dao.IPariJpaRepository;
 import com.losamax.dao.IParticipantJpaRepository;
 import com.losamax.dao.ISportJpaRepository;
+import com.losamax.entities.Client;
 import com.losamax.entities.Cote;
 import com.losamax.entities.Evenement;
 import com.losamax.entities.Participant;
@@ -61,39 +65,24 @@ public class AdminController {
 	}
 
 	@PostMapping("/creerParticipant")
-	public String creerParticipant(@ModelAttribute(value = "participant") Participant participant,
-			@ModelAttribute(value = "cote") Cote cote, Model model) {
+	public String creerParticipant(@ModelAttribute(value = "participant") Participant participant, Model model) {
 		List<Sport> sports = sportRepo.findAll();
 		model.addAttribute("sports", sports);
 		participantRepo.save(participant);
 		return "creerparticipant";
 	}
 
-	@PostMapping("/creerCote")
-	public String creerCote(@ModelAttribute(value = "participant") Participant participant,
-			@ModelAttribute(value = "cote") Cote cote, Model model) {
-		List<Sport> sports = sportRepo.findAll();
-		model.addAttribute("sports", sports);
-		coteRepo.save(cote);
-		return "creerparticipant";
-	}
 	@GetMapping("/goToCreerEvenement")
 	public String goToCreerEvenement(Model model) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-
 		List<Participant> participants = participantRepo.findAll();
 		List<Sport> sports = sportRepo.findAll();
-		List<Cote> cotes = coteRepo.findAll();
 		model.addAttribute("sports", sports);
-		model.addAttribute("cotes", cotes);
 		model.addAttribute("participants", participants);
 		model.addAttribute("evenement", new Evenement());
 		model.addAttribute("datedebut", dateFormat.format(new Date()));
 		model.addAttribute("datefin", dateFormat.format(new Date()));
-		return "creerEvenement";
-		
-		
-			
+		return "creerEvenement";		
 	}
 	
 	@PostMapping("/creerEvenement")
@@ -101,12 +90,29 @@ public class AdminController {
 		 Model model) {
 		List<Participant> participants = participantRepo.findAll();
 		List<Sport> sports = sportRepo.findAll();
-		List<Cote> cotes = coteRepo.findAll();
 		model.addAttribute("sports", sports);
-		model.addAttribute("cotes", cotes);
 		model.addAttribute("participants", participants);
 		evenementRepo.save(evenement);
-		return "creerEvenement";
+		Evenement e = evenementRepo.findByNom(evenement.getNom());
+		return "redirect:/admincontroller/goToCreerCote/" + e.getId();
+	}
+	
+	@GetMapping("/goToCreerCote/{id}")
+	public String goToCreerCote(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("evenementId", id);
+		Cote cote= new Cote();
+		model.addAttribute(cote);
+		return "creerCote";
+	}
+	
+	@PostMapping("/creerCote")
+	public String creerCote(@RequestParam(name="evenementId") Long evenementId, @ModelAttribute(value = "cote") Cote cote, Model model) {
+		System.out.println(evenementId);
+		Evenement originEvenement = evenementRepo.getOne(evenementId);
+		originEvenement.getCotes().add(cote);
+		evenementRepo.save(originEvenement);
+		model.addAttribute("evenementId", evenementId);
+		return "creerCote";
 	}
 	
 	@InitBinder

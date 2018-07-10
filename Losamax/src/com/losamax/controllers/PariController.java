@@ -45,20 +45,20 @@ public class PariController {
 
 	@GetMapping("/goToMenu")
 	public String gotomenu(Model model) {
-//		// Creation sport
-//		Sport s1 = new Sport();
-//		s1.setNom("footbal");
-//		Sport s2 = new Sport();
-//		s2.setNom("rugby");
-//		Sport s3 = new Sport();
-//		s3.setNom("basketball");
-//		Sport s4 = new Sport();
-//		s4.setNom("cyclisme");
-//		sportRepo.save(s1);
-//		sportRepo.save(s2);
-//		sportRepo.save(s3);
-//		sportRepo.save(s4);
-//		
+		// Creation sport
+		Sport s1 = new Sport();
+		s1.setNom("footbal");
+		Sport s2 = new Sport();
+		s2.setNom("rugby");
+		Sport s3 = new Sport();
+		s3.setNom("basketball");
+		Sport s4 = new Sport();
+		s4.setNom("cyclisme");
+		sportRepo.save(s1);
+		sportRepo.save(s2);
+		sportRepo.save(s3);
+		sportRepo.save(s4);
+		
 //		//creation participants
 //		Participant p1 = new Participant();
 //		p1.setNom("france");

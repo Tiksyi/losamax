@@ -21,43 +21,28 @@
 <body>
 	<div class="container">
 		<h3 text-align=center>
-			<spring:message code="evenement.creer" />
+			<spring:message code="cote.creer" />
 		</h3>
-		<form method="POST" action="creerEvenement" modelAttribute="evenement">
+		<form method="POST" action="${pageContext.request.contextPath}/admincontroller/creerCote" modelAttribute="cote">
 			<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
-
+				<input type="hidden" name="evenementId" value="${evenementId}" />
 			<div class="form-group">
-				<form:label path="evenement.nom">
-					<spring:message code="evenement.nom" />
+				<form:label path="cote.libelle">
+					<spring:message code="cote.libelle" />
 				</form:label>
-				<form:input path="evenement.nom" class="form-control" />
+				<form:input path="cote.libelle" class="form-control" />
+			</div>		
+			<div class="form-group">
+				<form:label path="cote.valeur">
+					<spring:message code="cote.valeur" />
+				</form:label>
+				<form:input path="cote.valeur" class="form-control" />
 			</div>
 
-			<div class="form-group">
-				<form:label path="evenement.participants" id="participants">
-					<spring:message code="evenement.participants" />
-				</form:label>
-
-				<form:select path="evenement.participants" items="${participants}"
-					multiple="true" itemValue="id" itemLabel="nom" class="form-control" />
-			</div>
-		<br>
-		<div class="form-group">
-			<form:label path="evenement.dateDebut">
-				<spring:message code="evenement.date.debut.format" />
-			</form:label>
-			<form:input path="evenement.dateDebut" class="form-control" />
-		</div>
-		<div class="form-group">
-			<form:label path="evenement.dateFin">
-				<spring:message code="evenement.date.fin.format" />
-			</form:label>
-			<form:input path="evenement.dateFin" class="form-control" />
-		</div>
 		<br> <input type="submit" class="btn btn-primary"
-			value="<spring:message code="evenement.creer" />" />
-		</form>	
+			value="<spring:message code="cote.creer" />" />
+		</form>
 		<br> <br> <a
 			href="<c:url value="/admincontroller/goToAdmin" />" type="button"
 			class="btn btn-primary"><spring:message code="menu.retour" /></a>

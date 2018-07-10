@@ -46,27 +46,6 @@
 			<br> <input type="submit" class="btn btn-primary"
 				value="<spring:message code="participant.creer" />" />
 		</form>
-		<h3 text-align=center>
-			<spring:message code="cote.creer" />
-		</h3>
-		<form method="POST" action="creerCote" modelAttribute="cote">
-			<input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token}" /> <input type="hidden" name="cote.id" />
-			<div class="form-group">
-				<form:label path="cote.libelle">
-					<spring:message code="cote.libelle" />
-				</form:label> 
-				<form:input path="cote.libelle" class="form-control" />
-			</div>
-			<div class="form-group">
-				<form:label path="cote.valeur">
-					<spring:message code="cote.valeur" />
-				</form:label>
-				<form:input path="cote.valeur" class="form-control" />
-			</div>
-			<br> <input type="submit" class="btn btn-primary"
-				value="<spring:message code="cote.creer" />" />
-		</form>
 		<br> <a href="<c:url value="/admincontroller/goToCreerEvenement" />"
 			type="button" class="btn btn-primary"><spring:message
 				code="evenement.creer" /></a><br>
