@@ -9,6 +9,7 @@ import javax.websocket.server.PathParam;
 
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,11 +18,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.losamax.dao.IAdminJpaRepository;
+import com.losamax.dao.IClientJpaRepository;
 import com.losamax.dao.ICoteJpaRepository;
+import com.losamax.dao.ICredentialsJpaRepository;
 import com.losamax.dao.IEvenementJpaRepository;
 import com.losamax.dao.IParticipantJpaRepository;
 import com.losamax.dao.ISportJpaRepository;
+import com.losamax.entities.Admin;
+import com.losamax.entities.Client;
 import com.losamax.entities.Cote;
+import com.losamax.entities.Credentials;
+import com.losamax.entities.ERole;
 import com.losamax.entities.Evenement;
 import com.losamax.entities.Participant;
 import com.losamax.entities.Sport;
@@ -31,6 +39,12 @@ import com.losamax.entities.Sport;
 @Transactional
 public class PariController {
 
+	@Autowired
+	IClientJpaRepository clientRepo;
+	
+	@Autowired
+	IAdminJpaRepository adminRepo;
+	
 	@Autowired
 	ISportJpaRepository sportRepo;
 
@@ -42,23 +56,57 @@ public class PariController {
 	
 	@Autowired
 	ICoteJpaRepository coteRepo;
+	
+	@Autowired
+	ICredentialsJpaRepository credRepo;
 
 	@GetMapping("/goToMenu")
 	public String gotomenu(Model model) {
-		// Creation sport
-		Sport s1 = new Sport();
-		s1.setNom("footbal");
-		Sport s2 = new Sport();
-		s2.setNom("rugby");
-		Sport s3 = new Sport();
-		s3.setNom("basketball");
-		Sport s4 = new Sport();
-		s4.setNom("cyclisme");
-		sportRepo.save(s1);
-		sportRepo.save(s2);
-		sportRepo.save(s3);
-		sportRepo.save(s4);
-		
+
+//		//Creation Client
+//		Credentials cred1 = new Credentials();
+//		cred1.setUsername("user");
+//		cred1.setPassword("123");
+//		cred1.setRole(ERole.ROLE_USER);
+//		encodePassword(cred1);
+//		
+//		Credentials cred2 = new Credentials();
+//		cred2.setUsername("admin");
+//		cred2.setPassword("123");
+//		cred2.setRole(ERole.ROLE_ADMIN);
+//		encodePassword(cred2);
+//		
+//		Client client = new Client();
+//		client.setCredentials(cred1);
+//		client.setNom("Rodriguez");
+//		client.setPrenom("Mathieu");
+//		
+//		
+//		Admin admin = new Admin();
+//		admin.setCredentials(cred2);
+//		admin.setNom("Vassal");
+//		admin.setPrenom("Franck");
+//		
+//		credRepo.save(cred2);
+//				
+//		adminRepo.save(admin);
+//	
+//		
+//		
+//		// Creation sport
+//		Sport s1 = new Sport();
+//		s1.setNom("footbal");
+//		Sport s2 = new Sport();
+//		Sport s3 = new Sport();
+//		s3.setNom("basketball");
+//		Sport s4 = new Sport();
+//		s4.setNom("cyclisme");
+//		sportRepo.save(s1);
+//		sportRepo.save(s2);
+//		sportRepo.save(s3);
+//		sportRepo.save(s4);
+//		
+
 //		//creation participants
 //		Participant p1 = new Participant();
 //		p1.setNom("france");
@@ -247,6 +295,12 @@ public class PariController {
 		List<Evenement> levent = eventRepo.findByParticipantsSportId(s.getId());
 		model.addAttribute("listeEvents", levent);
 		return "rubrique";
+	}
+	private static void encodePassword(Credentials client) {
+		String rawPassword = client.getPassword();
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		String encodedPassword = encoder.encode(rawPassword);
+		client.setPassword(encodedPassword);
 	}
 
 }
