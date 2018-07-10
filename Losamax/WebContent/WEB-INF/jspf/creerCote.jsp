@@ -51,6 +51,10 @@
 		</h3>
 		<br> <br>
 		<table class="table table-striped table-dark">
+			<tr>
+				<th><spring:message code="cote.libelle" /></th>
+				<th><spring:message code="cote.valeur" /></th>
+			</tr>
 			<c:forEach items="${cotes}" var="cote">
 				<tr>
 					<td><c:out value="${cote.libelle}" /></td>
