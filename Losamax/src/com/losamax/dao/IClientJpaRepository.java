@@ -4,5 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.losamax.entities.Client;
 
 public interface IClientJpaRepository extends JpaRepository<Client, Long> {
+	
+	public Client findByCredentialsUsername(String username);
 
 }

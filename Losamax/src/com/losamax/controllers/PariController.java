@@ -1,39 +1,35 @@
 package com.losamax.controllers;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
-import javax.websocket.server.PathParam;
 
-import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.losamax.dao.IAdminJpaRepository;
 import com.losamax.dao.IClientJpaRepository;
 import com.losamax.dao.ICoteJpaRepository;
 import com.losamax.dao.ICredentialsJpaRepository;
 import com.losamax.dao.IEvenementJpaRepository;
+import com.losamax.dao.IPariJpaRepository;
 import com.losamax.dao.IParticipantJpaRepository;
 import com.losamax.dao.ISportJpaRepository;
-import com.losamax.entities.Admin;
 import com.losamax.entities.Client;
-import com.losamax.entities.Cote;
 import com.losamax.entities.Credentials;
-import com.losamax.entities.ERole;
 import com.losamax.entities.Evenement;
+
 import com.losamax.entities.Participant;
 import com.losamax.entities.SendEmail;
+
+import com.losamax.entities.Pari;
+
 import com.losamax.entities.Sport;
 
 @Controller
@@ -61,6 +57,9 @@ public class PariController {
 	
 	@Autowired
 	ICredentialsJpaRepository credRepo;
+	
+	@Autowired
+	private IPariJpaRepository pariRepo;
 
 	@GetMapping("/goToMenu")
 	public String gotomenu(Model model) {
@@ -307,6 +306,16 @@ public class PariController {
 		model.addAttribute("listeEvents", levent);
 		return "rubrique";
 	}
+	
+	@PostMapping("/supprimerPari/{id}")
+	public String compte(@PathVariable(value = "id") Long id, Model model) {
+		
+		pariRepo.deleteById(id);;
+//		List<Pari> lpari = pariRepo.findByClientId(client.getId());
+//		model.addAttribute("listeParis", lpari);
+		return "redirect:/clientcontroller/compte/{username}";
+	}
+	
 	private static void encodePassword(Credentials client) {
 		String rawPassword = client.getPassword();
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();

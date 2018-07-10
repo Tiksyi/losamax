@@ -2,7 +2,6 @@ package com.losamax.controllers;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +17,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.losamax.dao.IClientJpaRepository;
 import com.losamax.dao.IEvenementJpaRepository;
@@ -114,16 +111,18 @@ public class ClientController {
 		return "modifierClient";
 	}
 
-	@GetMapping("/goToCreerPari/{id}")
-	public String goToCreerPari(@PathVariable("id") Long id, Model model) {
+	@GetMapping("/goToCreerPari/{username}/{id}")
+	public String goToCreerPari(@PathVariable("username") String username, @PathVariable("id") Long id, Model model) {
 		Pari pari = new Pari();
 		Evenement evenement = evenementRepo.getOne(id);
+		Client client = clientRepo.findByCredentialsUsername(username);
 		model.addAttribute("evenement", evenement);
 		List<Cote> cotes = evenement.getCotes();
 		model.addAttribute("cotes", cotes);
 		List<Participant> participants = evenement.getParticipants();
 		model.addAttribute("participants", participants);
 		pari.setEvenement(evenement);
+		pari.setClient(client);
 		model.addAttribute("pari", pari);
 		return "creerPari";
 	}
@@ -134,8 +133,12 @@ public class ClientController {
 		return "confirmationPari";
 	}
 	
-	@GetMapping("/compte/{id}")
-	public String compte(@PathVariable(value = "id") Long id, Model model) {
+	
+	@GetMapping("/compte/{username}")
+	public String compte(@PathVariable(value = "username") String username, Model model) {
+		Client client = clientRepo.findByCredentialsUsername(username);
+		List<Pari> lpari = pariRepo.findByClientId(client.getId());
+		model.addAttribute("listeParis", lpari);
 		return "compte";
 	}
 
