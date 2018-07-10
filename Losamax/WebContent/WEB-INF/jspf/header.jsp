@@ -45,7 +45,8 @@
 						<li><a href="?lang=fr">FR</a></li>
 						<li><a href="?lang=en">EN</a></li>
 						<li><a href="?lang=ru">RU</a></li>
-					</ul></li>
+					</ul>
+				</li>
 				<sec:authorize access="hasRole('ROLE_ANONYMOUS')">
 					<li><a href="<c:url value="/clientcontroller/goToCreer" />"><span
 							class="glyphicon glyphicon-user"></span>&nbsp;<spring:message
@@ -55,11 +56,25 @@
 								code="accueil.connexion" /></a></li>
 				</sec:authorize>
 				<sec:authorize access="hasRole('ROLE_USER')">
-				<c:set var="username" scope="session"><sec:authentication property="principal.username" /></c:set>
-					<li><a href="<c:url value="/clientcontroller/compte/${username}" />"><span
-							class="glyphicon glyphicon-tasks"></span>&nbsp;<sec:authentication property="principal.username" /></a></li>
-								<li><a
-						href="<c:url value="/logout" />"><span
+					<c:set var="username" scope="session">
+						<sec:authentication property="principal.username" />
+					</c:set>
+					<li><a
+						href="<c:url value="/clientcontroller/compte/${username}" />"><span
+							class="glyphicon glyphicon-tasks"></span>&nbsp;<sec:authentication
+								property="principal.username" /></a></li>
+					<li><a href="<c:url value="/logout" />"><span
+							class="glyphicon glyphicon-remove"></span>&nbsp;<spring:message
+								code="accueil.deconnexion" /></a></li>
+				</sec:authorize>
+				<sec:authorize access="hasRole('ROLE_ADMIN')">
+					<c:set var="username" scope="session">
+						<sec:authentication property="principal.username" />
+					</c:set>
+					<li><a href="<c:url value="/admincontroller/goToAdmin" />"><span
+							class="glyphicon glyphicon-tasks"></span>&nbsp;<sec:authentication
+								property="principal.username" /></a></li>
+					<li><a href="<c:url value="/logout" />"><span
 							class="glyphicon glyphicon-remove"></span>&nbsp;<spring:message
 								code="accueil.deconnexion" /></a></li>
 				</sec:authorize>

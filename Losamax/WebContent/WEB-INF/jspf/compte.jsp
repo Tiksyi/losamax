@@ -49,7 +49,7 @@
 					<td><c:out value="${pari.choix}" /></td>
 					<td><c:out value="${pari.evenement.resultatFinal}" /></td>
 					<td></td>
-					<td><a href="<c:url value="/paricontroller/supprimerPari/${pari.id}"/>"><spring:message code="pari.suppression" /></a></td>
+					<td><a href="<c:url value="/paricontroller/supprimerPari/${username}/${pari.id}"/>"><spring:message code="pari.suppression" /></a></td>
 					<td><a href="<c:url value="/clientcontroller/goToCreerPari/${username}/${pari.evenement.id}"/>"><spring:message code="pari.modifier" /></a></td>
 				</tr>
 			</c:forEach>
