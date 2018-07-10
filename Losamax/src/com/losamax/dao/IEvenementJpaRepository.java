@@ -19,4 +19,6 @@ public interface IEvenementJpaRepository extends JpaRepository<Evenement, Long> 
 //	@Query("select e from Evenement e join e.participants p where p.sport.nom = :nom where e.dateFin > CURRENT_DATE")
 //	public List<Evenement> findByParticipantsSportNom(@Param("nom") String nom);
 
+	public Evenement findByNom(String nom);
+	
 }

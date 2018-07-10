@@ -58,7 +58,8 @@ public class PariController {
 
 	@GetMapping("/goToMenu")
 	public String gotomenu(Model model) {
-//		//Creation Client
+
+		//Creation Client
 //		Credentials cred1 = new Credentials();
 //		cred1.setUsername("user");
 //		cred1.setPassword("123");
@@ -101,6 +102,7 @@ public class PariController {
 //		sportRepo.save(s3);
 //		sportRepo.save(s4);
 //		
+
 //		//creation participants
 //		Participant p1 = new Participant();
 //		p1.setNom("france");

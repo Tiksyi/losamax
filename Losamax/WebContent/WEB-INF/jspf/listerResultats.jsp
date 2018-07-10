@@ -55,44 +55,17 @@
 		<table class="table table-striped table-dark">
 			<tr>
 				<th><spring:message code="evenement.nom" /></th>
-				<th><spring:message code="evenement.date.debut" /></th>
 				<th><spring:message code="evenement.date.fin" /></th>
 			</tr>
-			<c:forEach items="${evenements}" var="evenement">
+			<c:forEach items="${evenementsFiltres}" var="evenement">
 				<tr>
 					<td><c:out value="${evenement.nom}" /></td>
-					<td><fmt:formatDate type = "both" dateStyle="long" value = "${evenement.dateDebut}" /></td>
 					<td><fmt:formatDate type = "both" dateStyle="long" value = "${evenement.dateFin}" /></td>
 				</tr>
 			</c:forEach>
 		</table>
 		<br>
-		<table class="table table-striped table-dark">
-			<tr>
-				<th><spring:message code="participant.nom" /></th>
-				<th><spring:message code="participant.sport" /></th>
-			</tr>
-			<c:forEach items="${participants}" var="participant">
-				<tr>
-					<td ><span class="capital"><c:out value="${fn:toLowerCase(participant.nom)}" /></span></td>
-					<td class="capital"><c:out value="${fn:toLowerCase(participant.sport)}" /></td>
-				</tr>
-			</c:forEach>
-		</table>
 		<br>
-		<table class="table table-striped table-dark">
-			<tr>
-				<th><spring:message code="cote.libelle" /></th>
-				<th><spring:message code="cote.valeur" /></th>
-			</tr>
-			<c:forEach items="${cotes}" var="cote">
-				<tr>
-					<td><c:out value="${cote.libelle}" /></td>
-					<td><c:out value="${cote.valeur}" /></td>
-				</tr>
-			</c:forEach>
-		</table>
-
 	</div>
 
 
