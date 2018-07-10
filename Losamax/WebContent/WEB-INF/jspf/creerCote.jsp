@@ -43,7 +43,22 @@
 		<br> <input type="submit" class="btn btn-primary"
 			value="<spring:message code="cote.creer" />" />
 		</form>
-		<br> <br> <a
+		<br>
+		
+		<div class="container">
+		<h3>
+			<spring:message code="admin.liste.cotes" />
+		</h3>
+		<br> <br>
+		<table class="table table-striped table-dark">
+			<c:forEach items="${cotes}" var="cote">
+				<tr>
+					<td><c:out value="${cote.libelle}" /></td>
+					<td><c:out value="${cote.valeur}" /></td>
+				</tr>
+			</c:forEach>
+		</table>
+		</div> <br> <a
 			href="<c:url value="/admincontroller/goToAdmin" />" type="button"
 			class="btn btn-primary"><spring:message code="menu.retour" /></a>
 	</div>

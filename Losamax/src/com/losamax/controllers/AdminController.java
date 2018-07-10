@@ -112,6 +112,8 @@ public class AdminController {
 		originEvenement.getCotes().add(cote);
 		evenementRepo.save(originEvenement);
 		model.addAttribute("evenementId", evenementId);
+		List<Cote> cotes = originEvenement.getCotes();
+		model.addAttribute("cotes", cotes);
 		return "creerCote";
 	}
 	
