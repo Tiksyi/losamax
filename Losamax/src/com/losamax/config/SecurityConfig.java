@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/clientcontroller/goToCreer").permitAll()
 				.antMatchers("/clientcontroller/creer").permitAll()
 				.anyRequest().authenticated().and().formLogin().loginPage("/securitycontroller/login")
-				.loginProcessingUrl("/login").defaultSuccessUrl("/paricontroller/goToMenu", true)
+				.loginProcessingUrl("/login").defaultSuccessUrl("/securitycontroller/dispatcher", true)
 				.failureUrl("/securitycontroller/login?error=true").permitAll().and().logout()
 				.invalidateHttpSession(true).logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/paricontroller/goToMenu?logout=true").permitAll();

@@ -30,10 +30,15 @@ public class UtilisateurPrincipal implements UserDetails {
     public String getPassword() {
 	return credentials.getPassword();
     }
-
+    
+    
     @Override
     public String getUsername() {
 	return credentials.getUsername();
+    }
+    
+     public Credentials getCredentials() {
+	return this.credentials;
     }
 
     @Override
