@@ -56,7 +56,7 @@
 				</sec:authorize>
 				<sec:authorize access="hasRole('ROLE_USER')">
 					<li><a href="<c:url value="/clientcontroller/compte/{id}" />"><span
-							class="glyphicon glyphicon-tasks"></span>&nbsp;</a></li>
+							class="glyphicon glyphicon-tasks"></span>&nbsp;<sec:authentication property="principal.username" /></a></li>
 								<li><a
 						href="<c:url value="/logout" />"><span
 							class="glyphicon glyphicon-remove"></span>&nbsp;<spring:message

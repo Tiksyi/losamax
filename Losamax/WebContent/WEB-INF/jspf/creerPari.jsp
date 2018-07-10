@@ -57,6 +57,7 @@
 										</c:forEach>
 										<form:hidden id="choix" path="pari.choix" value=""/>
 										<form:hidden path="pari.evenement.id" />
+										<form:hidden path="pari.client.id" />
 									</ul>
 								</div>
 								<div class="col-lg-4" align="right">

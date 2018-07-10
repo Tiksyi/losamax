@@ -25,9 +25,9 @@ public class SecurityController {
     	
 		String role = AuthHelper.getRole().name();
     	if (role.equals("ROLE_USER"))
-    			return "accueil";
+    			return "redirect:/paricontroller/goToMenu";
     	if (role.equals("ROLE_ADMIN"))
-    		return "bonjouradmin";
+    		return "redirect:/admincontroller/goToAdmin";
     	   else return "login";
 	    } 
  
