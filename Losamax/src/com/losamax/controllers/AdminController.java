@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomCollectionEditor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -132,6 +133,22 @@ public class AdminController {
     	evenementRepo.delete(evenement);;
     return "confirmationSuppression";   } 
 	
+	@GetMapping("/listerResultats")
+	public String listerResultats(Model model) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+		Date date=new Date();
+		dateFormat.format(date);
+		List<Evenement> evenements = evenementRepo.findAll(new Sort(Sort.Direction.ASC, "dateFin"));
+		List<Evenement> evenementsFiltres = new ArrayList<Evenement>();
+		for (Evenement e:evenements) {
+			if(e.getDateFin().before(date))
+			evenementsFiltres.add(e);
+		}
+		model.addAttribute("evenementsFiltres", evenementsFiltres);
+		return "listerResultats";
+	}
+    
+    
 	@InitBinder
     protected void initBinder(WebDataBinder binder) {
     	binder.registerCustomEditor(List.class, "participants", new CustomCollectionEditor(List.class){
