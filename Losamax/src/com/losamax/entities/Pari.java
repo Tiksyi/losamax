@@ -15,7 +15,7 @@ public class Pari {
 	private Long id;
 	@OneToOne
 	private Client client;
-	@OneToOne (cascade = CascadeType.PERSIST)
+	@OneToOne
 	private Evenement evenement;
 	private double mise;
 	private String choix;

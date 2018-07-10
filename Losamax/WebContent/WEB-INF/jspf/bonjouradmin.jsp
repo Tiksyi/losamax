@@ -1,17 +1,24 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html >
+<html lang=fr>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <link rel="icon" href="<c:url value="/static/icones/www.ico" />">
+ <link rel="stylesheet" href="<c:url value="/static/css/styles.css" />">
 <link rel="stylesheet"
 	href="<c:url value="/static/bootstrap3/css/bootstrap.css" />">
 <script src="<c:url value="/static/bootstrap3/js/bootstrap.js" />"></script>
 <script src="<c:url value="/static/jquery/js/jquery.js" />"></script>
+
 <title><spring:message code="admin.bienvenue" /></title>
+
 </head>
 <body>
 	<div class="container">
@@ -20,7 +27,28 @@
 			<br>
 			<spring:message code="admin.liste.evenement" />
 		</h3>
-		<br> <br>
+		<br>
+
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<ul class="nav navbar-nav">
+					<li><a
+						href="<c:url value="/admincontroller/goToCreerParticipant" />"><spring:message
+								code="participant.creer" /></a></li>
+					<li><a
+						href="<c:url value="/admincontroller/goToCreerParticipant" />"><spring:message
+								code="cote.creer" /></a></li>
+					<li><a
+						href="<c:url value="/admincontroller/goToCreerEvenement" />"><spring:message
+								code="evenement.creer" /></a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="<c:url value="/paricontroller/goToMenu" />"><spring:message
+								code="menu.retour" /></a></li>
+				</ul>
+			</div>
+		</nav>
+		<br>
 		<table class="table table-striped table-dark">
 			<tr>
 				<th><spring:message code="evenement.nom" /></th>
@@ -30,28 +58,37 @@
 			<c:forEach items="${evenements}" var="evenement">
 				<tr>
 					<td><c:out value="${evenement.nom}" /></td>
-					<td><c:out value="${evenement.dateDebut}" /></td>
-					<td><c:out value="${evenement.dateFin}" /></td>
+					<td><fmt:formatDate type = "both" dateStyle="long" value = "${evenement.dateDebut}" /></td>
+					<td><fmt:formatDate type = "both" dateStyle="long" value = "${evenement.dateFin}" /></td>
 				</tr>
 			</c:forEach>
 		</table>
-
-		<h3>
-
-			<a href="<c:url value="/admincontroller/goToCreerParticipant" />"
-				type="button" class="btn btn-primary"><spring:message
-					code="participant.creer" /></a> <br>
-							<br><a href="<c:url value="/admincontroller/goToCreerParticipant" />"
-				type="button" class="btn btn-primary"><spring:message
-					code="cote.creer" /></a> <br>
-					<br><a href="<c:url value="/admincontroller/goToCreerEvenement" />"
-				type="button" class="btn btn-primary"><spring:message
-					code="evenement.creer" /></a> <br>
-			<br> <a href="<c:url value="/paricontroller/goToMenu" />"
-				type="button" class="btn btn-primary"><spring:message
-					code="menu.retour" /></a>
-
-		</h3>
+		<br>
+		<table class="table table-striped table-dark">
+			<tr>
+				<th><spring:message code="participant.nom" /></th>
+				<th><spring:message code="participant.sport" /></th>
+			</tr>
+			<c:forEach items="${participants}" var="participant">
+				<tr>
+					<td ><span class="capital"><c:out value="${fn:toLowerCase(participant.nom)}" /></span></td>
+					<td class="capital"><c:out value="${fn:toLowerCase(participant.sport)}" /></td>
+				</tr>
+			</c:forEach>
+		</table>
+		<br>
+		<table class="table table-striped table-dark">
+			<tr>
+				<th><spring:message code="cote.libelle" /></th>
+				<th><spring:message code="cote.valeur" /></th>
+			</tr>
+			<c:forEach items="${cotes}" var="cote">
+				<tr>
+					<td><c:out value="${cote.libelle}" /></td>
+					<td><c:out value="${cote.valeur}" /></td>
+				</tr>
+			</c:forEach>
+		</table>
 
 	</div>
 

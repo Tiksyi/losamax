@@ -47,7 +47,11 @@ public class AdminController {
 	@GetMapping("/goToAdmin")
 	public String goToCreer(Model model) {
 		List<Evenement> evenements = evenementRepo.findAll();
+		List<Participant> participants = participantRepo.findAll();
+		List<Cote> cotes = coteRepo.findAll();
 		model.addAttribute("evenements", evenements);
+		model.addAttribute("participants", participants);
+		model.addAttribute("cotes", cotes);
 		return "bonjouradmin";
 	}
 

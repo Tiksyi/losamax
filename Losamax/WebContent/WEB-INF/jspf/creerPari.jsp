@@ -4,8 +4,7 @@
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+
 <!DOCTYPE html>
 <html lang=fr>
 <head>
@@ -13,6 +12,7 @@
 <title><spring:message code="creer.pari.title" /></title>
 <link rel="stylesheet"
 	href="<c:url value="/static/bootstrap3/css/bootstrap.css" />">
+	<link rel="stylesheet" href="<c:url value="/static/css/styles.css" />">
 <script src="<c:url value="/static/bootstrap3/js/bootstrap.js" />"></script>
 <script src="<c:url value="/static/jquery/js/jquery.js" />"></script>
 <script src="<c:url value="/static/js/js.js" />"></script>
@@ -26,6 +26,8 @@
 		<form method="POST"
 			action="${pageContext.request.contextPath}/clientcontroller/creerPari"
 			modelAttribute="pari">
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
 			<div class="form-group">
 				<form:label path="pari.mise">
 					<spring:message code="pari.mise" />
@@ -40,25 +42,24 @@
 					<div class="panel-body">
 						<div class="container">
 							<div class="row">
-								<div class="col-lg-4">
-									<label text-align=left align=center class="capital"> <c:forEach
-											var="p" items="${pari.evenement.participants}"
-											varStatus="loop">
-											<c:out value="${fn:toLowerCase(p.nom)}" />
+								<div class="col-lg-4 capital" align="left">
+									<c:forEach var="p" items="${pari.evenement.participants}" varStatus="loop">
+											<label><c:out value="${fn:toLowerCase(p.nom)}" /></label>
 											<c:if test="${loop.index==0}">&nbsp;-&nbsp;</c:if>
-										</c:forEach>
-									</label>
+									</c:forEach>
 								</div>
-								<div class="col-lg-4" align=left>
+								<div class="col-lg-4" align="center">
 									<ul class="list-inline">
 										<c:forEach var="c" items="${cotes}">
-											<li><button type="button" class="btn btn-default" onclick="calculCote(${c.valeur})">
+											<li><button type="button" class="btn btn-default" onclick="calculCote(${c.valeur}, '${c.libelle}')">
 											<c:out value="${c.libelle}" /></button>&nbsp;<label><c:out value="${c.valeur}" /></label>
 											</li>
 										</c:forEach>
+										<form:hidden id="choix" path="pari.choix" value=""/>
+										<form:hidden path="pari.evenement.id" />
 									</ul>
 								</div>
-								<div class="col-lg-4">
+								<div class="col-lg-4" align="right">
 									<input type="text" class="form-control" id="view" value="">
 								</div>
 							</div>
