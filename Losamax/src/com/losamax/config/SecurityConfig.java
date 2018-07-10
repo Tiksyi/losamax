@@ -24,15 +24,34 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		// Pour activer l'authentification sur les web services, enlever le
-		// matcher "/api/**"
-//		if (loginService.getRole().equals("ROLE_USER")) 
-		http.authorizeRequests().antMatchers("/static/**").permitAll().anyRequest().authenticated().and()
-				.formLogin().loginPage("/securitycontroller/login").loginProcessingUrl("/login")
-				.defaultSuccessUrl("/paricontroller/goToMenu", true)
+		
+		http.authorizeRequests()
+				.antMatchers("/static/**").permitAll()
+				.antMatchers("/index.jsp").permitAll()
+				.antMatchers("/paricontroller/goToMenu").permitAll()
+				.antMatchers("/clientcontroller/goToCreer").permitAll()
+				.antMatchers("/clientcontroller/creer").permitAll()
+				.anyRequest().authenticated().and().formLogin().loginPage("/securitycontroller/login")
+				.loginProcessingUrl("/login").defaultSuccessUrl("/securitycontroller/dispatcher", true)
 				.failureUrl("/securitycontroller/login?error=true").permitAll().and().logout()
 				.invalidateHttpSession(true).logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.logoutSuccessUrl("/securitycontroller/login?logout=true").permitAll();
+				.logoutSuccessUrl("/paricontroller/goToMenu?logout=true").permitAll();
+		
+//		http.authorizeRequests()
+//        .antMatchers("/", "/*.html").permitAll()
+//        .antMatchers("/user/**").hasRole("USER")
+//        .antMatchers("/admin/**").hasRole("ADMIN")
+//        .antMatchers("/admin/login").permitAll()
+//        .antMatchers("/user/login").permitAll()
+//        .anyRequest().authenticated()
+
+//		http.authorizeRequests()
+//				.antMatchers("/static/**", "/paricontroller/goToMenu", "index.jsp", "/clientcontroller/goToCreer/**")
+//				.permitAll().anyRequest().authenticated().and().formLogin().loginPage("/securitycontroller/login")
+//				.loginProcessingUrl("/login").defaultSuccessUrl("/paricontroller/goToMenu", true)
+//				.failureUrl("/securitycontroller/login?error=true").permitAll().and().logout()
+//				.invalidateHttpSession(true).logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//				.logoutSuccessUrl("/securitycontroller/login?logout=true").permitAll();
 	}
 
 	@Autowired
@@ -45,11 +64,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		
 		auth.userDetailsService(loginService);
 	}
 
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+	 @Bean
+	 public PasswordEncoder passwordEncoder() {
+	 return new BCryptPasswordEncoder();
+	 }
 }

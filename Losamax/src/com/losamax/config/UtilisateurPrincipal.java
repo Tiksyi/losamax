@@ -16,7 +16,7 @@ public class UtilisateurPrincipal implements UserDetails {
     private Credentials credentials;
 
     public UtilisateurPrincipal(Credentials credentials) {
-	this.credentials = credentials;
+    	this.credentials = credentials;
     }
 
     @Override
@@ -30,10 +30,15 @@ public class UtilisateurPrincipal implements UserDetails {
     public String getPassword() {
 	return credentials.getPassword();
     }
-
+    
+    
     @Override
     public String getUsername() {
 	return credentials.getUsername();
+    }
+    
+     public Credentials getCredentials() {
+	return this.credentials;
     }
 
     @Override

@@ -1,11 +1,14 @@
 package com.losamax.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/securitycontroller")
 public class SecurityController {
+
+	
 
     @SuppressWarnings("unused")
     @GetMapping("/login")
@@ -14,4 +17,18 @@ public class SecurityController {
 	    @RequestParam(value = "logout", required = false) Boolean logout) {
 	return "login";
     }
+    
+    @SuppressWarnings("unused")
+    @GetMapping("/dispatcher")
+    public String dispatcher()
+    	 {
+    	
+		String role = AuthHelper.getRole().name();
+    	if (role.equals("ROLE_USER"))
+    			return "redirect:/paricontroller/goToMenu";
+    	if (role.equals("ROLE_ADMIN"))
+    		return "redirect:/admincontroller/goToAdmin";
+    	   else return "login";
+	    } 
+ 
 }

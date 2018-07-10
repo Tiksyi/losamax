@@ -36,14 +36,11 @@
 						href="<c:url value="/admincontroller/goToCreerParticipant" />"><spring:message
 								code="participant.creer" /></a></li>
 					<li><a
+						href="<c:url value="/admincontroller/goToCreerParticipant" />"><spring:message
+								code="cote.creer" /></a></li>
+					<li><a
 						href="<c:url value="/admincontroller/goToCreerEvenement" />"><spring:message
 								code="evenement.creer" /></a></li>
-													<li><a
-						href="<c:url value="/admincontroller/supprimerEvenement" />"><spring:message
-								code="evenement.supprimer" /></a></li>
-								<li><a
-						href="<c:url value="/admincontroller/listerResultats" />"><spring:message
-								code="resultats.valider" /></a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="<c:url value="/paricontroller/goToMenu" />"><spring:message

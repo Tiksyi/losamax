@@ -28,7 +28,7 @@ public class Evenement {
 	private List<Participant> participants = new ArrayList<>();
 	private Date dateDebut;
 	private Date dateFin;
-	@ManyToMany
+	@ManyToMany(cascade=CascadeType.ALL)
 	private List<Cote> cotes = new ArrayList<>();
 	
 	private String resultatFinal;

@@ -38,14 +38,14 @@
 		</div>
 
 		<div class="form-label-group">
-			<input name="username" type="text" id="inputEmail"
-				class="form-control" placeholder="@Email">
+			<input name="username" type="text" 
+				class="form-control" placeholder="Username" value="">
 			<!--  <label for="inputEmail">@Email</label> -->
 		</div>
 		<br>
 		<div class="form-label-group">
-			<input name="password" type="password" id="inputPassword"
-				class="form-control" placeholder="Password" required>
+			<input name="password" type="password" 
+				class="form-control" placeholder="Password" required value="">
 			<!-- <label for="inputPassword">Password</label> -->
 		</div>
 		<br>
