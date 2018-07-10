@@ -73,7 +73,7 @@ public class PariController {
 		
 
 
-		//Creation Client
+//		//Creation Client
 //		Credentials cred1 = new Credentials();
 //		cred1.setUsername("user");
 //		cred1.setPassword("123");
@@ -103,7 +103,7 @@ public class PariController {
 //	
 //		
 //		
-
+//
 //		// Creation sport
 //		Sport s1 = new Sport();
 //		s1.setNom("football");
@@ -117,7 +117,7 @@ public class PariController {
 //		sportRepo.save(s3);
 //		sportRepo.save(s4);
 //		
-
+//
 //		//creation participants
 //		Participant p1 = new Participant();
 //		p1.setNom("france");
