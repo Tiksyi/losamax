@@ -59,7 +59,7 @@ public class ClientController {
 	@PostMapping("/creer")
 	public String creer(@Valid @ModelAttribute(value = "client") Client client, BindingResult result, Model model) {
 		if (!result.hasErrors()) {
-			// encodePassword(client);
+			encodePassword(client);
 			clientRepo.save(client);
 			return "confirmationCreation";
 		}
