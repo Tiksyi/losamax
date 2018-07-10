@@ -55,7 +55,8 @@
 								code="accueil.connexion" /></a></li>
 				</sec:authorize>
 				<sec:authorize access="hasRole('ROLE_USER')">
-					<li><a href="<c:url value="/clientcontroller/compte/{id}" />"><span
+				<c:set var="username" scope="session"><sec:authentication property="principal.username" /></c:set>
+					<li><a href="<c:url value="/clientcontroller/compte/${username}" />"><span
 							class="glyphicon glyphicon-tasks"></span>&nbsp;<sec:authentication property="principal.username" /></a></li>
 								<li><a
 						href="<c:url value="/logout" />"><span

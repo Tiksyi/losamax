@@ -69,9 +69,10 @@
 													<button type="button" class="btn btn-default">2</button>
 												</div>
 												<div class="col-lg-4" align="right">
+												<c:set var="username" scope="session"><sec:authentication property="principal.username" /></c:set>
 													<button type="submit" class="btn btn-primary"
 														formmethod="get"
-														formaction="<c:url value="/clientcontroller/goToCreerPari/${e.id}"/>"><spring:message code="pari.nom"/></button>
+														formaction="<c:url value="/clientcontroller/goToCreerPari/${username}/${e.id}"/>"><spring:message code="pari.nom"/></button>
 												</div>
 											</div>
 										</div>

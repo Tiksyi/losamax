@@ -10,8 +10,8 @@
 <html lang=fr>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
- <link rel="icon" href="<c:url value="/static/icones/www.ico" />">
- <link rel="stylesheet" href="<c:url value="/static/css/styles.css" />">
+<link rel="icon" href="<c:url value="/static/icones/www.ico" />">
+<link rel="stylesheet" href="<c:url value="/static/css/styles.css" />">
 <link rel="stylesheet"
 	href="<c:url value="/static/bootstrap3/css/bootstrap.css" />">
 <script src="<c:url value="/static/bootstrap3/js/bootstrap.js" />"></script>
@@ -23,73 +23,39 @@
 <body>
 	<div class="container">
 		<h3>
-			<spring:message code="admin.bienvenue" />
+			<spring:message code="compte.bienvenue" />
+			&nbsp;
+			<sec:authentication property="principal.username" />
 			<br>
-			<spring:message code="admin.liste.evenement" />
+			<spring:message code="client.historique" />
 		</h3>
-		<br>
-
-		<nav class="navbar navbar-inverse">
-			<div class="container-fluid">
-				<ul class="nav navbar-nav">
-					<li><a
-						href="<c:url value="/admincontroller/goToCreerParticipant" />"><spring:message
-								code="participant.creer" /></a></li>
-					<li><a
-						href="<c:url value="/admincontroller/goToCreerParticipant" />"><spring:message
-								code="cote.creer" /></a></li>
-					<li><a
-						href="<c:url value="/admincontroller/goToCreerEvenement" />"><spring:message
-								code="evenement.creer" /></a></li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="<c:url value="/paricontroller/goToMenu" />"><spring:message
-								code="menu.retour" /></a></li>
-				</ul>
-			</div>
-		</nav>
 		<br>
 		<table class="table table-striped table-dark">
 			<tr>
 				<th><spring:message code="evenement.nom" /></th>
-				<th><spring:message code="evenement.date.debut" /></th>
-				<th><spring:message code="evenement.date.fin" /></th>
+				<th><spring:message code="username" /></th>
+				<th><spring:message code="pari.mise" /></th>
+				<th><spring:message code="pari.choix" /></th>
+				<th><spring:message code="pari.resultat.evenement" /></th>
+				<th><spring:message code="pari.resultat.pari" /></th>
+				<th><spring:message code="pari.suppression" /></th>
+				<th><spring:message code="pari.modifier" /></th>
 			</tr>
-			<c:forEach items="${evenements}" var="evenement">
+			<c:forEach items="${listeParis}" var="pari">
 				<tr>
-					<td><c:out value="${evenement.nom}" /></td>
-					<td><fmt:formatDate type = "both" dateStyle="long" value = "${evenement.dateDebut}" /></td>
-					<td><fmt:formatDate type = "both" dateStyle="long" value = "${evenement.dateFin}" /></td>
+					<td><c:out value="${pari.evenement.nom}" /></td>
+					<td><c:out value="${pari.client.credentials.username}" /></td>
+					<td><c:out value="${pari.mise}" /></td>
+					<td><c:out value="${pari.choix}" /></td>
+					<td><c:out value="${pari.evenement.resultatFinal}" /></td>
+					<td></td>
+					<td><a href="<c:url value="/paricontroller/supprimerPari/${pari.id}"/>"><spring:message code="pari.suppression" /></a></td>
+					<td><a href="<c:url value="/clientcontroller/goToCreerPari/${username}/${pari.evenement.id}"/>"><spring:message code="pari.modifier" /></a></td>
 				</tr>
 			</c:forEach>
 		</table>
-		<br>
-		<table class="table table-striped table-dark">
-			<tr>
-				<th><spring:message code="participant.nom" /></th>
-				<th><spring:message code="participant.sport" /></th>
-			</tr>
-			<c:forEach items="${participants}" var="participant">
-				<tr>
-					<td ><span class="capital"><c:out value="${fn:toLowerCase(participant.nom)}" /></span></td>
-					<td class="capital"><c:out value="${fn:toLowerCase(participant.sport)}" /></td>
-				</tr>
-			</c:forEach>
-		</table>
-		<br>
-		<table class="table table-striped table-dark">
-			<tr>
-				<th><spring:message code="cote.libelle" /></th>
-				<th><spring:message code="cote.valeur" /></th>
-			</tr>
-			<c:forEach items="${cotes}" var="cote">
-				<tr>
-					<td><c:out value="${cote.libelle}" /></td>
-					<td><c:out value="${cote.valeur}" /></td>
-				</tr>
-			</c:forEach>
-		</table>
-
+		<a href="<c:url value="/paricontroller/goToMenu" />" type="button"
+			class="btn btn-primary"><spring:message code="menu.retour" /></a>
 	</div>
 
 
