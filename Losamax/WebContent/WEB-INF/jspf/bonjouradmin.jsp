@@ -1,8 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -44,6 +44,9 @@
 								<li><a
 						href="<c:url value="/admincontroller/listerResultats" />"><spring:message
 								code="resultats.valider" /></a></li>
+						<li><a
+						href="<c:url value="/admincontroller/newsletter" />"><spring:message
+								code="newsletter.creer" /></a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="<c:url value="/paricontroller/goToMenu" />"><spring:message
@@ -75,7 +78,7 @@
 			<c:forEach items="${participants}" var="participant">
 				<tr>
 					<td ><span class="capital"><c:out value="${fn:toLowerCase(participant.nom)}" /></span></td>
-					<td class="capital"><c:out value="${fn:toLowerCase(participant.sport)}" /></td>
+					<td ><span class="capital"><c:out value="${fn:toLowerCase(participant.sport)}" /></span></td>
 				</tr>
 			</c:forEach>
 		</table>
