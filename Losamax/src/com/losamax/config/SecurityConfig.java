@@ -29,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/static/**").permitAll()
 				.antMatchers("/index.jsp").permitAll()
 				.antMatchers("/paricontroller/goToMenu").permitAll()
+				.antMatchers("/clientcontroller/contact").permitAll()
 				.antMatchers("/clientcontroller/goToCreer").permitAll()
 				.antMatchers("/clientcontroller/creer").permitAll()
 				.anyRequest().authenticated().and().formLogin().loginPage("/securitycontroller/login")

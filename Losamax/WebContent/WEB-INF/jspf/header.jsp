@@ -23,6 +23,10 @@
 						class="glyphicon glyphicon-home"></span>&nbsp;<spring:message
 							code="accueil.accueil" /></a></li>
 
+<%-- 				<li><a href="<c:url value="/clientcontroller/parier"/>"><spring:message
+							code="accueil.parier" /></a></li> --%>
+
+
 				<c:forEach var="s" items="${listeSports}">
 					<li></li>
 					<li><a href="<c:url value="/paricontroller/${s.nom}"/>"
@@ -30,7 +34,6 @@
 
 				</c:forEach>
 
-				<li><a href="#"><spring:message code="accueil.apropos" /></a></li>
 				<li><a href="<c:url value="/clientcontroller/contact"/>"><span
 						class="glyphicon glyphicon-envelope"></span>&nbsp;<spring:message
 							code="accueil.contact" /></a></li>
