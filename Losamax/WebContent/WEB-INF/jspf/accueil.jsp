@@ -50,7 +50,7 @@
 					<spring:message code="acceuil.bienvenue" />
 				</h1>
 				<p>Losamax, we earn, you lose. Approved by Francis Lalanne and Nicolas Anelka.</p><br>
-				<img src="images/losamax.png"/>
+				<div align="center"><img src="<c:url value="/static/images/losamax.png"/>"/></div>
 				<hr>
 				<div class="well">
 					<c:forEach var="e" items="${listeEvents}">
