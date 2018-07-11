@@ -126,8 +126,8 @@ public class AdminController {
 		return "creerCote";
 	}
 
-	@GetMapping("/supprimerEvenement")
-	public String supprimerEvenement() {	
+	@RequestMapping("/supprimerEvenement")
+	public String supprimerEvenement(Evenement evenement) {
 		return "supprimerEvenement";
 	}
 
