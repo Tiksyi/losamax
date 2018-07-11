@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.losamax.dao.IClientJpaRepository;
 import com.losamax.dao.ICoteJpaRepository;
 import com.losamax.dao.IEvenementJpaRepository;
 import com.losamax.dao.IPariJpaRepository;
@@ -28,6 +29,7 @@ import com.losamax.entities.Client;
 import com.losamax.entities.Cote;
 import com.losamax.entities.Evenement;
 import com.losamax.entities.Participant;
+import com.losamax.entities.SendEmail;
 import com.losamax.entities.Sport;
 
 @Controller
@@ -42,6 +44,9 @@ public class AdminController {
 
 	@Autowired
 	private IEvenementJpaRepository evenementRepo;
+	
+	@Autowired
+	private IClientJpaRepository clientRepo;
 
 	@Autowired
 	private IParticipantJpaRepository participantRepo;
@@ -179,4 +184,23 @@ public class AdminController {
 			}
 		});
 	}
+	
+
+	@GetMapping("/goToNewsletter")
+	public String goToNewsletter(Model model) {
+		String message = "";
+		model.addAttribute("message", message);
+		return "newsletter";
+	}
+	@PostMapping("/newsletter")
+	public String sendNewsletter(@ModelAttribute (value = "message") String message, Model model) {
+		List<Client> liste = clientRepo.findAll();
+		String email = "";
+		for (Client c : liste)
+		{
+		SendEmail.send("losamax2018@gmail.com", "losamax31", c.getMail(), "newsletter Losamax", message);
+		}
+		return "bonjouradmin";
+	}
+	
 }

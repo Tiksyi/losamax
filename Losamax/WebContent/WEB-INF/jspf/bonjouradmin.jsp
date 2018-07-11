@@ -45,7 +45,7 @@
 						href="<c:url value="/admincontroller/listerResultats" />"><spring:message
 								code="resultats.valider" /></a></li>
 						<li><a
-						href="<c:url value="/admincontroller/newsletter" />"><spring:message
+						href="<c:url value="/admincontroller/goToNewsletter" />"><spring:message
 								code="newsletter.creer" /></a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
