@@ -121,7 +121,8 @@
 					<spring:message code="client.listeSports" />
 				</form:label>
 
-				<form:select path="client.listeSports" items="${sports}" multiple="true" itemValue="id" itemLabel="nom" class="form-control"/>
+				<form:select path="client.listeSports" items="${sports}"
+					multiple="true" itemValue="id" itemLabel="nom" class="form-control" />
 			</div>
 
 			<div class="form-group">
@@ -142,10 +143,10 @@
 				&nbsp;
 				<form:errors path="client.credentials.password" cssClass="errors" />
 			</div>
-			<form:hidden path = "client.credentials.role" value = "ROLE_USER" />
+			<form:hidden path="client.credentials.role" value="ROLE_USER" />
 			<!-- <input type="hidden" path="client.credentials.role" name ="client.credentials.role"
 				value="ROLE_USER" /> -->
-				<input type="submit" class="btn btn-primary"
+			<input type="submit" class="btn btn-primary"
 				value="<spring:message code="client.creer.submit" />" />
 		</form>
 		<a href="<c:url value="/paricontroller/goToMenu" />" type="button"
