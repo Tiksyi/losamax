@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.losamax.dao.IClientJpaRepository;
 import com.losamax.dao.ICoteJpaRepository;
 import com.losamax.dao.IEvenementJpaRepository;
 import com.losamax.dao.IPariJpaRepository;
@@ -28,6 +29,7 @@ import com.losamax.entities.Client;
 import com.losamax.entities.Cote;
 import com.losamax.entities.Evenement;
 import com.losamax.entities.Participant;
+import com.losamax.entities.SendEmail;
 import com.losamax.entities.Sport;
 
 @Controller
@@ -42,6 +44,9 @@ public class AdminController {
 
 	@Autowired
 	private IEvenementJpaRepository evenementRepo;
+	
+	@Autowired
+	private IClientJpaRepository clientRepo;
 
 	@Autowired
 	private IParticipantJpaRepository participantRepo;
@@ -112,7 +117,6 @@ public class AdminController {
 	@PostMapping("/creerCote")
 	public String creerCote(@RequestParam(name = "evenementId") Long evenementId,
 			@ModelAttribute(value = "cote") Cote cote, Model model) {
-		System.out.println(evenementId);
 		Evenement originEvenement = evenementRepo.getOne(evenementId);
 		originEvenement.getCotes().add(cote);
 		evenementRepo.save(originEvenement);
@@ -122,9 +126,8 @@ public class AdminController {
 		return "creerCote";
 	}
 
-	@RequestMapping("/supprimerEvenement/{id}")
-	public String supprimerEvenement(@PathVariable("id") Long id, Evenement evenement) {
-		evenementRepo.deleteById(id);
+	@RequestMapping("/supprimerEvenement")
+	public String supprimerEvenement(Evenement evenement) {
 		return "supprimerEvenement";
 	}
 
@@ -133,25 +136,49 @@ public class AdminController {
 			@RequestParam(value = "nom") String nom) {
 		evenement = evenementRepo.findByNom(nom);
 		evenementRepo.delete(evenement);
-		;
 		return "confirmationSuppression";
 	}
 
 	@GetMapping("/listerResultats")
 	public String listerResultats(Model model) {
+		filtrerEvenements(model);
+		return "listerResultats";
+	}
+	
+	@GetMapping("/goToEntrerResultat/{id}")
+	public String goToEntrerResultat(@PathVariable("id") Long id, Model model) {
+		Evenement evenement = evenementRepo.getOne(id);
+		model.addAttribute("evenement", evenement);
+		List<Cote> cotes = evenement.getCotes();
+		List<String> libelles = new ArrayList<String>();
+		for(Cote c:cotes)
+			libelles.add(c.getLibelle());
+		model.addAttribute("libelles",libelles);
+		return "entrerResultat";
+	}
+	
+	@PostMapping("/entrerResultat")
+	public String entrerResultat(@ModelAttribute(value = "evenement") Evenement evenement, Model model) {
+		Evenement originEvenement=evenementRepo.getOne(evenement.getId());
+		originEvenement.setResultatFinal(evenement.getResultatFinal());
+		evenementRepo.save(originEvenement);
+		filtrerEvenements(model);
+		return "listerResultats";
+	}
+	
+	private void filtrerEvenements(Model model) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 		Date date = new Date();
 		dateFormat.format(date);
 		List<Evenement> evenements = evenementRepo.findAll(new Sort(Sort.Direction.ASC, "dateFin"));
 		List<Evenement> evenementsFiltres = new ArrayList<Evenement>();
 		for (Evenement e : evenements) {
-			if (e.getDateFin().before(date))
+			if (e.getDateFin().before(date) & e.getResultatFinal()==null)
 				evenementsFiltres.add(e);
 		}
 		model.addAttribute("evenementsFiltres", evenementsFiltres);
-		return "listerResultats";
 	}
-
+	
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(List.class, "participants", new CustomCollectionEditor(List.class) {
@@ -179,4 +206,22 @@ public class AdminController {
 			}
 		});
 	}
+	
+
+	@GetMapping("/goToNewsletter")
+	public String goToNewsletter(Model model) {
+		String message = "";
+		model.addAttribute("message", message);
+		return "newsletter";
+	}
+	@PostMapping("/newsletter")
+	public String sendNewsletter(@ModelAttribute (value = "message") String message, Model model) {
+		List<Client> liste = clientRepo.findAll();
+		for (Client c : liste)
+		{
+		SendEmail.send("losamax2018@gmail.com", "losamax31", c.getMail(), "newsletter Losamax", message);
+		}
+		return "bonjouradmin";
+	}
+	
 }

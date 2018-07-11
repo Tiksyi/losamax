@@ -6,6 +6,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 public class Credentials {
@@ -13,26 +17,22 @@ public class Credentials {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
+	@NotEmpty(message =  "{error.username.vide}")
 	private String username;
+	
 
+	@Length(min = 1, max = 255, message =  "{error.password.taille}")
 	private String password;
 
 	@Enumerated(EnumType.STRING)
 	private ERole role;
-//	private String role;
+	
 
 	public Credentials() {
 	}
 
-//	public String getRole() {
-//		return role;
-//	}
-//
-//	public void setRole(String role) {
-//		this.role = role;
-//	}
-
+	
 	public Long getId() {
 		return id;
 	}

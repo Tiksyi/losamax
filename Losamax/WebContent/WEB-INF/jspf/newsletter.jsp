@@ -4,12 +4,12 @@
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!--  -->
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <!DOCTYPE html>
-<html lang=fr>
+<html lang="fr">
 <head>
-<title><spring:message code="creer.menu.title" /></title>
+<title><spring:message code="contact.titre" /></title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <link rel="stylesheet" href="<c:url value="/static/css/styles.css" />">
@@ -30,24 +30,43 @@
 <script src="<c:url value="/static/bootstrap3/js/bootstrap.min.js" />" ></script> --%>
 </head>
 <body>
+
+	<c:import url="./header.jsp" />
+
 	<div class="container">
-		<h3 text-align=center>
-			<spring:message code="evenement.creer" />
-		</h3>
-		<form method="POST" action="supprimerNom" modelAttribute="evenement">
-			<input type="hidden" name="${_csrf.parameterName}"
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="well well-sm">
+					<form class="form-horizontal" method="post" action="newsletter"
+						modelAttribute="message">
+						<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
-			<div class="form-group">
-				<form:label path="evenement.nom">
-					<spring:message code="evenement.nom" />
-				</form:label>
-				<form:input path="evenement.nom" class="form-control" />
+						<fieldset>
+							<legend class="text-center">
+								<spring:message code="newsletter.titre" />
+							</legend>
+
+							<!-- Message body -->
+							<div class="form-group">
+								<label class="col-md-3 control-label" for="message"><spring:message
+										code="newsletter.titre" /></label>
+								<div class="col-md-9">
+									<textarea class="form-control" id="message" name="message"
+										placeholder="${message}" rows="35" cols="50"></textarea>
+								</div>
+							</div>
+
+						</fieldset>
+						<input type="submit" class="btn btn-primary"
+							value="<spring:message code="newsletter.creer" />" />
+
+
+						<!-- Form actions -->
+
+					</form>
+				</div>
 			</div>
-		<br> <input type="submit" class="btn btn-primary"
-			value="<spring:message code="evenement.supprimer" />" />
-		</form>	
-		<br> <br> <a href="<c:url value="/admincontroller/goToAdmin" />" type="button"
-			class="btn btn-primary"><spring:message code="menu.retour" /></a>
+		</div>
 	</div>
 </body>
 </html>
