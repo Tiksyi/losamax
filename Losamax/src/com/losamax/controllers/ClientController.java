@@ -116,6 +116,12 @@ public class ClientController {
 		Pari pari = new Pari();
 		Evenement evenement = evenementRepo.getOne(id);
 		Client client = clientRepo.findByCredentialsUsername(username);
+		populatePariModel(model, pari, client, evenement);
+		return "creerPari";
+	}
+	
+	private void populatePariModel(Model model, Pari pari, Client client, Evenement evenement) {
+		model.addAttribute("client", client);
 		model.addAttribute("evenement", evenement);
 		List<Cote> cotes = evenement.getCotes();
 		model.addAttribute("cotes", cotes);
@@ -124,16 +130,22 @@ public class ClientController {
 		pari.setEvenement(evenement);
 		pari.setClient(client);
 		model.addAttribute("pari", pari);
-		return "creerPari";
 	}
 
 	@PostMapping("/creerPari")
-	public String creerPari(@ModelAttribute(value = "pari") Pari pari, Model model) {
+	public String creerPari(@Valid @ModelAttribute(value = "pari") Pari pari, BindingResult result, Model model) {
+		Client client = clientRepo.getOne(pari.getClient().getId());
+		if (pari.getMise() > client.getMiseMax()) {
+			result.rejectValue("mise", "error.pari.mise");
+			Evenement evenement = evenementRepo.getOne(pari.getEvenement().getId());
+			populatePariModel(model, pari, client, evenement);
+			return "creerPari";
+
+		}
 		pariRepo.save(pari);
 		return "confirmationPari";
 	}
-	
-	
+
 	@GetMapping("/compte/{username}")
 	public String compte(@PathVariable(value = "username") String username, Model model) {
 		Client client = clientRepo.findByCredentialsUsername(username);

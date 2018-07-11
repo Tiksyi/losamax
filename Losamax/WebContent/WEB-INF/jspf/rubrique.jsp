@@ -63,22 +63,40 @@
 														<c:if test="${loop.index==0}">&nbsp;-&nbsp;</c:if>
 													</c:forEach>
 												</div>
-												<div class="col-lg-4" align="center">
+												<%-- <div class="col-lg-4" align="center">
+													<ul class="list-inline">
+														<c:forEach var="c" items="${cotes}">
+															<li><button type="button" class="btn btn-default"
+																	onclick="calculCote(${c.valeur}, '${c.libelle}')">
+																	<c:out value="${c.libelle}" />
+																</button>&nbsp;<label><c:out value="${c.valeur}" /></label></li>
+														</c:forEach>
+														<form:hidden id="choix" path="pari.choix" value="" />
+														<form:hidden path="pari.evenement.id" />
+														<form:hidden path="pari.client.id" />
+													</ul>
+												</div> --%>
+												<div class="col-lg-4" align=center>
 													<button type="button" class="btn btn-default">1</button>
 													<button type="button" class="btn btn-default">N</button>
 													<button type="button" class="btn btn-default">2</button>
 												</div>
 												<div class="col-lg-4" align="right">
-												<c:set var="username" scope="session"><sec:authentication property="principal.username" /></c:set>
+													<c:set var="username" scope="session">
+														<sec:authentication property="principal.username" />
+													</c:set>
 													<button type="submit" class="btn btn-primary"
 														formmethod="get"
-														formaction="<c:url value="/clientcontroller/goToCreerPari/${username}/${e.id}"/>"><spring:message code="pari.nom"/></button>
+														formaction="<c:url value="/clientcontroller/goToCreerPari/${username}/${e.id}"/>">
+														<spring:message code="pari.nom" />
+													</button>
 												</div>
 											</div>
 										</div>
 									</div>
 									<div class="panel-footer">
-										<i>Expire le <fmt:formatDate type = "both" dateStyle="long" value = "${e.dateFin}" /></i>
+										<i>Expire le <fmt:formatDate type="both" dateStyle="long"
+												value="${e.dateFin}" /></i>
 									</div>
 								</div>
 							</div>

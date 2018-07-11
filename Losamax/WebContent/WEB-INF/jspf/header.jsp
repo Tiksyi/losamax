@@ -55,18 +55,21 @@
 							class="glyphicon glyphicon-log-in"></span>&nbsp;<spring:message
 								code="accueil.connexion" /></a></li>
 				</sec:authorize>
+				
+				
 				<sec:authorize access="hasRole('ROLE_USER')">
 					<c:set var="username" scope="session">
 						<sec:authentication property="principal.username" />
 					</c:set>
 					<li><a
 						href="<c:url value="/clientcontroller/compte/${username}" />"><span
-							class="glyphicon glyphicon-tasks"></span>&nbsp;<sec:authentication
-								property="principal.username" /></a></li>
+							class="glyphicon glyphicon-tasks"></span>&nbsp;${username}</a></li>
 					<li><a href="<c:url value="/logout" />"><span
 							class="glyphicon glyphicon-remove"></span>&nbsp;<spring:message
 								code="accueil.deconnexion" /></a></li>
 				</sec:authorize>
+				
+				
 				<sec:authorize access="hasRole('ROLE_ADMIN')">
 					<c:set var="username" scope="session">
 						<sec:authentication property="principal.username" />
