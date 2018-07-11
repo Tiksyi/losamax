@@ -5,14 +5,14 @@
 	prefix="sec"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
+			<!-- <button type="button" class="navbar-toggle" data-toggle="collapse"
 				data-target="#myNavbar">
 				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
-			</button>
+			</button> -->
 			<a class="navbar-brand"
 				href="<c:url value="/paricontroller/goToMenu"/>">LOSAMAX</a>
 		</div>
@@ -68,18 +68,6 @@
 								code="accueil.deconnexion" /></a></li>
 				</sec:authorize>
 
-
-				<sec:authorize access="hasRole('ROLE_ADMIN')">
-					<c:set var="username" scope="session">
-						<sec:authentication property="principal.username" />
-					</c:set>
-					<li><a href="<c:url value="/admincontroller/goToAdmin" />"><span
-							class="glyphicon glyphicon-tasks"></span>&nbsp;<sec:authentication
-								property="principal.username" /></a></li>
-					<li><a href="<c:url value="/logout" />"><span
-							class="glyphicon glyphicon-remove"></span>&nbsp;<spring:message
-								code="accueil.deconnexion" /></a></li>
-				</sec:authorize>
 			</ul>
 		</div>
 	</div>

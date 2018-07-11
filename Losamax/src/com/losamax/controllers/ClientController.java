@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.losamax.dao.IClientJpaRepository;
 import com.losamax.dao.IEvenementJpaRepository;
@@ -71,14 +72,19 @@ public class ClientController {
 		return "login";
 	}
 
-	@GetMapping(value = { "/contact", "/contact?lang={code}" })
-	public String contact(@PathVariable(value = "code", required = false) String code, Model model) {
-		if (code == "fr") {
-			model.addAttribute("nom", "Entrez votre nom");
-			model.addAttribute("email", "Entrez votre email");
-			model.addAttribute("message", "Saisissez votre message ici ...");
-		}
-		if (code == "en") {
+	@GetMapping("/contact")
+	public String contact(@RequestParam(value = "lang", required = false) String lang, Model model) {
+		
+		model.addAttribute("nom", "Entrez votre nom");
+		model.addAttribute("email", "Entrez votre email");
+		model.addAttribute("message", "Saisissez votre message ici ...");
+		
+//		if ("fr".equals(lang)) {
+//			model.addAttribute("nom", "Entrez votre nom");
+//			model.addAttribute("email", "Entrez votre email");
+//			model.addAttribute("message", "Saisissez votre message ici ...");
+//		}
+		if ("en".equals(lang)) {
 			model.addAttribute("nom", "Enter your name");
 			model.addAttribute("email", "Enter your email");
 			model.addAttribute("message", "Please enter your message here...");

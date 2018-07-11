@@ -10,28 +10,37 @@
 <html lang=fr>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="icon" href="<c:url value="/static/icones/www.ico" />">
+<link rel="icon" href="<c:url value="/static/images/losamax2.png" />">
 <link rel="stylesheet" href="<c:url value="/static/css/styles.css" />">
 <link rel="stylesheet"
 	href="<c:url value="/static/bootstrap3/css/bootstrap.css" />">
-<script src="<c:url value="/static/bootstrap3/js/bootstrap.js" />"></script>
-<script src="<c:url value="/static/jquery/js/jquery.js" />"></script>
+<%-- <script src="<c:url value="/static/bootstrap3/js/bootstrap.js" />"></script> --%>
+<%-- <script src="<c:url value="/static/jquery/js/jquery.js" />"></script> --%>
 <script src="<c:url value="/static/js/js.js" />"></script>
-
-<title><spring:message code="admin.bienvenue" /></title>
+<!-- <link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+<title><spring:message code="compte.bienvenue" />&nbsp;${client.prenom}</title>
 
 </head>
 <body>
 	<div class="container">
-		<h3>
-			<spring:message code="compte.bienvenue" />
-			<span>${client.nom}</span>
-			<br>
-			<span>Solde : ${client.solde} &euro;</span>
-		</h3>
-		<br> <a type="button" class="btn btn-primary"
-			href="<c:url value="/clientcontroller/goToModifier/${client.id}" />">Modifier
-			mon compte</a> <br> <br> <br>
+		<div class="row">
+				<h3>
+					<spring:message code="compte.bienvenue" />&nbsp;<span>${client.prenom}</span>
+					<span>
+					<br>
+					<span>Solde : ${client.solde}&euro;</span>
+				</h3>
+				<a type="button" class="btn btn-primary"
+					href="<c:url value="/clientcontroller/goToModifier/${client.id}" />"><spring:message
+						code="compte.modifier" /></a>
+		</div>
+		<br> <br> <br>
 		<div class="row">
 			<div class="col-lg-6" align="left">
 				<h3>
@@ -40,8 +49,8 @@
 			</div>
 			<div class="col-lg-6" align="right">
 				<a type="button" class="btn btn-primary"
-					href="<c:url value="/clientcontroller/actualiser/${client.credentials.username}" />">Actualiser
-					les paris</a>
+					href="<c:url value="/clientcontroller/actualiser/${client.credentials.username}" />"><spring:message
+						code="compte.actualiser.pari" /></a>
 			</div>
 		</div>
 

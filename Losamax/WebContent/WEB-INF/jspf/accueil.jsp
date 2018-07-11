@@ -5,27 +5,27 @@
 	prefix="sec"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+	
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <title><spring:message code="accueil.title" /></title>
-<meta charset="utf-8">
-<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="icon" href="<c:url value="/static/images/losamax2.png" />">
 <link rel="stylesheet" href="<c:url value="/static/css/styles.css" />">
 <link rel="stylesheet"
 	href="<c:url value="/static/bootstrap3/css/bootstrap.css" />">
-	 <link rel="icon" href="<c:url value="/static/icones/www.ico" />">
-<script src="<c:url value="/static/jquery/js/jquery.js" />"
-	type="application/javascript"></script>
-<script src="<c:url value="/static/bootstrap3/js/bootstrap.js" />"
-	type="application/javascript"></script>
-
-<!-- <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-<!-- <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-<!--<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+<%-- <script src="<c:url value="/static/bootstrap3/js/bootstrap.js" />"></script>
+<script src="<c:url value="/static/jquery/js/jquery.js" />"></script> --%>
+<script src="<c:url value="/static/js/js.js" />"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body class="body">
 
@@ -46,13 +46,27 @@
 				</p> --%>
 			</div>
 			<div class="col-sm-8 text-left">
-				<h1>
-					<spring:message code="acceuil.bienvenue" />
-				</h1>
-				<p>Losamax, we earn, you lose. Approved by Francis Lalanne and Nicolas Anelka.</p><br>
-				<div align="center"><img src="<c:url value="/static/images/losamax.png"/>"/></div>
+				<div align="center">
+					<h1>
+						<spring:message code="acceuil.bienvenue" />
+					</h1>
+					<h4>
+						<spring:message code="accueil.message" />
+					</h4>
+				</div>
+				<br>
+				<div align="center">
+					<img src="<c:url value="/static/images/losamax2.png"/>" width="15%"
+						height="15%" />
+				</div>
 				<hr>
 				<div class="well">
+					<div>
+						<h2>
+							<spring:message code="accueil.rubrique.event.futur" />
+						</h2>
+					</div>
+					<br>
 					<c:forEach var="e" items="${listeEvents}">
 
 						<%-- <h2 style="text-transform: capitalize">
@@ -88,7 +102,8 @@
 									</div>
 								</div>
 								<div class="panel-footer">
-									<i>Expire le <fmt:formatDate type="both" dateStyle="long" value="${e.dateFin}" /></i>
+									<i><spring:message code="accueil.event.date" /><fmt:formatDate type="both" dateStyle="long"
+											value="${e.dateFin}" /></i>
 								</div>
 							</div>
 						</div>

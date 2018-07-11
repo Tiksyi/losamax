@@ -9,15 +9,25 @@
 <!DOCTYPE html>
 <html lang=fr>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><spring:message code="creer.menu.title" /></title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" href="<c:url value="/static/css/styles.css" />">
+<link rel="icon" href="<c:url value="/static/images/losamax2.png" />">
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	 <link rel="icon" href="<c:url value="/static/icones/www.ico" />">
+	href="<c:url value="/static/bootstrap3/css/bootstrap.css" />">
+<!-- <link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+<%-- <link rel="stylesheet"
+	href="<c:url value="/static/bootstrap3/css/bootstrap.min.css" />">
+
+<script src="<c:url value="/static/jquery/js/jquery.min.js" />" ></script>
+<script src="<c:url value="/static/bootstrap3/js/bootstrap.min.js" />" ></script> --%>
 </head>
 <body>
 	<div class="container">

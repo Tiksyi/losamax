@@ -10,20 +10,24 @@
 <html lang="fr">
 <head>
 <title><spring:message code="contact.titre" /></title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <link rel="stylesheet" href="<c:url value="/static/css/styles.css" />">
- <link rel="icon" href="<c:url value="/static/icones/www.ico" />">
-<%-- <link rel="stylesheet"
-	href="<c:url value="/static/bootstrap3/css/bootstrap.css" />">
-<script src="<c:url value="/static/bootstrap3/js/bootstrap.js" />"></script>
-<script src="<c:url value="/static/jquery/js/jquery.js" />"></script> --%>
+<link rel="icon" href="<c:url value="/static/images/losamax2.png" />">
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	href="<c:url value="/static/bootstrap3/css/bootstrap.css" />">
+<!-- <link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+<%-- <link rel="stylesheet"
+	href="<c:url value="/static/bootstrap3/css/bootstrap.min.css" />">
+
+<script src="<c:url value="/static/jquery/js/jquery.min.js" />" ></script>
+<script src="<c:url value="/static/bootstrap3/js/bootstrap.min.js" />" ></script> --%>
 </head>
 <body>
 
