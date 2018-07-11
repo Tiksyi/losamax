@@ -14,6 +14,7 @@
 <link rel="stylesheet"
 	href="<c:url value="/static/bootstrap3/css/bootstrap.css" />">
 <link rel="stylesheet" href="<c:url value="/static/css/styles.css" />">
+ <link rel="icon" href="<c:url value="/static/icones/www.ico" />">
 <script src="<c:url value="/static/bootstrap3/js/bootstrap.js" />"></script>
 <script src="<c:url value="/static/jquery/js/jquery.js" />"></script>
 <script src="<c:url value="/static/js/js.js" />"></script>

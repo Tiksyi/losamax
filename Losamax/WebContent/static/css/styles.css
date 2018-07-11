@@ -1,5 +1,5 @@
 /* Debut du CCS pour la page d'accueil */
-@charset "utf-8"; 
+@charset "utf-8";
 
 .
 
@@ -25,7 +25,7 @@
 	padding-top: 20px;
 	background-color: transparent;
 	height: 100%;
-	border-right: 1px solid ;
+	border-right: 1px solid;
 	border-right-color: #999999;
 }
 
@@ -71,5 +71,10 @@ footer {
 
 .capital {
 	text-transform: capitalize;
+}
+
+.errors {
+	color: red;
+	font-style: italic;
 }
 /* Fin du CCS perso */

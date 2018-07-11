@@ -13,6 +13,7 @@
 <title><spring:message code="modifier.client.title" /></title>
 <link rel="stylesheet"
 	href="<c:url value="/static/bootstrap3/css/bootstrap.css" />">
+	 <link rel="icon" href="<c:url value="/static/icones/www.ico" />">
 <script src="<c:url value="/static/bootstrap3/js/bootstrap.js" />"></script>
 <script src="<c:url value="/static/jquery/js/jquery.js" />"></script>
 </head>

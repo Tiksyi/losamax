@@ -9,6 +9,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+ <link rel="icon" href="<c:url value="/static/icones/www.ico" />">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><spring:message code="contact.titre"/></title>
 </head>

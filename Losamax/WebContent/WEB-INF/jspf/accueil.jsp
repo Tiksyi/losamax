@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="<c:url value="/static/css/styles.css" />">
 <link rel="stylesheet"
 	href="<c:url value="/static/bootstrap3/css/bootstrap.css" />">
+	 <link rel="icon" href="<c:url value="/static/icones/www.ico" />">
 <script src="<c:url value="/static/jquery/js/jquery.js" />"
 	type="application/javascript"></script>
 <script src="<c:url value="/static/bootstrap3/js/bootstrap.js" />"
@@ -33,7 +34,7 @@
 
 	<div class="container-fluid text-center">
 		<div class="row content">
-			<div class="col-sm-2 sidenav-right">
+			<div class="col-sm-2 sidenav">
 				<%-- <p>
 					<a href="#"><spring:message code="accueil.lien" /></a>
 				</p>
@@ -48,15 +49,8 @@
 				<h1>
 					<spring:message code="acceuil.bienvenue" />
 				</h1>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-					do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-					enim ad minim veniam, quis nostrud exercitation ullamco laboris
-					nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat
-					cupidatat non proident, sunt in culpa qui officia deserunt mollit
-					anim id est laborum consectetur adipiscing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-					minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-					aliquip ex ea commodo consequat.</p>
+				<p>Losamax, we earn, you lose. Approved by Francis Lalanne and Nicolas Anelka.</p><br>
+				<div align="center"><img src="<c:url value="/static/images/losamax.png"/>"/></div>
 				<hr>
 				<div class="well">
 					<c:forEach var="e" items="${listeEvents}">
@@ -86,9 +80,9 @@
 												<button type="button" class="btn btn-default">2</button>
 											</div>
 											<div class="col-lg-4" align=right>
-												<a
+												<%-- <a
 													href="<c:url value="/clientcontroller/goToCreerPari/"/>"
-													type="button" class="btn btn-primary">Parier</a>
+													type="button" class="btn btn-primary">Parier</a> --%>
 											</div>
 										</div>
 									</div>
@@ -102,7 +96,7 @@
 					</c:forEach>
 				</div>
 			</div>
-			<div class="col-sm-2 sidenav-left">
+			<div class="col-sm-2 sidenav">
 				<!-- <div class="well">
 					<p>ADS</p>
 				</div>
