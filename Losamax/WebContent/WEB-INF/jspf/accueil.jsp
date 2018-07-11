@@ -86,9 +86,9 @@
 												<button type="button" class="btn btn-default">2</button>
 											</div>
 											<div class="col-lg-4" align=right>
-												<a
+												<%-- <a
 													href="<c:url value="/clientcontroller/goToCreerPari/"/>"
-													type="button" class="btn btn-primary">Parier</a>
+													type="button" class="btn btn-primary">Parier</a> --%>
 											</div>
 										</div>
 									</div>
