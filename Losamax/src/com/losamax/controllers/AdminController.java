@@ -87,12 +87,11 @@ public class AdminController {
 		model.addAttribute("evenement", new Evenement());
 		model.addAttribute("datedebut", dateFormat.format(new Date()));
 		model.addAttribute("datefin", dateFormat.format(new Date()));
-		return "creerEvenement";		
+		return "creerEvenement";
 	}
-	
+
 	@PostMapping("/creerEvenement")
-	public String creerEvenement(@ModelAttribute(value = "evenement") Evenement evenement,
-		 Model model) {
+	public String creerEvenement(@ModelAttribute(value = "evenement") Evenement evenement, Model model) {
 		List<Participant> participants = participantRepo.findAll();
 		List<Sport> sports = sportRepo.findAll();
 		model.addAttribute("sports", sports);
@@ -101,17 +100,18 @@ public class AdminController {
 		Evenement e = evenementRepo.findByNom(evenement.getNom());
 		return "redirect:/admincontroller/goToCreerCote/" + e.getId();
 	}
-	
+
 	@GetMapping("/goToCreerCote/{id}")
 	public String goToCreerCote(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("evenementId", id);
-		Cote cote= new Cote();
+		Cote cote = new Cote();
 		model.addAttribute(cote);
 		return "creerCote";
 	}
-	
+
 	@PostMapping("/creerCote")
-	public String creerCote(@RequestParam(name="evenementId") Long evenementId, @ModelAttribute(value = "cote") Cote cote, Model model) {
+	public String creerCote(@RequestParam(name = "evenementId") Long evenementId,
+			@ModelAttribute(value = "cote") Cote cote, Model model) {
 		System.out.println(evenementId);
 		Evenement originEvenement = evenementRepo.getOne(evenementId);
 		originEvenement.getCotes().add(cote);
@@ -121,59 +121,62 @@ public class AdminController {
 		model.addAttribute("cotes", cotes);
 		return "creerCote";
 	}
-	
-    @RequestMapping("/supprimerEvenement")
-    public String supprimerEvenement(Evenement evenement) {
-	return "supprimerEvenement";
-    }
 
-    @PostMapping("/supprimerNom")
-    public String supprimerNom(@ModelAttribute(value = "evenement") Evenement evenement, Model model, @RequestParam(value = "nom") String nom) {   
-    	evenement=evenementRepo.findByNom(nom);
-    	evenementRepo.delete(evenement);;
-    return "confirmationSuppression";   } 
-	
+	@RequestMapping("/supprimerEvenement/{id}")
+	public String supprimerEvenement(@PathVariable("id") Long id, Evenement evenement) {
+		evenementRepo.deleteById(id);
+		return "supprimerEvenement";
+	}
+
+	@PostMapping("/supprimerNom")
+	public String supprimerNom(@ModelAttribute(value = "evenement") Evenement evenement, Model model,
+			@RequestParam(value = "nom") String nom) {
+		evenement = evenementRepo.findByNom(nom);
+		evenementRepo.delete(evenement);
+		;
+		return "confirmationSuppression";
+	}
+
 	@GetMapping("/listerResultats")
 	public String listerResultats(Model model) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-		Date date=new Date();
+		Date date = new Date();
 		dateFormat.format(date);
 		List<Evenement> evenements = evenementRepo.findAll(new Sort(Sort.Direction.ASC, "dateFin"));
 		List<Evenement> evenementsFiltres = new ArrayList<Evenement>();
-		for (Evenement e:evenements) {
-			if(e.getDateFin().before(date))
-			evenementsFiltres.add(e);
+		for (Evenement e : evenements) {
+			if (e.getDateFin().before(date))
+				evenementsFiltres.add(e);
 		}
 		model.addAttribute("evenementsFiltres", evenementsFiltres);
 		return "listerResultats";
 	}
-    
-    
+
 	@InitBinder
-    protected void initBinder(WebDataBinder binder) {
-    	binder.registerCustomEditor(List.class, "participants", new CustomCollectionEditor(List.class){
-    		@Override
-    		protected Object convertElement(Object element) {
-    			Long id=null;
-    			if (element instanceof String) {
-    				id=Long.valueOf((String) element);
-    			} else if (element instanceof Long) {
-    				id = (Long) element;
-    			}
-    			return id != null ? participantRepo.getOne(id) : null;
-    		}
-    	});
-       	binder.registerCustomEditor(List.class, "cotes", new CustomCollectionEditor(List.class){
-    		@Override
-    		protected Object convertElement(Object element) {
-    			Long id=null;
-    			if (element instanceof String) {
-    				id=Long.valueOf((String) element);
-    			} else if (element instanceof Long) {
-    				id = (Long) element;
-    			}
-    			return id != null ? coteRepo.getOne(id) : null;
-    		}
-    	});
-    }
+	protected void initBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(List.class, "participants", new CustomCollectionEditor(List.class) {
+			@Override
+			protected Object convertElement(Object element) {
+				Long id = null;
+				if (element instanceof String) {
+					id = Long.valueOf((String) element);
+				} else if (element instanceof Long) {
+					id = (Long) element;
+				}
+				return id != null ? participantRepo.getOne(id) : null;
+			}
+		});
+		binder.registerCustomEditor(List.class, "cotes", new CustomCollectionEditor(List.class) {
+			@Override
+			protected Object convertElement(Object element) {
+				Long id = null;
+				if (element instanceof String) {
+					id = Long.valueOf((String) element);
+				} else if (element instanceof Long) {
+					id = (Long) element;
+				}
+				return id != null ? coteRepo.getOne(id) : null;
+			}
+		});
+	}
 }

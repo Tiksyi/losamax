@@ -307,8 +307,8 @@ public class PariController {
 		return "rubrique";
 	}
 	
-	@PostMapping("/supprimerPari/{id}")
-	public String compte(@PathVariable(value = "id") Long id, Model model) {
+	@RequestMapping("/supprimerPari/{username}/{id}")
+	public String compte(@PathVariable(value = "id") Long id, @PathVariable(value = "username") String username, Model model) {
 		
 		pariRepo.deleteById(id);;
 //		List<Pari> lpari = pariRepo.findByClientId(client.getId());
