@@ -37,21 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.invalidateHttpSession(true).logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/paricontroller/goToMenu?logout=true").permitAll();
 		
-//		http.authorizeRequests()
-//        .antMatchers("/", "/*.html").permitAll()
-//        .antMatchers("/user/**").hasRole("USER")
-//        .antMatchers("/admin/**").hasRole("ADMIN")
-//        .antMatchers("/admin/login").permitAll()
-//        .antMatchers("/user/login").permitAll()
-//        .anyRequest().authenticated()
 
-//		http.authorizeRequests()
-//				.antMatchers("/static/**", "/paricontroller/goToMenu", "index.jsp", "/clientcontroller/goToCreer/**")
-//				.permitAll().anyRequest().authenticated().and().formLogin().loginPage("/securitycontroller/login")
-//				.loginProcessingUrl("/login").defaultSuccessUrl("/paricontroller/goToMenu", true)
-//				.failureUrl("/securitycontroller/login?error=true").permitAll().and().logout()
-//				.invalidateHttpSession(true).logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//				.logoutSuccessUrl("/securitycontroller/login?logout=true").permitAll();
 	}
 
 	@Autowired
