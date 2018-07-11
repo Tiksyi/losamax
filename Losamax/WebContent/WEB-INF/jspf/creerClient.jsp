@@ -33,7 +33,7 @@
 				</form:label>
 				<form:input path="client.nom" class="form-control" />
 				&nbsp;
-				<form:errors path="client.nom" cssClass="errors" />
+				<form:errors path="client.nom" class="alert alert-danger" />
 
 			</div>
 			<div class="form-group">
@@ -43,7 +43,7 @@
 				</form:label>
 				<form:input path="client.prenom" class="form-control" />
 				&nbsp;
-				<form:errors path="client.prenom" cssClass="errors" />
+				<form:errors path="client.prenom" class="alert alert-danger" />
 
 			</div>
 			<div class="form-group">
@@ -53,7 +53,7 @@
 				</form:label>
 				<form:input path="client.mail" class="form-control" />
 				&nbsp;
-				<form:errors path="client.mail" cssClass="errors" />
+				<form:errors path="client.mail" class="alert alert-danger" />
 
 			</div>
 			<div class="form-group">
@@ -63,39 +63,29 @@
 				</form:label>
 				<form:input path="client.age" class="form-control" />
 				&nbsp;
-				<form:errors path="client.age" cssClass="errors" />
+				<form:errors path="client.age" class="alert alert-danger" />
 
 			</div>
 			<div class="form-group">
 				<form:label path="client.adresse">
 					<spring:message code="client.adresse" />
-					<span class="required">*</span>
-				</form:label>
+					</form:label>
 				<form:input path="client.adresse" class="form-control" />
-				&nbsp;
-				<form:errors path="client.adresse" cssClass="errors" />
-
-			</div>
+				</div>
 			<div class="form-group">
 				<form:label path="client.telFix">
 					<spring:message code="client.telFix" />
-					<span class="required">*</span>
-				</form:label>
+					</form:label>
 				<form:input path="client.telFix" class="form-control" />
-				&nbsp;
-				<form:errors path="client.telFix" cssClass="errors" />
+				
 
 			</div>
 			<div class="form-group">
 				<form:label path="client.telMobile">
 					<spring:message code="client.telMobile" />
-					<span class="required">*</span>
-				</form:label>
+					</form:label>
 				<form:input path="client.telMobile" class="form-control" />
-				&nbsp;
-				<form:errors path="client.telMobile" cssClass="errors" />
-
-			</div>
+				</div>
 			<div class="form-group">
 				<form:label path="client.miseMax">
 					<spring:message code="client.miseMax" />
@@ -103,18 +93,15 @@
 				</form:label>
 				<form:input path="client.miseMax" class="form-control" />
 				&nbsp;
-				<form:errors path="client.miseMax" cssClass="errors" />
+				<form:errors path="client.miseMax" class="alert alert-danger" />
 
 			</div>
 			<div class="form-group">
 				<form:label path="client.solde">
 					<spring:message code="client.depot.solde" />
-					<span class="required">*</span>
-				</form:label>
+					</form:label>
 				<form:input path="client.solde" class="form-control" />
-				&nbsp;
-				<form:errors path="client.solde" cssClass="errors" />
-			</div>
+				</div>
 
 			<div class="form-group">
 				<form:label path="client.listeSports" id="listeSports">
@@ -131,7 +118,7 @@
 				</form:label>
 				<form:input path="client.credentials.username" />
 				&nbsp;
-				<form:errors path="client.credentials.username" cssClass="errors" />
+				<form:errors path="client.credentials.username" class="alert alert-danger" />
 			</div>
 			<div class="form-group">
 				<form:label path="client.credentials.password">
@@ -140,7 +127,7 @@
 				</form:label>
 				<form:password path="client.credentials.password" />
 				&nbsp;
-				<form:errors path="client.credentials.password" cssClass="errors" />
+				<form:errors path="client.credentials.password" class="alert alert-danger" />
 			</div>
 			<form:hidden path = "client.credentials.role" value = "ROLE_USER" />
 			<!-- <input type="hidden" path="client.credentials.role" name ="client.credentials.role"

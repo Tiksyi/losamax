@@ -49,7 +49,7 @@
 								code="newsletter.creer" /></a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="<c:url value="/paricontroller/goToMenu" />"><spring:message
+					<li><a href="<c:url value="/admincontroller/goToAdmin" />"><spring:message
 								code="menu.retour" /></a></li>
 				</ul>
 			</div>

@@ -11,6 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.Valid;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Client {
@@ -18,17 +23,25 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+    @Valid
     @OneToOne(cascade=CascadeType.ALL)
 	private Credentials credentials;
+    @NotEmpty(message = "{error.nom.obligatoire}")
 	private String nom;
+    @NotEmpty(message = "{error.prenom.obligatoire}")
 	private String prenom;
+    @NotEmpty(message = "{error.mail.obligatoire}")
+    @Email(message = "{error.mail.format}")
 	private String mail;
+    @Min(value=18, message = "{error.age}")
 	private int age;
+    
 	private String adresse;
 	private String telFix;
 	private String telMobile;
 	@ManyToMany
 	private List<Sport> listeSports = new ArrayList<>();
+	@Min(value=1,message = "{error.miseMax.obligatoire}")
 	private double miseMax;
 	private double solde;
 

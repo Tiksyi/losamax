@@ -126,9 +126,8 @@ public class AdminController {
 		return "creerCote";
 	}
 
-	@RequestMapping("/supprimerEvenement/{id}")
-	public String supprimerEvenement(@PathVariable("id") Long id, Evenement evenement) {
-		evenementRepo.deleteById(id);
+	@RequestMapping("/supprimerEvenement")
+	public String supprimerEvenement(Evenement evenement) {
 		return "supprimerEvenement";
 	}
 
@@ -137,7 +136,6 @@ public class AdminController {
 			@RequestParam(value = "nom") String nom) {
 		evenement = evenementRepo.findByNom(nom);
 		evenementRepo.delete(evenement);
-		;
 		return "confirmationSuppression";
 	}
 
@@ -175,7 +173,7 @@ public class AdminController {
 		List<Evenement> evenements = evenementRepo.findAll(new Sort(Sort.Direction.ASC, "dateFin"));
 		List<Evenement> evenementsFiltres = new ArrayList<Evenement>();
 		for (Evenement e : evenements) {
-			if (e.getDateFin().before(date))
+			if (e.getDateFin().before(date) & e.getResultatFinal()==null)
 				evenementsFiltres.add(e);
 		}
 		model.addAttribute("evenementsFiltres", evenementsFiltres);
