@@ -27,6 +27,7 @@
 
 <script src="<c:url value="/static/jquery/js/jquery.min.js" />" ></script>
 <script src="<c:url value="/static/bootstrap3/js/bootstrap.min.js" />" ></script> --%>
+<script src="<c:url value="/static/js/js.js" />"></script>
 </head>
 <body>
 	<div class="container">
@@ -37,7 +38,7 @@
 		<nav class="navbar navbar-inverse">
 			<div class="container-fluid">
 				<ul class="nav navbar-nav">
-					 <p class="navbar-text capital">${client.nom}</p>
+					 <p class="navbar-text capital">${client.prenom}</p>
 					 <p class="navbar-text">Solde : ${client.solde} &euro;</p>
 					 <p class="navbar-text">Mise maximum : ${client.miseMax} &euro;</p>
 				</ul>
@@ -59,7 +60,7 @@
 					<spring:message code="pari.mise" />
 					<span class="required">*</span>
 				</form:label>
-				<form:input path="pari.mise" class="form-control" id="mise" />
+				<form:input path="pari.mise" class="form-control" id="mise" onkeyup="modifSolde()"/>
 				&nbsp;
 				<form:errors path="pari.mise" cssClass="errors" />
 			</div>
