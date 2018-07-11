@@ -112,7 +112,6 @@ public class AdminController {
 	@PostMapping("/creerCote")
 	public String creerCote(@RequestParam(name = "evenementId") Long evenementId,
 			@ModelAttribute(value = "cote") Cote cote, Model model) {
-		System.out.println(evenementId);
 		Evenement originEvenement = evenementRepo.getOne(evenementId);
 		originEvenement.getCotes().add(cote);
 		evenementRepo.save(originEvenement);
@@ -139,6 +138,32 @@ public class AdminController {
 
 	@GetMapping("/listerResultats")
 	public String listerResultats(Model model) {
+		filtrerEvenements(model);
+		return "listerResultats";
+	}
+	
+	@GetMapping("/goToEntrerResultat/{id}")
+	public String goToEntrerResultat(@PathVariable("id") Long id, Model model) {
+		Evenement evenement = evenementRepo.getOne(id);
+		model.addAttribute("evenement", evenement);
+		List<Cote> cotes = evenement.getCotes();
+		List<String> libelles = new ArrayList<String>();
+		for(Cote c:cotes)
+			libelles.add(c.getLibelle());
+		model.addAttribute("libelles",libelles);
+		return "entrerResultat";
+	}
+	
+	@PostMapping("/entrerResultat")
+	public String entrerResultat(@ModelAttribute(value = "evenement") Evenement evenement, Model model) {
+		Evenement originEvenement=evenementRepo.getOne(evenement.getId());
+		originEvenement.setResultatFinal(evenement.getResultatFinal());
+		evenementRepo.save(originEvenement);
+		filtrerEvenements(model);
+		return "listerResultats";
+	}
+	
+	private void filtrerEvenements(Model model) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 		Date date = new Date();
 		dateFormat.format(date);
@@ -149,9 +174,8 @@ public class AdminController {
 				evenementsFiltres.add(e);
 		}
 		model.addAttribute("evenementsFiltres", evenementsFiltres);
-		return "listerResultats";
 	}
-
+	
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(List.class, "participants", new CustomCollectionEditor(List.class) {

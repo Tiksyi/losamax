@@ -52,6 +52,7 @@
 			</div>
 		</nav>
 		<br>
+
 		<table class="table table-striped table-dark">
 			<tr>
 				<th><spring:message code="evenement.nom" /></th>
@@ -60,10 +61,19 @@
 			<c:forEach items="${evenementsFiltres}" var="evenement">
 				<tr>
 					<td><c:out value="${evenement.nom}" /></td>
-					<td><fmt:formatDate type = "both" dateStyle="long" value = "${evenement.dateFin}" /></td>
+					<td><fmt:formatDate type="both" dateStyle="long"
+							value="${evenement.dateFin}" /></td>
+					<td>
+
+						<div class="col-lg-4" align="right">
+								<a href="<c:url value="/admincontroller/goToEntrerResultat/${evenement.id}"/>" type="button" class="btn btn-primary"><spring:message code="valider.resultat" /></a>
+						</div>
+
+					</td>
 				</tr>
 			</c:forEach>
 		</table>
+
 		<br>
 		<br>
 	</div>
