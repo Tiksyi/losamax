@@ -175,7 +175,7 @@ public class AdminController {
 		List<Evenement> evenements = evenementRepo.findAll(new Sort(Sort.Direction.ASC, "dateFin"));
 		List<Evenement> evenementsFiltres = new ArrayList<Evenement>();
 		for (Evenement e : evenements) {
-			if (e.getDateFin().before(date))
+			if (e.getDateFin().before(date) & e.getResultatFinal()==null)
 				evenementsFiltres.add(e);
 		}
 		model.addAttribute("evenementsFiltres", evenementsFiltres);
