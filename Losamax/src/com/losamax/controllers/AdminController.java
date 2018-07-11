@@ -219,7 +219,6 @@ public class AdminController {
 	@PostMapping("/newsletter")
 	public String sendNewsletter(@ModelAttribute (value = "message") String message, Model model) {
 		List<Client> liste = clientRepo.findAll();
-		String email = "";
 		for (Client c : liste)
 		{
 		SendEmail.send("losamax2018@gmail.com", "losamax31", c.getMail(), "newsletter Losamax", message);
