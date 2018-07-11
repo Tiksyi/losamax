@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="<c:url value="/static/css/styles.css" />">
 <link rel="stylesheet"
 	href="<c:url value="/static/bootstrap3/css/bootstrap.css" />">
+	 <link rel="icon" href="<c:url value="/static/icones/www.ico" />">
 <script src="<c:url value="/static/jquery/js/jquery.js" />"
 	type="application/javascript"></script>
 <script src="<c:url value="/static/bootstrap3/js/bootstrap.js" />"
@@ -48,15 +49,8 @@
 				<h1>
 					<spring:message code="acceuil.bienvenue" />
 				</h1>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-					do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-					enim ad minim veniam, quis nostrud exercitation ullamco laboris
-					nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat
-					cupidatat non proident, sunt in culpa qui officia deserunt mollit
-					anim id est laborum consectetur adipiscing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-					minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-					aliquip ex ea commodo consequat.</p>
+				<p>Losamax, we earn, you lose. Approved by Francis Lalanne and Nicolas Anelka.</p><br>
+				<img src="images/losamax.png"/>
 				<hr>
 				<div class="well">
 					<c:forEach var="e" items="${listeEvents}">
