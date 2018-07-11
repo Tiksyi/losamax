@@ -13,6 +13,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="<c:url value="/static/css/styles.css" />">
+ <link rel="icon" href="<c:url value="/static/icones/www.ico" />">
 <%-- <link rel="stylesheet"
 	href="<c:url value="/static/bootstrap3/css/bootstrap.css" />">
 <script src="<c:url value="/static/bootstrap3/js/bootstrap.js" />"></script>
