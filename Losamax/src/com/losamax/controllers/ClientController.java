@@ -1,5 +1,6 @@
 package com.losamax.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -119,7 +120,7 @@ public class ClientController {
 		populatePariModel(model, pari, client, evenement);
 		return "creerPari";
 	}
-	
+
 	private void populatePariModel(Model model, Pari pari, Client client, Evenement evenement) {
 		model.addAttribute("client", client);
 		model.addAttribute("evenement", evenement);
@@ -134,14 +135,25 @@ public class ClientController {
 
 	@PostMapping("/creerPari")
 	public String creerPari(@Valid @ModelAttribute(value = "pari") Pari pari, BindingResult result, Model model) {
+		
 		Client client = clientRepo.getOne(pari.getClient().getId());
+		
 		if (pari.getMise() > client.getMiseMax()) {
 			result.rejectValue("mise", "error.pari.mise");
 			Evenement evenement = evenementRepo.getOne(pari.getEvenement().getId());
 			populatePariModel(model, pari, client, evenement);
 			return "creerPari";
 
+		} else if (pari.getMise() < client.getMiseMax() & pari.getMise() > client.getSolde()) {
+			result.rejectValue("mise", "error.pari.mise.impossible");
+			Evenement evenement = evenementRepo.getOne(pari.getEvenement().getId());
+			populatePariModel(model, pari, client, evenement);
+			return "creerPari";
 		}
+
+		Double nSolde = client.getSolde() - pari.getMise();
+		client.setSolde(nSolde);
+		clientRepo.save(client);
 		pariRepo.save(pari);
 		return "confirmationPari";
 	}
@@ -150,6 +162,27 @@ public class ClientController {
 	public String compte(@PathVariable(value = "username") String username, Model model) {
 		Client client = clientRepo.findByCredentialsUsername(username);
 		List<Pari> lpari = pariRepo.findByClientId(client.getId());
+		model.addAttribute("client", client);
+		model.addAttribute("listeParis", lpari);
+		return "compte";
+	}
+
+	@GetMapping("/actualiser/{username}")
+	public String actualiser(@PathVariable(value = "username") String username, Model model) {
+		Client client = clientRepo.findByCredentialsUsername(username);
+		List<Pari> lpari = pariRepo.findByClientId(client.getId());
+		List<String> resultats = new ArrayList<String>();
+		for (Pari p : lpari) {
+			String resultat = null;
+			if (p.getChoix().equals(p.getEvenement().getResultatFinal())) {
+				resultat = "Gagné";
+			} else {
+				resultat = "Perdu";
+			}
+			resultats.add(resultat);
+		}
+		model.addAttribute("resultats", resultats);
+		model.addAttribute("client", client);
 		model.addAttribute("listeParis", lpari);
 		return "compte";
 	}
