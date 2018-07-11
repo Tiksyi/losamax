@@ -1,5 +1,6 @@
 package com.losamax.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,9 +17,13 @@ public interface IEvenementJpaRepository extends JpaRepository<Evenement, Long> 
 	@Query("select e from Evenement e join e.participants p group by e")
 	public List<Evenement> findByEvenementUnique();
 	
+	@Query("select e from Evenement e join e.participants p where e.dateFin > :date group by e")
+	public List<Evenement> findByEvenementFutur(@Param("date") Date date);
+	
 //	@Query("select e from Evenement e join e.participants p where p.sport.nom = :nom where e.dateFin > CURRENT_DATE")
 //	public List<Evenement> findByParticipantsSportNom(@Param("nom") String nom);
 
 	public Evenement findByNom(String nom);
+	
 	
 }

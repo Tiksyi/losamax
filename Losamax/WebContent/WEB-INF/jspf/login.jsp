@@ -7,11 +7,9 @@
 
 <link href="<c:url value="/static/css/styles.css" />" rel="stylesheet">
 <meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="icon" href="../../../../favicon.ico">
+<link rel="icon" href="<c:url value="/static/images/losamax2.png" />">
 
 <%-- <title><c:out value="${pageTitle}" /></title> --%>
 <title>Connexion</title>

@@ -1,5 +1,6 @@
 package com.losamax.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.losamax.dao.IClientJpaRepository;
 import com.losamax.dao.IEvenementJpaRepository;
@@ -70,14 +72,19 @@ public class ClientController {
 		return "login";
 	}
 
-	@GetMapping(value = { "/contact", "/contact?lang={code}" })
-	public String contact(@PathVariable(value = "code", required = false) String code, Model model) {
-		if (code == "fr") {
-			model.addAttribute("nom", "Entrez votre nom");
-			model.addAttribute("email", "Entrez votre email");
-			model.addAttribute("message", "Saisissez votre message ici ...");
-		}
-		if (code == "en") {
+	@GetMapping("/contact")
+	public String contact(@RequestParam(value = "lang", required = false) String lang, Model model) {
+		
+		model.addAttribute("nom", "Entrez votre nom");
+		model.addAttribute("email", "Entrez votre email");
+		model.addAttribute("message", "Saisissez votre message ici ...");
+		
+//		if ("fr".equals(lang)) {
+//			model.addAttribute("nom", "Entrez votre nom");
+//			model.addAttribute("email", "Entrez votre email");
+//			model.addAttribute("message", "Saisissez votre message ici ...");
+//		}
+		if ("en".equals(lang)) {
 			model.addAttribute("nom", "Enter your name");
 			model.addAttribute("email", "Enter your email");
 			model.addAttribute("message", "Please enter your message here...");
@@ -116,6 +123,12 @@ public class ClientController {
 		Pari pari = new Pari();
 		Evenement evenement = evenementRepo.getOne(id);
 		Client client = clientRepo.findByCredentialsUsername(username);
+		populatePariModel(model, pari, client, evenement);
+		return "creerPari";
+	}
+
+	private void populatePariModel(Model model, Pari pari, Client client, Evenement evenement) {
+		model.addAttribute("client", client);
 		model.addAttribute("evenement", evenement);
 		List<Cote> cotes = evenement.getCotes();
 		model.addAttribute("cotes", cotes);
@@ -124,20 +137,58 @@ public class ClientController {
 		pari.setEvenement(evenement);
 		pari.setClient(client);
 		model.addAttribute("pari", pari);
-		return "creerPari";
 	}
 
 	@PostMapping("/creerPari")
-	public String creerPari(@ModelAttribute(value = "pari") Pari pari, Model model) {
+	public String creerPari(@Valid @ModelAttribute(value = "pari") Pari pari, BindingResult result, Model model) {
+		
+		Client client = clientRepo.getOne(pari.getClient().getId());
+		
+		if (pari.getMise() > client.getMiseMax()) {
+			result.rejectValue("mise", "error.pari.mise");
+			Evenement evenement = evenementRepo.getOne(pari.getEvenement().getId());
+			populatePariModel(model, pari, client, evenement);
+			return "creerPari";
+
+		} else if (pari.getMise() < client.getMiseMax() & pari.getMise() > client.getSolde()) {
+			result.rejectValue("mise", "error.pari.mise.impossible");
+			Evenement evenement = evenementRepo.getOne(pari.getEvenement().getId());
+			populatePariModel(model, pari, client, evenement);
+			return "creerPari";
+		}
+
+		Double nSolde = client.getSolde() - pari.getMise();
+		client.setSolde(nSolde);
+		clientRepo.save(client);
 		pariRepo.save(pari);
 		return "confirmationPari";
 	}
-	
-	
+
 	@GetMapping("/compte/{username}")
 	public String compte(@PathVariable(value = "username") String username, Model model) {
 		Client client = clientRepo.findByCredentialsUsername(username);
 		List<Pari> lpari = pariRepo.findByClientId(client.getId());
+		model.addAttribute("client", client);
+		model.addAttribute("listeParis", lpari);
+		return "compte";
+	}
+
+	@GetMapping("/actualiser/{username}")
+	public String actualiser(@PathVariable(value = "username") String username, Model model) {
+		Client client = clientRepo.findByCredentialsUsername(username);
+		List<Pari> lpari = pariRepo.findByClientId(client.getId());
+		List<String> resultats = new ArrayList<String>();
+		for (Pari p : lpari) {
+			String resultat = null;
+			if (p.getChoix().equals(p.getEvenement().getResultatFinal())) {
+				resultat = "Gagné";
+			} else {
+				resultat = "Perdu";
+			}
+			resultats.add(resultat);
+		}
+		model.addAttribute("resultats", resultats);
+		model.addAttribute("client", client);
 		model.addAttribute("listeParis", lpari);
 		return "compte";
 	}

@@ -12,5 +12,5 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = { "com.losamax.dao" })
 public class AppConfig {
-//
+
 }

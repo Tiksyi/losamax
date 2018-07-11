@@ -5,14 +5,14 @@
 	prefix="sec"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
+			<!-- <button type="button" class="navbar-toggle" data-toggle="collapse"
 				data-target="#myNavbar">
 				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
-			</button>
+			</button> -->
 			<a class="navbar-brand"
 				href="<c:url value="/paricontroller/goToMenu"/>">LOSAMAX</a>
 		</div>
@@ -22,8 +22,10 @@
 					href="<c:url value="/paricontroller/goToMenu"/>"><span
 						class="glyphicon glyphicon-home"></span>&nbsp;<spring:message
 							code="accueil.accueil" /></a></li>
-				<li><a href="<c:url value="/clientcontroller/parier"/>"><spring:message
-							code="accueil.parier" /></a></li>
+
+<%-- 				<li><a href="<c:url value="/clientcontroller/parier"/>"><spring:message
+							code="accueil.parier" /></a></li> --%>
+
 
 				<c:forEach var="s" items="${listeSports}">
 					<li></li>
@@ -32,7 +34,6 @@
 
 				</c:forEach>
 
-				<li><a href="#"><spring:message code="accueil.apropos" /></a></li>
 				<li><a href="<c:url value="/clientcontroller/contact"/>"><span
 						class="glyphicon glyphicon-envelope"></span>&nbsp;<spring:message
 							code="accueil.contact" /></a></li>
@@ -45,8 +46,8 @@
 						<li><a href="?lang=fr">FR</a></li>
 						<li><a href="?lang=en">EN</a></li>
 						<li><a href="?lang=ru">RU</a></li>
-					</ul>
-				</li>
+					</ul></li>
+					
 				<sec:authorize access="hasRole('ROLE_ANONYMOUS')">
 					<li><a href="<c:url value="/clientcontroller/goToCreer" />"><span
 							class="glyphicon glyphicon-user"></span>&nbsp;<spring:message
@@ -55,29 +56,18 @@
 							class="glyphicon glyphicon-log-in"></span>&nbsp;<spring:message
 								code="accueil.connexion" /></a></li>
 				</sec:authorize>
+
+
 				<sec:authorize access="hasRole('ROLE_USER')">
-					<c:set var="username" scope="session">
-						<sec:authentication property="principal.username" />
-					</c:set>
+					 <p class="navbar-text"><span class="glyphicon glyphicon-euro"></span>&nbsp;${client.solde} &euro;</span> </p>
 					<li><a
-						href="<c:url value="/clientcontroller/compte/${username}" />"><span
-							class="glyphicon glyphicon-tasks"></span>&nbsp;<sec:authentication
-								property="principal.username" /></a></li>
+						href="<c:url value="/clientcontroller/compte/${client.credentials.username}" />"><span
+							class="glyphicon glyphicon-user"></span>&nbsp;${client.prenom}</a></li>
 					<li><a href="<c:url value="/logout" />"><span
-							class="glyphicon glyphicon-remove"></span>&nbsp;<spring:message
+							class="glyphicon glyphicon-off"></span>&nbsp;<spring:message
 								code="accueil.deconnexion" /></a></li>
 				</sec:authorize>
-				<sec:authorize access="hasRole('ROLE_ADMIN')">
-					<c:set var="username" scope="session">
-						<sec:authentication property="principal.username" />
-					</c:set>
-					<li><a href="<c:url value="/admincontroller/goToAdmin" />"><span
-							class="glyphicon glyphicon-tasks"></span>&nbsp;<sec:authentication
-								property="principal.username" /></a></li>
-					<li><a href="<c:url value="/logout" />"><span
-							class="glyphicon glyphicon-remove"></span>&nbsp;<spring:message
-								code="accueil.deconnexion" /></a></li>
-				</sec:authorize>
+
 			</ul>
 		</div>
 	</div>
