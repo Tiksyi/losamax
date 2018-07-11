@@ -34,7 +34,7 @@
 
 	<div class="container-fluid text-center">
 		<div class="row content">
-			<div class="col-sm-2 sidenav-right">
+			<div class="col-sm-2 sidenav">
 				<%-- <p>
 					<a href="#"><spring:message code="accueil.lien" /></a>
 				</p>
@@ -96,7 +96,7 @@
 					</c:forEach>
 				</div>
 			</div>
-			<div class="col-sm-2 sidenav-left">
+			<div class="col-sm-2 sidenav">
 				<!-- <div class="well">
 					<p>ADS</p>
 				</div>
