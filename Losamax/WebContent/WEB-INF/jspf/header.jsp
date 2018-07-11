@@ -56,12 +56,12 @@
 
 
 				<sec:authorize access="hasRole('ROLE_USER')">
-					 <p class="navbar-text">Solde : ${client.solde} &euro;</p>
+					 <p class="navbar-text"><span class="glyphicon glyphicon-euro"></span>&nbsp;${client.solde} &euro;</span> </p>
 					<li><a
 						href="<c:url value="/clientcontroller/compte/${client.credentials.username}" />"><span
-							class="glyphicon glyphicon-tasks"></span>&nbsp;${client.nom}</a></li>
+							class="glyphicon glyphicon-user"></span>&nbsp;${client.prenom}</a></li>
 					<li><a href="<c:url value="/logout" />"><span
-							class="glyphicon glyphicon-remove"></span>&nbsp;<spring:message
+							class="glyphicon glyphicon-off"></span>&nbsp;<spring:message
 								code="accueil.deconnexion" /></a></li>
 				</sec:authorize>
 

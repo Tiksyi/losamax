@@ -1,6 +1,8 @@
 package com.losamax.controllers;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -286,9 +288,11 @@ public class PariController {
 				model.addAttribute("admin", admin);
 			}
 		}
-
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+		Date d = new Date();
+		dateFormat.format(d);
 		List<Sport> lsport = sportRepo.findAll();
-		List<Evenement> levent = eventRepo.findByEvenementUnique();
+		List<Evenement> levent = eventRepo.findByEvenementFutur(d);
 		model.addAttribute("listeEvents", levent);
 		model.addAttribute("listeSports", lsport);
 		return "accueil";

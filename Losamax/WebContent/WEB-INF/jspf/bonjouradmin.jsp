@@ -49,8 +49,8 @@
 								code="newsletter.creer" /></a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="<c:url value="/admincontroller/goToAdmin" />"><spring:message
-								code="menu.retour" /></a></li>
+					<li><a href="<c:url value="/logout" />"><spring:message
+								code="accueil.deconnexion" /></a></li>
 				</ul>
 			</div>
 		</nav>
