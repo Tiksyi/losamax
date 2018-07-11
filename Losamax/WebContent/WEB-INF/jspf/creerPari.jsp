@@ -44,6 +44,7 @@
 			<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
 			<div class="form-group">
+
 				<form:label path="pari.mise">
 					<spring:message code="pari.mise" />
 					<span class="required">*</span>
