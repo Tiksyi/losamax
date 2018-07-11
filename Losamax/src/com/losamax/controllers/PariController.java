@@ -21,8 +21,10 @@ import com.losamax.dao.IEvenementJpaRepository;
 import com.losamax.dao.IPariJpaRepository;
 import com.losamax.dao.IParticipantJpaRepository;
 import com.losamax.dao.ISportJpaRepository;
+import com.losamax.entities.Admin;
 import com.losamax.entities.Client;
 import com.losamax.entities.Credentials;
+import com.losamax.entities.ERole;
 import com.losamax.entities.Evenement;
 import com.losamax.entities.Pari;
 import com.losamax.entities.Sport;
@@ -59,7 +61,7 @@ public class PariController {
 	@GetMapping("/goToMenu")
 	public String gotomenu(Model model) {
 
-		//Creation Client
+//		Creation Client
 //		Credentials cred1 = new Credentials();
 //		cred1.setUsername("user");
 //		cred1.setPassword("123");
