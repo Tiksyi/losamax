@@ -93,7 +93,7 @@
 				</form:label>
 				<form:input path="client.miseMax" class="form-control" />
 				&nbsp;
-				<form:errors path="client.miseMax" cssClass="errors" class="alert alert-danger" />
+				<form:errors path="client.miseMax" class="alert alert-danger" />
 
 			</div>
 			<div class="form-group">

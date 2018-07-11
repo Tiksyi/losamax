@@ -41,7 +41,7 @@ public class Client {
 	private String telMobile;
 	@ManyToMany
 	private List<Sport> listeSports = new ArrayList<>();
-	@NotNull(message = "{error.miseMax.obligatoire}")
+	@Min(value=1,message = "{error.miseMax.obligatoire}")
 	private double miseMax;
 	private double solde;
 
