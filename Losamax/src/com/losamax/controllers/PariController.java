@@ -65,6 +65,7 @@ public class PariController {
 	@GetMapping("/goToMenu")
 	public String gotomenu(Model model) {
 
+
 		// //Creation Client
 		// Credentials cred1 = new Credentials();
 		// cred1.setUsername("user");
