@@ -35,8 +35,8 @@
 
 	<div class="container-fluid text-center">
 		<div class="row content">
-			<div class="col-sm-2 sidenav-right">
-				<p>
+			<div class="col-sm-2 sidenav">
+				<%-- <p>
 					<a href="#"><spring:message code="accueil.lien" /></a>
 				</p>
 				<p>
@@ -44,7 +44,7 @@
 				</p>
 				<p>
 					<a href="#"><spring:message code="accueil.lien" /></a>
-				</p>
+				</p> --%>
 			</div>
 			<div class="col-sm-8 text-left">
 
@@ -102,7 +102,7 @@
 										</div>
 									</div>
 									<div class="panel-footer">
-										<i>Expire le <fmt:formatDate type="both" dateStyle="long"
+										<i><spring:message code="accueil.event.date" /><fmt:formatDate type="both" dateStyle="long"
 												value="${e.dateFin}" /></i>
 									</div>
 								</div>
@@ -112,13 +112,13 @@
 				</div>
 			</div>
 
-			<div class="col-sm-2 sidenav-left">
-				<div class="well">
+			<div class="col-sm-2 sidenav">
+				<!-- <div class="well">
 					<p>ADS</p>
 				</div>
 				<div class="well">
 					<p>ADS</p>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>
