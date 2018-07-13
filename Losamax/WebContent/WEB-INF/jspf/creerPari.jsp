@@ -39,7 +39,8 @@
 			<div class="container-fluid">
 				<ul class="nav navbar-nav">
 					 <p class="navbar-text capital">${client.prenom}</p>
-					 <p class="navbar-text">Solde : ${client.solde} &euro;</p>
+					 <p class="navbar-text">
+					 Solde : <fmt:formatNumber groupingUsed = "false" value = "${client.solde}" type = "number"/> &euro;</p>
 					 <p class="navbar-text">Mise maximum : ${client.miseMax} &euro;</p>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
