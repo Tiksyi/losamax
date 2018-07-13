@@ -5,7 +5,8 @@
 	prefix="sec"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -35,8 +36,8 @@
 
 	<div class="container-fluid text-center">
 		<div class="row content">
-			<div class="col-sm-2 sidenav-right">
-				<p>
+			<div class="col-sm-2 sidenav">
+				<%-- <p>
 					<a href="#"><spring:message code="accueil.lien" /></a>
 				</p>
 				<p>
@@ -44,11 +45,11 @@
 				</p>
 				<p>
 					<a href="#"><spring:message code="accueil.lien" /></a>
-				</p>
+				</p> --%>
 			</div>
 			<div class="col-sm-8 text-left">
 
-				<h1 class="capital">Rubrique ${nom}</h1>
+				<h1 class="capital"><spring:message code="rubrique.titre"/>${nom}</h1>
 				<div class="well">
 					<c:forEach var="e" items="${listeEvents}">
 
@@ -58,7 +59,7 @@
 						<form action="" method="get">
 							<div class="panel-group">
 								<div class="panel panel-info class">
-									<div class="panel-heading">Rencontre à la une</div>
+									<div class="panel-heading">Rencontre Ã  la une</div>
 									<div class="panel-body">
 										<div class="container">
 
@@ -67,7 +68,7 @@
 													<c:forEach var="p" items="${e.participants}"
 														varStatus="loop">
 														<c:out value="${fn:toLowerCase(p.nom)}" />
-														<c:if test="${loop.index==0}">&nbsp;-&nbsp;</c:if>
+														<c:if test="${loop.index<10}">&nbsp;-&nbsp;</c:if>
 													</c:forEach>
 												</div>
 												<%-- <div class="col-lg-4" align="center">
@@ -83,11 +84,11 @@
 														<form:hidden path="pari.client.id" />
 													</ul>
 												</div> --%>
-												<div class="col-lg-4" align=center>
-													<button type="button" class="btn btn-default">1</button>
-													<button type="button" class="btn btn-default">N</button>
-													<button type="button" class="btn btn-default">2</button>
-												</div>
+<!-- 												<div class="col-lg-4" align=center> -->
+<!-- 													<button type="button" class="btn btn-default">1</button> -->
+<!-- 													<button type="button" class="btn btn-default">N</button> -->
+<!-- 													<button type="button" class="btn btn-default">2</button> -->
+<!-- 												</div> -->
 												<div class="col-lg-4" align="right">
 													<c:set var="username" scope="session">
 														<sec:authentication property="principal.username" />
@@ -102,7 +103,7 @@
 										</div>
 									</div>
 									<div class="panel-footer">
-										<i>Expire le <fmt:formatDate type="both" dateStyle="long"
+										<i><spring:message code="accueil.event.date" /><fmt:formatDate type="both" dateStyle="long"
 												value="${e.dateFin}" /></i>
 									</div>
 								</div>
@@ -112,13 +113,13 @@
 				</div>
 			</div>
 
-			<div class="col-sm-2 sidenav-left">
-				<div class="well">
+			<div class="col-sm-2 sidenav">
+				<!-- <div class="well">
 					<p>ADS</p>
 				</div>
 				<div class="well">
 					<p>ADS</p>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>

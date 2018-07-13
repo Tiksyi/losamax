@@ -9,8 +9,9 @@ function calculCote(id, nom) {
 	console.log(cote);
 	console.log(resultat);
 	var view = document.getElementById('view');
-	view.value = resultat;
-
+	console.log("before " + view);
+	view.innerHTML = "Gain potentiel : " + resultat + " €";
+	console.log("after " + view);
 	var choix = document.getElementById('choix');
 	choix.value = nom;
 }

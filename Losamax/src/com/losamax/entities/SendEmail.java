@@ -2,7 +2,8 @@ package com.losamax.entities;
 
 import java.util.Properties;    
 import javax.mail.*;    
-import javax.mail.internet.*;    
+import javax.mail.internet.*; 
+
 public class SendEmail{  
     public static void send(String from,String password,String to,String sub,String msg){  
           //Get properties object    

@@ -278,7 +278,7 @@ public class PariController {
 //		 eventRepo.save(e6);
 //		 eventRepo.save(e7);
 //		 eventRepo.save(e8);
-		 
+		
 		if (AuthHelper.isAuthenticated()) {
 			if (AuthHelper.getRole().equals(ERole.ROLE_USER)) {
 				Credentials credentials = AuthHelper.getCredentials();
