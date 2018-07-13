@@ -49,7 +49,7 @@
 			</div>
 			<div class="col-sm-8 text-left">
 
-				<h1 class="capital">Rubrique ${nom}</h1>
+				<h1 class="capital"><spring:message code="rubrique.titre"/>${nom}</h1>
 				<div class="well">
 					<c:forEach var="e" items="${listeEvents}">
 

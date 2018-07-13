@@ -77,4 +77,10 @@ footer {
 	color: red;
 	font-style: italic;
 }
+
+.gain {
+	color: red;
+	font-style: italic;
+	font-weight: bold;
+}
 /* Fin du CCS perso */

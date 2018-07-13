@@ -22,7 +22,8 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	
+<script
+	src="<c:url value="/static/js/js.js"/>"></script>
 <%-- <link rel="stylesheet"
 	href="<c:url value="/static/bootstrap3/css/bootstrap.min.css" />">
 
@@ -89,8 +90,9 @@
 										<form:hidden path="pari.client.id" />
 									</ul>
 								</div>
-								<div class="col-lg-4" align="right">
-									<input type="text" class="form-control" id="view" value="">
+								<div class="col-lg-4" align="center">
+									<!-- <input type="text" class="form-control" id="view" value=""> -->
+									<p id="view" class="gain"></p>
 								</div>
 							</div>
 						</div>
