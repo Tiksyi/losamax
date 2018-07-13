@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.losamax.dao.IClientJpaRepository;
+import com.losamax.dao.ICoteJpaRepository;
 import com.losamax.dao.IEvenementJpaRepository;
 import com.losamax.dao.IPariJpaRepository;
 import com.losamax.dao.ISportJpaRepository;
@@ -46,6 +47,9 @@ public class ClientController {
 
 	@Autowired
 	private IPariJpaRepository pariRepo;
+	
+	@Autowired
+	private ICoteJpaRepository coteRepo;
 
 	@GetMapping("/goToCreer")
 	public String goToCreer(Model model) {
@@ -109,7 +113,7 @@ public class ClientController {
 	@PostMapping("/modifier")
 	public String modifier(@Valid @ModelAttribute(value = "client") Client client, BindingResult result, Model model) {
 		if (!result.hasErrors()) {
-			// encodePassword(client);
+			encodePassword(client);
 			clientRepo.save(client);
 			return "confirmationModification";
 		}
@@ -182,6 +186,11 @@ public class ClientController {
 			String resultat = null;
 			if (p.getChoix().equals(p.getEvenement().getResultatFinal())) {
 				resultat = "Gagné";
+//				Cote c = coteRepo.getOne(p.getEvenement().getId());
+//				Double gain = c.getValeur() * p.getMise();
+//				Double nSolde = client.getSolde() + gain;
+//				client.setSolde(nSolde);
+//				clientRepo.save(client);
 			} else {
 				resultat = "Perdu";
 			}

@@ -56,8 +56,8 @@
 								code="resultats.valider" /></a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="<c:url value="/paricontroller/goToMenu" />"><spring:message
-								code="menu.retour" /></a></li>
+					<li><a href="<c:url value="/admincontroller/goToAdmin" />"><spring:message
+								code="accueil.deconnexion" /></a></li>
 				</ul>
 			</div>
 		</nav>

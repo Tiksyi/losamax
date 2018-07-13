@@ -68,7 +68,7 @@
 													<c:forEach var="p" items="${e.participants}"
 														varStatus="loop">
 														<c:out value="${fn:toLowerCase(p.nom)}" />
-														<c:if test="${loop.index==0}">&nbsp;-&nbsp;</c:if>
+														<c:if test="${loop.index<10}">&nbsp;-&nbsp;</c:if>
 													</c:forEach>
 												</div>
 												<%-- <div class="col-lg-4" align="center">
@@ -84,11 +84,11 @@
 														<form:hidden path="pari.client.id" />
 													</ul>
 												</div> --%>
-												<div class="col-lg-4" align=center>
-													<button type="button" class="btn btn-default">1</button>
-													<button type="button" class="btn btn-default">N</button>
-													<button type="button" class="btn btn-default">2</button>
-												</div>
+<!-- 												<div class="col-lg-4" align=center> -->
+<!-- 													<button type="button" class="btn btn-default">1</button> -->
+<!-- 													<button type="button" class="btn btn-default">N</button> -->
+<!-- 													<button type="button" class="btn btn-default">2</button> -->
+<!-- 												</div> -->
 												<div class="col-lg-4" align="right">
 													<c:set var="username" scope="session">
 														<sec:authentication property="principal.username" />

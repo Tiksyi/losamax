@@ -80,31 +80,31 @@
 			</c:forEach>
 		</table>
 		<br>
-		<table class="table table-striped table-dark">
-			<tr>
-				<th><spring:message code="participant.nom" /></th>
-				<th><spring:message code="participant.sport" /></th>
-			</tr>
-			<c:forEach items="${participants}" var="participant">
-				<tr>
-					<td ><span class="capital"><c:out value="${fn:toLowerCase(participant.nom)}" /></span></td>
-					<td ><span class="capital"><c:out value="${fn:toLowerCase(participant.sport)}" /></span></td>
-				</tr>
-			</c:forEach>
-		</table>
-		<br>
-		<table class="table table-striped table-dark">
-			<tr>
-				<th><spring:message code="cote.libelle" /></th>
-				<th><spring:message code="cote.valeur" /></th>
-			</tr>
-			<c:forEach items="${cotes}" var="cote">
-				<tr>
-					<td><c:out value="${cote.libelle}" /></td>
-					<td><c:out value="${cote.valeur}" /></td>
-				</tr>
-			</c:forEach>
-		</table>
+<!-- 		<table class="table table-striped table-dark"> -->
+<!-- 			<tr> -->
+<%-- 				<th><spring:message code="participant.nom" /></th> --%>
+<%-- 				<th><spring:message code="participant.sport" /></th> --%>
+<!-- 			</tr> -->
+<%-- 			<c:forEach items="${participants}" var="participant"> --%>
+<!-- 				<tr> -->
+<%-- 					<td ><span class="capital"><c:out value="${fn:toLowerCase(participant.nom)}" /></span></td> --%>
+<%-- 					<td ><span class="capital"><c:out value="${fn:toLowerCase(participant.sport)}" /></span></td> --%>
+<!-- 				</tr> -->
+<%-- 			</c:forEach> --%>
+<!-- 		</table> -->
+<!-- 		<br> -->
+<!-- 		<table class="table table-striped table-dark"> -->
+<!-- 			<tr> -->
+<%-- 				<th><spring:message code="cote.libelle" /></th> --%>
+<%-- 				<th><spring:message code="cote.valeur" /></th> --%>
+<!-- 			</tr> -->
+<%-- 			<c:forEach items="${cotes}" var="cote"> --%>
+<!-- 				<tr> -->
+<%-- 					<td><c:out value="${cote.libelle}" /></td> --%>
+<%-- 					<td><c:out value="${cote.valeur}" /></td> --%>
+<!-- 				</tr> -->
+<%-- 			</c:forEach> --%>
+<!-- 		</table> -->
 
 	</div>
 
